@@ -1,0 +1,21 @@
+# Secrets — never commit real keys
+.env
+.env.*
+!.env.example
+
+# Raw dataset (download separately; see README)
+data/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
