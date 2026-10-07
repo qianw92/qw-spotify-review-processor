@@ -19,3 +19,6 @@ venv/
 
 # Node
 node_modules/
+
+# Local pipeline state database (rebuilt by `python -m pipeline ingest`)
+state/

@@ -31,7 +31,7 @@ Mark a step `[x]` when it's done.
 
 ## Phase 1: Understand the data (Day 1)
 
-### [ ] Step 1.1: Ingest and profile all 660,622 reviews
+### [x] Step 1.1: Ingest and profile all 660,622 reviews
 **What you're doing:** Use code (no AI) to read every row, count everything, and check for problems: empty reviews, missing versions, duplicate IDs, and duplicate texts.
 **Outputs:**
 - `outputs/data_manifest.json`: an "ID card" for the input file (its fingerprint/checksum, size and row count) so we can prove which data we used

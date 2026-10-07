@@ -1,0 +1,18 @@
+{
+  "run_id": "ingest-20261006-172910",
+  "created_at": "2026-10-07T00:29:33+00:00",
+  "code_commit": "68680137d4297c852dee4b9b1613eb8a1b129828",
+  "input": {
+    "path": "data/spotify_reviews_18months.csv",
+    "bytes": 97400616,
+    "sha256": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6",
+    "is_course_full_file": true
+  },
+  "row_hash": "check_submission.row_sha (SHA-256 of canonical JSON of 6 source fields)",
+  "outputs": {
+    "ingestion_report": "outputs/ingestion_report.json",
+    "quarantine": "outputs/quarantine.jsonl",
+    "grading_ingestion": "grading/ingestion.json",
+    "state_db": "state/pipeline.sqlite"
+  }
+}

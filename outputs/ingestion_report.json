@@ -1,0 +1,108 @@
+{
+  "run_id": "ingest-20261006-172910",
+  "created_at": "2026-10-07T00:29:33+00:00",
+  "stage": "prepare",
+  "model_calls": 0,
+  "input": {
+    "path": "data/spotify_reviews_18months.csv",
+    "bytes": 97400616,
+    "sha256": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6",
+    "is_course_full_file": true
+  },
+  "counts": {
+    "records": 660622,
+    "nonempty": 660609,
+    "empty_review_text": 13,
+    "missing_app_version": 159701,
+    "duplicate_review_ids": 0,
+    "distinct_nonempty_texts": 484189,
+    "multiline_text": 68
+  },
+  "exact_duplicate_texts": {
+    "distinct_nonempty_texts": 484189,
+    "texts_appearing_more_than_once": 15922,
+    "rows_reusable_from_cache": 176420
+  },
+  "text_length_chars": {
+    "min": 1,
+    "median": 32,
+    "mean": 74.8,
+    "p95": 305,
+    "max": 1693
+  },
+  "reviews_by_rating": {
+    "1": 242620,
+    "2": 31034,
+    "3": 33268,
+    "4": 54140,
+    "5": 299560
+  },
+  "reviews_by_month": {
+    "2022-05": 15461,
+    "2022-06": 30338,
+    "2022-07": 32784,
+    "2022-08": 30732,
+    "2022-09": 26933,
+    "2022-10": 27572,
+    "2022-11": 27349,
+    "2022-12": 31744,
+    "2023-01": 28609,
+    "2023-02": 20889,
+    "2023-03": 27238,
+    "2023-04": 25014,
+    "2023-05": 28062,
+    "2023-06": 27117,
+    "2023-07": 85079,
+    "2023-08": 30438,
+    "2023-09": 41634,
+    "2023-10": 89104,
+    "2023-11": 34525
+  },
+  "first_review": "2022-05-17 00:01:07",
+  "last_review": "2023-11-15 23:16:10",
+  "timestamp_issues": {},
+  "record_status": {
+    "pending": 660609,
+    "quarantined": 13
+  },
+  "quarantine": {
+    "count": 13,
+    "by_reason": {
+      "empty_review_text": 13
+    }
+  },
+  "checks_vs_course_manifest": {
+    "records": {
+      "expected": 660622,
+      "observed": 660622,
+      "ok": true
+    },
+    "nonempty": {
+      "expected": 660609,
+      "observed": 660609,
+      "ok": true
+    },
+    "empty_review_text": {
+      "expected": 13,
+      "observed": 13,
+      "ok": true
+    },
+    "missing_app_version": {
+      "expected": 159701,
+      "observed": 159701,
+      "ok": true
+    },
+    "duplicate_review_ids": {
+      "expected": 0,
+      "observed": 0,
+      "ok": true
+    },
+    "distinct_nonempty_texts": {
+      "expected": 484189,
+      "observed": 484189,
+      "ok": true
+    }
+  },
+  "agrees_with_course_profile_helper": true,
+  "seconds": 22.4
+}
