@@ -39,7 +39,7 @@ Mark a step `[x]` when it's done.
 - `outputs/quarantine.jsonl`: the 13 empty reviews, set aside with a reason
 - Pending queue: the list of review IDs still waiting to be labeled
 
-### [ ] Step 1.2: Find duplicate texts
+### [x] Step 1.2: Find duplicate texts
 **What you're doing:** Group identical review texts so the AI labels each unique text only once. This cuts the work from 660,609 reviews to 484,189 unique texts.
 **Outputs:**
 - A mapping from each review ID to its unique text, so every original ID is still tracked
