@@ -1,0 +1,32 @@
+{
+  "version": "entities-v1",
+  "match": "case-insensitive whole-word; entity name recorded, not the matched spelling",
+  "vocabulary": {
+    "premium": ["premium", "subscription", "subscribe"],
+    "ads": ["ad", "ads", "advert", "adverts", "advertisement", "advertisements", "commercial", "commercials"],
+    "login": ["login", "log in", "sign in", "signin", "password"],
+    "account": ["account"],
+    "shuffle": ["shuffle"],
+    "queue": ["queue"],
+    "repeat": ["repeat"],
+    "skip": ["skip", "skips", "skipping"],
+    "playlist": ["playlist", "playlists"],
+    "library": ["library"],
+    "search": ["search"],
+    "lyrics": ["lyrics"],
+    "podcast": ["podcast", "podcasts"],
+    "recommendations": ["recommendation", "recommendations", "algorithm"],
+    "offline": ["offline"],
+    "download": ["download", "downloads", "downloaded", "downloading"],
+    "crash": ["crash", "crashes", "crashing", "crashed"],
+    "bluetooth": ["bluetooth"],
+    "car": ["car", "android auto"],
+    "widget": ["widget", "lockscreen", "lock screen"],
+    "audio_quality": ["audio quality", "sound quality"],
+    "price": ["price", "pricing", "expensive", "cost"],
+    "refund": ["refund", "refunded"],
+    "charge": ["charge", "charged", "charges"],
+    "update": ["update", "updated"],
+    "customer_support": ["customer service", "customer support", "support team"]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "record_schema_v1",
+  "title": "Final record — one per source review_id (grading/records.jsonl)",
+  "oneOf": [
+    {
+      "title": "completed",
+      "type": "object",
+      "required": ["review_id", "source_sha256", "status", "topic", "intent", "sentiment", "severity",
+                   "entities", "evidence_quote", "needs_review", "label_config"],
+      "properties": {
+        "review_id":       {"type": "string", "minLength": 1, "description": "Original ID, unchanged"},
+        "source_sha256":   {"type": "string", "pattern": "^[0-9a-f]{64}$", "description": "check_submission.row_sha of the six source fields"},
+        "status":          {"const": "completed"},
+        "topic":           {"enum": ["access", "usability", "playback", "downloads", "catalog", "billing", "support", "other"]},
+        "intent":          {"enum": ["cancellation", "complaint", "request", "praise", "unclear"]},
+        "sentiment":       {"type": "number", "minimum": -1, "maximum": 1},
+        "severity":        {"type": "integer", "minimum": 1, "maximum": 5},
+        "entities":        {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "evidence_quote":  {"type": "string", "minLength": 1, "description": "Exact substring of review_text (checked in code)"},
+        "needs_review":    {"type": "boolean"},
+        "label_config":    {"type": "string", "minLength": 1, "description": "model + prompt + schema version, e.g. jev-1.13.0+enrich-v1+labels-v1"},
+        "cache_source_id": {"type": "string", "description": "Only on exact-duplicate copies: the canonical review_id whose label is reused"}
+      },
+      "additionalProperties": true
+    },
+    {
+      "title": "quarantined",
+      "type": "object",
+      "required": ["review_id", "source_sha256", "status", "reason"],
+      "properties": {
+        "review_id":     {"type": "string", "minLength": 1},
+        "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "status":        {"const": "quarantined"},
+        "reason":        {"type": "string", "minLength": 1, "description": "e.g. empty_review_text, invalid_model_output_after_retry"}
+      },
+      "additionalProperties": true
+    }
+  ]
+}

@@ -48,7 +48,7 @@ Mark a step `[x]` when it's done.
 
 ## Phase 2: Define labels and hand-label (Day 1–2)
 
-### [ ] Step 2.1: Write the label rules
+### [x] Step 2.1: Write the label rules
 **What you're doing:** Write down the 8 topics, 5 intents and 5 severity levels, with examples, following `GRADING_CONTRACT.md` exactly.
 **Outputs:**
 - `schema/labels.md`: the rulebook for how to label a review
