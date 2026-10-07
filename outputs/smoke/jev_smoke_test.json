@@ -1,0 +1,11 @@
+{
+ "ts": "2026-10-06T17:16:55",
+ "purpose": "jev key smoke test",
+ "model": "jev-1.13.0",
+ "request_id": "req_01a113b8688c7eb4a7d356e20fbacc8e",
+ "input_tokens": 292,
+ "output_tokens": 23,
+ "cost_usd": 1.2264000000000002e-05,
+ "answer_noul": 0.99,
+ "seconds": 0.24
+}

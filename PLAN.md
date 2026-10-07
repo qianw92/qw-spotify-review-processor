@@ -10,19 +10,19 @@ Mark a step `[x]` when it's done.
 
 ## Phase 0: Set up the project (Day 1)
 
-### [ ] Step 0.1: Create the repo and protect secrets
+### [x] Step 0.1: Create the repo and protect secrets
 **What you're doing:** Make a GitHub repo and set it up so API keys can never be uploaded by accident.
 **Outputs:**
 - `.gitignore`: tells Git to never upload the `.env` file that holds real keys
 - `.env.example`: a blank template listing which keys are needed, with no real values
 - `.env` (local only, never committed): your real keys
 
-### [ ] Step 0.2: Download the dataset
+### [x] Step 0.2: Download the dataset
 **What you're doing:** Download the course ZIP, unzip it into `data/`, and read `GRADING_CONTRACT.md` and `COST_CALCULATOR.md`. These two files contain the exact rules the grader checks.
 **Outputs:**
 - `data/` folder (not committed): the review CSV plus sample files like `cost_100.csv` and `golden_50_to_label.csv`
 
-### [ ] Step 0.3: Choose tools
+### [x] Step 0.3: Choose tools
 **What you're doing:** Pick a programming language, an AI model for labeling (a cheap, small one), a database, and a hosting service for the dashboard.
 **Outputs:**
 - Notes in README section 8 explaining the choices

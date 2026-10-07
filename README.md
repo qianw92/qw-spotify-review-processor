@@ -93,7 +93,7 @@ TODO: clone + install commands
 
 | File | SHA-256 |
 |---|---|
-| `spotify_reviews_18months.csv` (97,400,616 bytes) | TODO |
+| `spotify_reviews_18months.csv` (97,400,616 bytes) | `1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6` |
 
 **API keys.** Copy `.env.example` to `.env` and fill in only the keys you use. `.env` is git-ignored.
 
