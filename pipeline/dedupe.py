@@ -94,6 +94,7 @@ def run(db_path=db.DEFAULT_DB, out_dir=ROOT / "outputs"):
         "seconds": round(time.time() - started, 1),
     }
     out = Path(out_dir) / "dedupe_report.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
     tmp = out.with_suffix(".json.tmp")
     tmp.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     tmp.replace(out)

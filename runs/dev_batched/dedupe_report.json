@@ -1,0 +1,86 @@
+{
+  "stage": "dedupe",
+  "model_calls": 0,
+  "created_at": "2026-10-10T06:56:46+00:00",
+  "rule": "exact byte-identical review_text (SHA-256); canonical = earliest source row; aliases reuse its label via cache_source_id",
+  "counts": {
+    "nonempty_rows": 24,
+    "canonical_texts_to_classify": 24,
+    "alias_rows_reusing_a_label": 0,
+    "work_reduction_pct": 0.0
+  },
+  "integrity_checks_all_zero": true,
+  "integrity_checks": {
+    "nonempty_rows_not_mapped": 0,
+    "alias_text_differs_from_canonical": 0,
+    "alias_points_to_non_canonical (chain)": 0,
+    "canonical_not_pointing_to_itself": 0,
+    "empty_text_rows_mapped": 0
+  },
+  "group_size_distribution": {
+    "1 (unique)": 24
+  },
+  "most_repeated_texts": [
+    {
+      "text": "Won't let me log in. Tried resetting password but still won't let me log in.",
+      "rows": 1
+    },
+    {
+      "text": "Login problems faced many times. Every time demanding new contact number. Worst experience.",
+      "rows": 1
+    },
+    {
+      "text": "this is good but ads are annoying",
+      "rows": 1
+    },
+    {
+      "text": "This new main page UI is terrible",
+      "rows": 1
+    },
+    {
+      "text": "Weirdly stops playing every handful of minutes. Also the play/pause bar doesn't show up.",
+      "rows": 1
+    },
+    {
+      "text": "Podcast keeps playing when ads are playing after update",
+      "rows": 1
+    },
+    {
+      "text": "I just bought premium again, just for my TV the only thing I use Spotify on... to not let me go to my library, it just skips library everytime I scroll:(",
+      "rows": 1
+    },
+    {
+      "text": "Not at all pleased with this app would recomend you tube premium. Offline mode does not work at all. All my playlists are missing.",
+      "rows": 1
+    },
+    {
+      "text": "It was a 5 Star app but.... recently it's so buggy... doesn't load lyrics most of the time....and literally for rewinding I need a premium membership....",
+      "rows": 1
+    },
+    {
+      "text": "It's good but doesn't play offline unless you pay for a subscription",
+      "rows": 1
+    },
+    {
+      "text": "For free users It sucks right now, now without premium there is no queue, no repeat, no way to go to previous song, very sad",
+      "rows": 1
+    },
+    {
+      "text": "Works well and customer service is great",
+      "rows": 1
+    },
+    {
+      "text": "Love Spotify. It so easy to program all your favorite songs. I recommend Spotify if you want the best music has to offer.",
+      "rows": 1
+    },
+    {
+      "text": "The update sucks. To many ads. Going to uninstall it.",
+      "rows": 1
+    },
+    {
+      "text": "An \"autoplay when connecting to bluetooth\" feature would be nice",
+      "rows": 1
+    }
+  ],
+  "seconds": 0.0
+}

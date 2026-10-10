@@ -63,7 +63,7 @@ Mark a step `[x]` when it's done.
 
 ## Phase 3: Build the labeling pipeline (Day 2–3)
 
-### [ ] Step 3.1: Build the enricher (Stage 2: Classify)
+### [x] Step 3.1: Build the enricher (Stage 2: Classify)
 **What you're doing:** Write code that sends batches of up to 50 reviews to the AI and gets back labels. Code then checks each answer: correct format, allowed values, and a quote that really appears in the review. Bad answers are retried once, then quarantined.
 **Outputs:**
 - `prompts/enricher_v1.md`: the instructions given to the AI
