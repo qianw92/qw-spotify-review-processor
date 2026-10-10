@@ -54,7 +54,7 @@ Mark a step `[x]` when it's done.
 - `schema/labels.md`: the rulebook for how to label a review
 - `schema/record_schema.json`: the exact format every labeled review must follow
 
-### [ ] Step 2.2: Hand-label the golden 50
+### [x] Step 2.2: Hand-label the golden 50
 **What you're doing:** You read 50 reviews and label them yourself, without AI help. These are the "answer key" for testing the AI. Never show them to the AI as examples.
 **Outputs:**
 - `evals/golden/golden_50_labeled.csv`: your 50 human labels
