@@ -1,9 +1,22 @@
 {
-  "project_cap_usd": 10.00,
+  "project_cap_usd": 10.0,
   "currency": "USD",
   "pricing_basis": "list price; free-plan credits are not subtracted so spend is never undercounted",
   "providers": {
-    "typesafe": {"model": "jev-1.13.0", "price_in_per_m": 0.042, "price_out_per_m": 0.0, "source": "https://docs.typesafe.ai/models.md", "checked": "2026-10-06"},
-    "openai":   {"model": "gpt-6-luna", "price_in_per_m": 0.10,  "price_out_per_m": 0.50, "source": "https://developers.openai.com/api/docs/models/gpt-6-luna", "checked": "2026-10-06"}
+    "typesafe": {
+      "model": "jev-1.13.0",
+      "price_in_per_m": 0.042,
+      "price_out_per_m": 0.0,
+      "source": "https://docs.typesafe.ai/models.md",
+      "checked": "2026-10-06"
+    },
+    "openai": {
+      "model": "gpt-6-luna",
+      "price_in_per_m": 0.1,
+      "price_out_per_m": 0.5,
+      "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "checked": "2026-10-10",
+      "price_cached_in_per_m": 0.01
+    }
   }
 }

@@ -6,9 +6,9 @@
 
 | | |
 |---|---|
-| **Current step** | **4.2 — Build the cost calculator** ($0) |
-| **Next paid step** | 4.3 — 500-review run (needs price preview + approval) |
-| **Progress** | 13 of 27 steps done |
+| **Current step** | **4.3 — 500-review run** (awaiting price approval) |
+| **Next paid step** | 4.3 — 500-review run (~$0.019) |
+| **Progress** | 14 of 27 steps done |
 | **Spent so far** | Jev $0.0049 · OpenAI $0.0013 · **Total $0.0065 of $10** |
 | **Last updated** | Oct 10 |
 
@@ -92,11 +92,11 @@ Rules for every step: explain outputs in plain words · price preview + approval
 **What you're doing:** Run every stage on `cost_100.csv`: cold (nothing saved) then warm (should reuse everything).
 **Outputs:** `cost/pilot_run/` — cold $0.00295 in 18.9 s; warm $0 in 0.27 s with **0 new calls**; memo passed all checks; verifier agreed 18/20
 
-### ⏳ Step 4.2: Build the calculator ($0) ← **current**
+### ✅ Step 4.2: Build the calculator ($0)
 **What you're doing:** A tool that recomputes cost from saved usage and editable prices (no API key), and projects the full run with budget warnings.
 **Outputs:** `cost/rates.csv` · `cost/usage.csv` · `cost/pilot_records.jsonl` · `cost/pilot_calls.jsonl` · `cost/report.md` · offline replay command
 
-### ⏳ Step 4.3: Run 500 reviews (paid, ~$0.02)
+### ⏳ Step 4.3: Run 500 reviews (paid, ~$0.02) ← **current**
 **What you're doing:** Run `checkpoint_500.csv`, refresh the estimate; test shorter question wording to cut full-run cost.
 **Outputs:** `cost/checkpoint_500_run/` · updated `cost/report.md`
 

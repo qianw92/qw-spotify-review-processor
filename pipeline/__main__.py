@@ -34,6 +34,7 @@ def main():
     p.add_argument("--verify-rate", type=float, default=0.01)
     p.add_argument("--verify-min", type=int, default=20)
     p.add_argument("--allow-partial", action="store_true")
+    p.add_argument("--prompt", default="enrich-v1", choices=["enrich-v1", "enrich-v2"])
     p.add_argument("--confirm-spend", action="store_true")
     p = stages.add_parser("rank", help="Rebuild ranking.csv from saved files only (no database, no model, $0)")
     p.add_argument("--records", required=True, help="records.jsonl or enriched.jsonl (.gz ok)")
@@ -50,13 +51,13 @@ def main():
 
     if args.stage == "run":
         from . import run as orchestrator
-        pv = orchestrator.preview(args.input, args.db, args.run_dir, args.verify_rate, args.verify_min)
+        pv = orchestrator.preview(args.input, args.db, args.run_dir, args.verify_rate, args.verify_min, args.prompt)
         print("PRICE PREVIEW\n" + json.dumps(pv, indent=2))
         if not args.confirm_spend:
             print("\nNo API calls made. Re-run with --confirm-spend and --max-spend to execute.")
             return
         s = orchestrator.run(args.input, args.db, args.run_dir, args.max_spend, args.verify_rate, args.verify_min,
-                             args.label, args.allow_partial)
+                             args.label, args.allow_partial, args.prompt)
         print(json.dumps({k: s[k] for k in ("record_status", "wall_clock_seconds", "run_spent_usd")}, indent=2))
         return
     if args.stage == "rank":

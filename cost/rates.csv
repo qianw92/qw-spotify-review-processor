@@ -1,0 +1,7 @@
+provider,model,tier,billing_item,unit,price_usd,per_units,source_url,checked_date,notes
+typesafe,jev-1.13.0,standard,input_tokens,token,0.042,1000000,https://docs.typesafe.ai/models.md,2026-10-06,"$42 per billion input tokens"
+typesafe,jev-1.13.0,standard,output_tokens,token,0,1000000,https://docs.typesafe.ai/models.md,2026-10-06,"output tokens are free"
+openai,gpt-6-luna,standard,input_tokens_uncached,token,0.10,1000000,https://developers.openai.com/api/docs/models/gpt-6-luna,2026-10-10,"standard tier; input minus cached input"
+openai,gpt-6-luna,standard,cached_input_tokens,token,0.01,1000000,https://developers.openai.com/api/docs/models/gpt-6-luna,2026-10-10,"provider prompt cache; 0 observed in pilot"
+openai,gpt-6-luna,standard,output_tokens,token,0.50,1000000,https://developers.openai.com/api/docs/models/gpt-6-luna,2026-10-10,"includes reasoning tokens (effort=none, so 0 reasoning)"
+local,macbook,n/a,local_compute,hour,unknown,1,,2026-10-10,"laptop CPU for ingest/dedupe/rank; electricity and hardware not measured"

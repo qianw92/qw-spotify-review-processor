@@ -1,0 +1,13 @@
+request_id,run_label,role,provider,model,outcome,billing_item,units
+req_01a1287ac8337fee90abde226797f9a2,cold,enrich,typesafe,jev-1.13.0,succeeded,input_tokens,16114
+req_01a1287ac8337fee90abde226797f9a2,cold,enrich,typesafe,jev-1.13.0,succeeded,output_tokens,10892
+req_01a1287ad33476b5a6bc41d03d3be941,cold,enrich,typesafe,jev-1.13.0,succeeded,input_tokens,16089
+req_01a1287ad33476b5a6bc41d03d3be941,cold,enrich,typesafe,jev-1.13.0,succeeded,output_tokens,10851
+req_01a1287ad5037a53949352223a751d40,cold,verify,typesafe,jev-1.13.0,succeeded,input_tokens,7268
+req_01a1287ad5037a53949352223a751d40,cold,verify,typesafe,jev-1.13.0,succeeded,output_tokens,4231
+resp_0a1c0aea6949d0ff006acadff64b6c87d0a6b491f860bf227a,cold,group,openai,gpt-6-luna,succeeded,input_tokens_uncached,2804
+resp_0a1c0aea6949d0ff006acadff64b6c87d0a6b491f860bf227a,cold,group,openai,gpt-6-luna,succeeded,cached_input_tokens,0
+resp_0a1c0aea6949d0ff006acadff64b6c87d0a6b491f860bf227a,cold,group,openai,gpt-6-luna,succeeded,output_tokens,520
+resp_0cdd3bba981a243d006acadffc88e487d086ea00a302090cf3,cold,memo,openai,gpt-6-luna,succeeded,input_tokens_uncached,3288
+resp_0cdd3bba981a243d006acadffc88e487d086ea00a302090cf3,cold,memo,openai,gpt-6-luna,succeeded,cached_input_tokens,0
+resp_0cdd3bba981a243d006acadffc88e487d086ea00a302090cf3,cold,memo,openai,gpt-6-luna,succeeded,output_tokens,850

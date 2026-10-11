@@ -59,8 +59,12 @@ CREATE TABLE IF NOT EXISTS labels (
 """
 
 
-def label_config(layout):
-    return f"{MODEL}+{rules.PROMPT_VERSION}+{rules.LABELS_VERSION}+{layout}"
+PROMPTS = ("enrich-v1", "enrich-v2")  # v2 = same rules, shorter per-review question wording (cost test)
+DEFAULT_PROMPT = "enrich-v1"
+
+
+def label_config(layout, prompt=DEFAULT_PROMPT):
+    return f"{MODEL}+{prompt}+{rules.LABELS_VERSION}+{layout}"
 
 
 def now():
@@ -85,11 +89,28 @@ def entities(text):
 
 # ---------- request building ----------
 
-def build_request(batch, layout):
+def build_request(batch, layout, prompt=DEFAULT_PROMPT):
     """batch: list of (review_id, text). Returns (state, questions, keymap, quote_options)."""
     from typesafe_sdk import Choice, Score
     keymap, quote_options, questions = {}, {}, {}
-    if layout == "batched":
+    if layout == "batched" and prompt == "enrich-v2":
+        reviews = {}
+        for i, (rid, text) in enumerate(batch):
+            k = f"r{i:02d}"
+            keymap[k] = rid
+            reviews[k] = text
+            questions[f"{k}|topic"] = Choice(instructions=f"`reviews.{k}` topic per `label_rules.topic`",
+                                             criteria={t: None for t in rules.TOPICS})
+            questions[f"{k}|intent"] = Choice(instructions=f"`reviews.{k}` intent per `label_rules.intent`",
+                                              criteria={t: None for t in rules.INTENTS})
+            questions[f"{k}|severity"] = Choice(instructions=f"`reviews.{k}` severity per `label_rules.severity`",
+                                                criteria={s: None for s in rules.SEVERITY})
+            questions[f"{k}|sentiment"] = Score(instructions=f"`reviews.{k}` sentiment",
+                                                criteria=["very negative", "negative", "neutral", "positive",
+                                                          "very positive"])
+            add_quote_question(questions, quote_options, k, text, f"`reviews.{k}`: ")
+        state = {"label_rules": rules.shared_rules(), "reviews": reviews}
+    elif layout == "batched":
         reviews = {}
         for i, (rid, text) in enumerate(batch):
             k = f"r{i:02d}"
@@ -146,7 +167,7 @@ def estimate_tokens(state, questions):
 
 # ---------- parsing + validation ----------
 
-def parse(answers, keymap, quote_options, texts, layout, request_id):
+def parse(answers, keymap, quote_options, texts, config, request_id):
     """Returns ({review_id: label_row}, {review_id: reason}) — invalid reviews get a reason."""
     good, bad = {}, {}
     for k, rid in keymap.items():
@@ -174,7 +195,7 @@ def parse(answers, keymap, quote_options, texts, layout, request_id):
             needs = min(conf.values()) < NEEDS_REVIEW_CONFIDENCE
             good[rid] = {"review_id": rid, "topic": topic, "intent": intent, "severity": int(sev),
                          "sentiment": round(score / 2 - 1, 2), "entities": json.dumps(entities(text)),
-                         "evidence_quote": quote, "needs_review": int(needs), "label_config": label_config(layout),
+                         "evidence_quote": quote, "needs_review": int(needs), "label_config": config,
                          "confidences": json.dumps(conf), "request_id": request_id, "cache_source_id": None,
                          "created_at": now()}
         except (KeyError, ValueError, AttributeError, TypeError) as e:
@@ -185,7 +206,10 @@ def parse(answers, keymap, quote_options, texts, layout, request_id):
 # ---------- the stage ----------
 
 class Enricher:
-    def __init__(self, db_path, run_dir, layout="batched", batch_size=50, max_spend=0.0, limit=None, guard=None):
+    def __init__(self, db_path, run_dir, layout="batched", batch_size=50, max_spend=0.0, limit=None, guard=None,
+                 prompt=DEFAULT_PROMPT):
+        assert prompt in PROMPTS, prompt
+        self.prompt = prompt
         assert 1 <= batch_size <= 50, "enrichment requests must contain at most 50 reviews"
         if layout == "single":
             batch_size = 1
@@ -194,7 +218,7 @@ class Enricher:
             raise SystemExit("No duplicate-text map in this database: run `python -m pipeline dedupe` first.")
         self.con.executescript(LABEL_SCHEMA)
         self.layout, self.batch_size, self.limit = layout, batch_size, limit
-        self.config = label_config(layout)
+        self.config = label_config(layout, prompt)
         self.run_dir = Path(run_dir)
         self.run_dir.mkdir(parents=True, exist_ok=True)
         self.calls_path = self.run_dir / "calls.jsonl"
@@ -219,7 +243,7 @@ class Enricher:
         rows = self.pending()
         tokens = requests = 0
         for b in self.batches(rows):
-            state, qs, _, _ = build_request(b, self.layout)
+            state, qs, _, _ = build_request(b, self.layout, self.prompt)
             tokens += estimate_tokens(state, qs)
             requests += 1
         usd = budget.cost(PROVIDER, tokens, 0)
@@ -241,7 +265,7 @@ class Enricher:
     def call(self, batch):
         """One logical request with bounded retries on transient API errors. Each attempt is logged."""
         from typesafe_sdk import RetryPolicy, TypeSafeClient, TypeSafeError
-        state, questions, keymap, quote_options = build_request(batch, self.layout)
+        state, questions, keymap, quote_options = build_request(batch, self.layout, self.prompt)
         est = estimate_tokens(state, questions)
         self.guard.check(budget.cost(PROVIDER, est, 0) * RESERVE_FACTOR)   # raises BudgetExceeded
         ids = [rid for rid, _ in batch]
@@ -297,14 +321,14 @@ class Enricher:
             for b in self.batches(rows):
                 resp, keymap, qopts = self.call(b)
                 stats["requests"] += 1
-                good, bad = parse(resp.answers, keymap, qopts, texts, self.layout, resp.request_id)
+                good, bad = parse(resp.answers, keymap, qopts, texts, self.config, resp.request_id)
                 self.save(good, bad, final=False)
                 stats["completed"] += len(good)
                 if bad:  # retry invalid output once, then quarantine
                     retry = [(rid, texts[rid]) for rid in bad]
                     resp2, keymap2, qopts2 = self.call(retry)
                     stats["requests"] += 1
-                    good2, bad2 = parse(resp2.answers, keymap2, qopts2, texts, self.layout, resp2.request_id)
+                    good2, bad2 = parse(resp2.answers, keymap2, qopts2, texts, self.config, resp2.request_id)
                     self.save(good2, bad2, final=True)
                     stats["completed"] += len(good2)
                     stats["quarantined"] += len(bad2)

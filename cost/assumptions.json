@@ -1,0 +1,18 @@
+{
+  "_note": "Editable projection assumptions. Measured pilot results never depend on this file.",
+  "budget_usd": 10.0,
+  "already_spent_usd": 0.0065,
+  "full_run": {"source_rows": 660622, "nonempty_to_classify": 660609, "empty_text_quarantines": 13,
+               "distinct_nonempty_texts": 484189},
+  "batch_size": 50,
+  "controls": {"max_workers": 4, "openai_max_output_tokens": {"group": 2600, "memo": 2500},
+               "fallback_model": "none", "max_fallback_fraction": 0.0, "run_cap_usd": 7.0},
+  "verify_rate": 0.01,
+  "expected_full_run_issues": 30,
+  "scenarios": {
+    "base":         {"token_variance": 0.00, "api_retry_rate": 0.01, "invalid_output_resend_rate": 0.005,
+                     "memo_attempts": 1, "group_attempts": 1, "seconds_per_request": "mean", "parallel_efficiency": 0.9},
+    "conservative": {"token_variance": 0.10, "api_retry_rate": 0.05, "invalid_output_resend_rate": 0.02,
+                     "memo_attempts": 2, "group_attempts": 2, "seconds_per_request": "max", "parallel_efficiency": 0.6}
+  }
+}

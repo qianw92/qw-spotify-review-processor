@@ -17,11 +17,11 @@ def spend_by_provider():
     return {"typesafe": budget.spent("typesafe"), "openai": budget.spent("openai")}
 
 
-def preview(input_csv, db_path, run_dir, verify_rate, verify_min):
+def preview(input_csv, db_path, run_dir, verify_rate, verify_min, prompt=enrich.DEFAULT_PROMPT):
     """Estimate every stage before spending. Runs ingest + dedupe ($0) so pending work is known."""
     ingest.run(input_csv, db_path=db_path, out_dir=Path(run_dir), grading_dir=Path(run_dir) / "grading")
     dedupe.run(db_path=db_path, out_dir=Path(run_dir))
-    e = enrich.Enricher(db_path, run_dir).preview()
+    e = enrich.Enricher(db_path, run_dir, prompt=prompt).preview()
     con = db.connect(db_path)
     canon = con.execute("SELECT COUNT(*) FROM text_map WHERE is_canonical=1").fetchone()[0]
     per_review = e["estimated_input_tokens"] / max(1, e["reviews_to_send"]) if e["reviews_to_send"] else 330
@@ -47,14 +47,14 @@ def preview(input_csv, db_path, run_dir, verify_rate, verify_min):
 
 
 def run(input_csv, db_path, run_dir, max_spend, verify_rate=0.01, verify_min=20, run_label="run",
-        allow_partial=False):
+        allow_partial=False, prompt=enrich.DEFAULT_PROMPT):
     run_dir = Path(run_dir)
     run_dir.mkdir(parents=True, exist_ok=True)
     guard = budget.Guard(max_spend)
     log_path = run_dir / "run_log.jsonl"
     summary = {"run_label": run_label, "input": str(input_csv), "db": str(db_path),
                "started_at": calllog.now(), "max_spend_usd": max_spend,
-               "config": {"enrich": enrich.label_config("batched"), "verify": verify.verify_config(),
+               "config": {"enrich": enrich.label_config("batched", prompt), "verify": verify.verify_config(),
                           "group_prompt": group.PROMPT_VERSION, "memo_prompt": memo.PROMPT_VERSION,
                           "openai_model": llm.MODEL, "openai_reasoning_effort": llm.REASONING_EFFORT,
                           "jev_model": enrich.MODEL, "batch_size": 50, "workers": 1,
@@ -88,7 +88,7 @@ def run(input_csv, db_path, run_dir, max_spend, verify_rate=0.01, verify_min=20,
                                                            grading_dir=run_dir / "grading").items()
                              if k in ("counts", "record_status", "reused_saved_state_for_same_input")})
     stage("dedupe", lambda: dedupe.run(db_path=db_path, out_dir=run_dir)["counts"])
-    enricher = enrich.Enricher(db_path, run_dir, guard=guard)
+    enricher = enrich.Enricher(db_path, run_dir, guard=guard, prompt=prompt)
     status, res = stage("enrich", enricher.run)
     con = db.connect(db_path)
     counts = dict(con.execute("SELECT status, COUNT(*) FROM records GROUP BY status").fetchall())
