@@ -1,0 +1,87 @@
+{
+  "stage": "dedupe",
+  "model_calls": 0,
+  "created_at": "2026-10-11T01:54:15+00:00",
+  "rule": "exact byte-identical review_text (SHA-256); canonical = earliest source row; aliases reuse its label via cache_source_id",
+  "counts": {
+    "nonempty_rows": 50,
+    "canonical_texts_to_classify": 49,
+    "alias_rows_reusing_a_label": 1,
+    "work_reduction_pct": 2.0
+  },
+  "integrity_checks_all_zero": true,
+  "integrity_checks": {
+    "nonempty_rows_not_mapped": 0,
+    "alias_text_differs_from_canonical": 0,
+    "alias_points_to_non_canonical (chain)": 0,
+    "canonical_not_pointing_to_itself": 0,
+    "empty_text_rows_mapped": 0
+  },
+  "group_size_distribution": {
+    "1 (unique)": 48,
+    "2-5": 1
+  },
+  "most_repeated_texts": [
+    {
+      "text": "Good",
+      "rows": 2
+    },
+    {
+      "text": "Staff must be full of mentally ill kool-aid heads. Banning conservative music that speaks truth. Spotify is doing all they can to protect pedophiles, by banning Christian songs discussing the path the devil leads you down. Pride is a sin.",
+      "rows": 1
+    },
+    {
+      "text": "Great app use it every chance I get",
+      "rows": 1
+    },
+    {
+      "text": "It's really an amazing experience with Spotify...I love it🥰",
+      "rows": 1
+    },
+    {
+      "text": "Ads were okay, but limited functionality..it's just too much",
+      "rows": 1
+    },
+    {
+      "text": "I just loved it",
+      "rows": 1
+    },
+    {
+      "text": "Hate this application 🤮🤮🤮🤮🤮🤮",
+      "rows": 1
+    },
+    {
+      "text": "Excellent",
+      "rows": 1
+    },
+    {
+      "text": "good ❤❤🔊🔊",
+      "rows": 1
+    },
+    {
+      "text": "Spotify is awesome and and very diverse :)",
+      "rows": 1
+    },
+    {
+      "text": "Duo Premium .... No ads at all!",
+      "rows": 1
+    },
+    {
+      "text": "Very good but wen I play my song it o ly plays a little bit then it stops I updated my phone and it worked but it happend again they need to fix this issue",
+      "rows": 1
+    },
+    {
+      "text": "Update: I reached out to Spotify Support and with some help from Sarah I was able to get the app working again. Old Post:Normally, the app works great, and I use it constantly. I tried to open it today, and it keeps crashing every time. I've tried uninstalling and reinstalling, and updating. Nothing seems to work unfortunately.",
+      "rows": 1
+    },
+    {
+      "text": "This app is bad work",
+      "rows": 1
+    },
+    {
+      "text": "Great...",
+      "rows": 1
+    }
+  ],
+  "seconds": 0.0
+}

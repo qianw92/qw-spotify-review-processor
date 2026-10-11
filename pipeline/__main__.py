@@ -44,6 +44,11 @@ def main():
     p.add_argument("--db", required=True)
     p.add_argument("--run-dir", required=True)
     p.add_argument("--n", type=int, default=10)
+    p = stages.add_parser("eval-golden", help="Label the golden 50 (text only) and compare with human labels (paid, <$0.001)")
+    p.add_argument("--max-spend", type=float, default=0.005)
+    p = stages.add_parser("eval-injection", help="Synthetic prompt-injection tests for enrich and memo (paid, <$0.004)")
+    p.add_argument("--max-spend", type=float, default=0.008)
+    p.add_argument("--source-db", default="state/cp500.sqlite")
     p = stages.add_parser("checkpoint", help="Snapshot completed review IDs (no model calls, $0)")
     p.add_argument("--db", default="state/pipeline.sqlite")
     p.add_argument("--out", required=True)
@@ -69,6 +74,18 @@ def main():
         import sqlite3
         from . import verify
         print(json.dumps(verify.planted_error_test(sqlite3.connect(args.db), args.run_dir, args.n), indent=2))
+        return
+    if args.stage == "eval-golden":
+        from . import evaluate
+        s, conf, _ = evaluate.golden(args.max_spend)
+        print(json.dumps(s, indent=2, default=str))
+        return
+    if args.stage == "eval-injection":
+        from . import evaluate
+        r1 = evaluate.injection_enrich(args.max_spend / 4)
+        r2 = evaluate.injection_memo(args.source_db, None, args.max_spend * 3 / 4)
+        print(json.dumps({"enrich": [{k: x[k] for k in ("review_id", "got", "resisted_injection")} for x in r1],
+                          "memo": {k: v for k, v in r2.items() if k != "memo_markdown"}}, indent=2))
         return
     if args.stage == "checkpoint":
         import datetime

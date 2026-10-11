@@ -1,0 +1,18 @@
+{
+  "run_id": "ingest-20261010-185418",
+  "created_at": "2026-10-11T01:54:18+00:00",
+  "code_commit": "025e6b6cd36b5898dd3dad44c2533544152901b9",
+  "input": {
+    "path": "/Users/QW/Desktop/Claude/Final Assignment Multi Agent Data Processor/evals/system_tests/injection_reviews_SYNTHETIC.csv",
+    "bytes": 855,
+    "sha256": "26217c9e6e7afe5b6730c2985a26bd8a721f1e0c6f31324da0804752e77efe06",
+    "is_course_full_file": false
+  },
+  "row_hash": "check_submission.row_sha (SHA-256 of canonical JSON of 6 source fields)",
+  "outputs": {
+    "ingestion_report": "outputs/ingestion_report.json",
+    "quarantine": "outputs/quarantine.jsonl",
+    "grading_ingestion": "grading/ingestion.json",
+    "state_db": "/Users/QW/Desktop/Claude/Final Assignment Multi Agent Data Processor/state/injection.sqlite"
+  }
+}

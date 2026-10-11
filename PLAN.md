@@ -6,11 +6,11 @@
 
 | | |
 |---|---|
-| **Current step** | **5.1 + 5.3 — golden-50 evaluation and system tests** (awaiting price approval) |
-| **Next paid step** | 5.1 + 5.3 (~$0.002) |
-| **Progress** | 15 of 27 steps done |
-| **Spent so far** | Jev $0.0122 · OpenAI $0.0028 · **Total $0.0150 of $10** |
-| **Last updated** | Oct 10 |
+| **Current step** | **6.1 — 10,000-review run** (+ parallel workers, awaiting price approval) |
+| **Next paid step** | 6.1 (~$0.17) |
+| **Progress** | 18 of 27 steps done |
+| **Spent so far** | Jev $0.0130 · OpenAI $0.0036 · **Total $0.0166 of $10** |
+| **Last updated** | Oct 11 |
 
 **Status key:** ✅ done · 🔨 code built, still needs its full-data run · ⏳ to do
 
@@ -104,23 +104,23 @@ Rules for every step: explain outputs in plain words · price preview + approval
 
 ## Phase 5: Evaluate quality
 
-### ⏳ Step 5.1: Compare AI labels with the golden 50 (paid, <$0.01) ← **current**
+### ✅ Step 5.1: Compare AI labels with the golden 50 (paid, $0.00065)
 **What you're doing:** Run Jev on the golden 50 and compare with your labels, field by field.
-**Outputs:** `evals/golden/results.csv` · `evals/golden/report.md` (agreement, confusion table, error analysis)
+**Outputs:** `evals/golden/results.csv` · `evals/golden/summary.json` · `evals/golden/report.md` — topic 88%, intent 92%, severity exact 76% (MAE 0.28; model runs ~1 level high), sentiment within ±0.5: 96%
 
-### 🔨 Step 5.2: Build the verifier (Stage 3)
+### ✅ Step 5.2: Build the verifier (Stage 3)
 **What you're doing:** A second, independent Jev task re-labels a declared random sample; code compares.
-**Outputs:** `pipeline/verify.py` (built, ran in pilot: 18/20 agree) · full-run report comes in 6.2
+**Outputs:** `pipeline/verify.py` · pilot 18/20 and 500-run 43/48 all-three agree · full-run report comes in 6.2
 
-### ⏳ Step 5.3: Run system tests ($0–0.01)
+### ✅ Step 5.3: Run system tests ($0.0009)
 **What you're doing:** Planted wrong labels, a hidden instruction in a fake review, malformed output, API failure — record actual outcomes.
-**Outputs:** `evals/system_tests/results.md` (reuses the recovery test from 3.2/3.3)
+**Outputs:** `evals/system_tests/results.md` — 12/12 pass (spend cap, API failure, malformed output, crash/resume, planted errors 10/10, memo checker 6/6, injection 6/6) · memo prompt → `memo-v2`
 
 ---
 
 ## Phase 6: Scale up and do the full run
 
-### ⏳ Step 6.1: Run 10,000 reviews (paid, ~$0.15)
+### ⏳ Step 6.1: Run 10,000 reviews (paid, ~$0.17) ← **current**
 **What you're doing:** Run `analysis_10000.csv`, refresh the estimate, confirm the full run fits the budget.
 **Outputs:** `cost/analysis_10000_run/` · updated `cost/report.md`
 

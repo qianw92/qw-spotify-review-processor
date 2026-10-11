@@ -1,0 +1,18 @@
+{
+  "run_id": "ingest-20261010-185415",
+  "created_at": "2026-10-11T01:54:15+00:00",
+  "code_commit": "025e6b6cd36b5898dd3dad44c2533544152901b9",
+  "input": {
+    "path": "/Users/QW/Desktop/Claude/Final Assignment Multi Agent Data Processor/data/golden_50_to_label.csv",
+    "bytes": 7905,
+    "sha256": "1a125c3e509f58b0246ba16d0ea332675a53ffadb1928be4338a0bd7053a11c7",
+    "is_course_full_file": false
+  },
+  "row_hash": "check_submission.row_sha (SHA-256 of canonical JSON of 6 source fields)",
+  "outputs": {
+    "ingestion_report": "outputs/ingestion_report.json",
+    "quarantine": "outputs/quarantine.jsonl",
+    "grading_ingestion": "grading/ingestion.json",
+    "state_db": "/Users/QW/Desktop/Claude/Final Assignment Multi Agent Data Processor/state/golden.sqlite"
+  }
+}

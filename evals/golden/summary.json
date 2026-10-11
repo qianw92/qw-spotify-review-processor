@@ -1,0 +1,101 @@
+{
+  "summary": {
+    "cases": 50,
+    "predictions": 50,
+    "missing_count_as_wrong": 0,
+    "topic_agreement": 0.88,
+    "intent_agreement": 0.92,
+    "severity_exact": 0.76,
+    "severity_mae": 0.28,
+    "sentiment_mae": 0.219,
+    "sentiment_within_tolerance": 0.96,
+    "all_three_correct": 0.68,
+    "ambiguous_cases": 4,
+    "quotes_exact_substring": 50,
+    "quotes_identical_to_human": 47,
+    "unsupported_entities": 0,
+    "needs_review": {
+      "flagged": 12,
+      "precision_vs_any_error": 0.5833333333333334,
+      "recall_vs_any_error": 0.4375
+    },
+    "label_config": "jev-1.13.0+enrich-v1+labels-v1+batched",
+    "enrich_stats": {
+      "requests": 1,
+      "completed": 49,
+      "quarantined": 0,
+      "stopped_reason": null,
+      "batches_saved": 1,
+      "aliases_completed_from_cache": 1,
+      "run_spent_usd": 0.000651,
+      "seconds": 3.61
+    },
+    "sentiment_tolerance_predeclared": 0.5
+  },
+  "confusion": {
+    "topic": {
+      "other": {
+        "catalog": 2,
+        "other": 27
+      },
+      "usability": {
+        "usability": 8,
+        "billing": 1,
+        "playback": 1,
+        "catalog": 1
+      },
+      "playback": {
+        "playback": 4
+      },
+      "catalog": {
+        "catalog": 2
+      },
+      "billing": {
+        "usability": 1,
+        "billing": 2
+      },
+      "downloads": {
+        "downloads": 1
+      }
+    },
+    "intent": {
+      "unclear": {
+        "complaint": 2,
+        "unclear": 4,
+        "request": 1
+      },
+      "praise": {
+        "praise": 20,
+        "complaint": 1
+      },
+      "complaint": {
+        "complaint": 19
+      },
+      "request": {
+        "request": 2
+      },
+      "cancellation": {
+        "cancellation": 1
+      }
+    },
+    "severity": {
+      "1": {
+        "2": 2,
+        "1": 27
+      },
+      "2": {
+        "3": 4,
+        "2": 8,
+        "5": 1
+      },
+      "3": {
+        "4": 4,
+        "3": 1
+      },
+      "4": {
+        "4": 2,
+        "3": 1
+      }
+    }
+  }
+}

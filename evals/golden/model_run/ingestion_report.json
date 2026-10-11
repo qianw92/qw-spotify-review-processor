@@ -1,0 +1,73 @@
+{
+  "run_id": "ingest-20261010-185415",
+  "created_at": "2026-10-11T01:54:15+00:00",
+  "stage": "prepare",
+  "model_calls": 0,
+  "reused_saved_state_for_same_input": false,
+  "input": {
+    "path": "/Users/QW/Desktop/Claude/Final Assignment Multi Agent Data Processor/data/golden_50_to_label.csv",
+    "bytes": 7905,
+    "sha256": "1a125c3e509f58b0246ba16d0ea332675a53ffadb1928be4338a0bd7053a11c7",
+    "is_course_full_file": false
+  },
+  "counts": {
+    "records": 50,
+    "nonempty": 50,
+    "empty_review_text": 0,
+    "missing_app_version": 12,
+    "duplicate_review_ids": 0,
+    "distinct_nonempty_texts": 49,
+    "multiline_text": 1
+  },
+  "exact_duplicate_texts": {
+    "distinct_nonempty_texts": 49,
+    "texts_appearing_more_than_once": 1,
+    "rows_reusable_from_cache": 1
+  },
+  "text_length_chars": {
+    "min": 4,
+    "median": 39.0,
+    "mean": 75.5,
+    "p95": 284,
+    "max": 329
+  },
+  "reviews_by_rating": {
+    "1": 22,
+    "2": 1,
+    "3": 2,
+    "4": 4,
+    "5": 21
+  },
+  "reviews_by_month": {
+    "2022-05": 1,
+    "2022-06": 2,
+    "2022-07": 2,
+    "2022-08": 6,
+    "2022-09": 2,
+    "2022-11": 2,
+    "2022-12": 2,
+    "2023-01": 1,
+    "2023-02": 2,
+    "2023-03": 2,
+    "2023-04": 2,
+    "2023-05": 1,
+    "2023-07": 6,
+    "2023-08": 3,
+    "2023-09": 7,
+    "2023-10": 7,
+    "2023-11": 2
+  },
+  "first_review": "2022-05-31 10:50:59",
+  "last_review": "2023-11-15 13:31:03",
+  "timestamp_issues": {},
+  "record_status": {
+    "pending": 50
+  },
+  "quarantine": {
+    "count": 0,
+    "by_reason": {}
+  },
+  "checks_vs_course_manifest": "skipped: input is not the full course file",
+  "agrees_with_course_profile_helper": true,
+  "seconds": 0.0
+}

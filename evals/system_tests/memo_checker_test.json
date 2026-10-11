@@ -1,0 +1,13 @@
+{
+  "synthetic_test": true,
+  "model_calls": 0,
+  "correct_memo_problems": [],
+  "planted_errors_memo_problems": [
+    "C1: complaint_count of ISS-billing-paywall is 40, not 999",
+    "[C2] cited but missing from claims",
+    "memo mentions unknown issue ISS-fake-issue",
+    "review ffffffff-ffff-ffff-ffff-ffffffffffff is not in the evidence pack",
+    "number 4242 does not appear in the evidence pack",
+    "numbers must not be wrapped in quotation marks"
+  ]
+}
