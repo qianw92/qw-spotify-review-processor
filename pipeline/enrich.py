@@ -326,11 +326,26 @@ class Enricher:
                                      (now(), rid))
 
     def run(self):
+        import signal
         rows = self.pending()
         texts = dict(rows)
         stats = {"requests": 0, "completed": 0, "quarantined": 0, "stopped_reason": None, "workers": self.workers}
         started = time.time()
         queue = list(self.batches(rows))
+        done_before = self.con.execute("SELECT COUNT(*) FROM labels WHERE label_config=? AND cache_source_id IS NULL",
+                                       (self.config,)).fetchone()[0]
+        print(f"[enrich] phase={self.phase} · already completed={done_before:,} · pending={len(rows):,} texts in "
+              f"{len(queue):,} batches · workers={self.workers} · run cap ${self.guard.run_cap}", flush=True)
+        self._progress = {"t0": started, "total": len(queue)}
+
+        # Ctrl+C sets a flag instead of raising: stop admitting work, then finish and SAVE in-flight requests
+        # (they are already paid for). A second Ctrl+C exits immediately (saved batches are still safe).
+        def on_sigint(signum, frame):
+            if stats["stopped_reason"] and "interrupted" in stats["stopped_reason"]:
+                raise KeyboardInterrupt
+            stats["stopped_reason"] = "interrupted by user (Ctrl+C); rerun the same command to resume"
+            print("\nINTERRUPTED: no new requests; saving in-flight batches before exit...", flush=True)
+        previous = signal.signal(signal.SIGINT, on_sigint)
         pool = ThreadPoolExecutor(max_workers=self.workers)
         in_flight = set()
         try:
@@ -340,27 +355,30 @@ class Enricher:
                     in_flight.add(pool.submit(self.call, queue.pop(0)))
                 if not in_flight:
                     break
-                try:
-                    done, in_flight = wait(in_flight, return_when=FIRST_COMPLETED)
-                except KeyboardInterrupt:
-                    # Ctrl+C: stop admitting work; finish and SAVE requests already sent (they are paid for).
-                    print(f"\nINTERRUPTED: no new requests; saving {len(in_flight)} in-flight batch(es)...", flush=True)
-                    stats["stopped_reason"] = "interrupted by user (Ctrl+C); rerun the same command to resume"
-                    queue.clear()
-                    done, in_flight = wait(in_flight), set()
+                done, in_flight = wait(in_flight, timeout=1.0, return_when=FIRST_COMPLETED)
                 for fut in done:
                     try:
                         resp, keymap, qopts = fut.result()
                     except budget.BudgetExceeded as e:
                         stats["stopped_reason"] = f"budget: {e}"
-                        queue.clear()
+                        continue
+                    except Exception as e:  # API still failing after bounded retries: stop cleanly, keep saved work
+                        stats["stopped_reason"] = (f"api_failure after {API_ATTEMPTS} attempts: {type(e).__name__}: "
+                                                   f"{str(e)[:150]}; rerun the same command to resume")
                         continue
                     self._handle(resp, keymap, qopts, texts, stats)
+                if stats["stopped_reason"]:
+                    queue.clear()
         finally:
             pool.shutdown(wait=True)
+            signal.signal(signal.SIGINT, previous)
         stats["aliases_completed_from_cache"] = self.propagate()
         stats["run_spent_usd"] = round(self.guard.run_spent, 6)
         stats["seconds"] = round(time.time() - started, 2)
+        if stats["stopped_reason"]:
+            print(f"[enrich] STOPPED: {stats['stopped_reason']}", flush=True)
+        print(f"[enrich] saved {stats.get('batches_saved', 0):,} batches · {stats['completed']:,} texts this run · "
+              f"${stats['run_spent_usd']:.4f} · {stats['seconds']:.0f}s", flush=True)
         return stats
 
     def _handle(self, resp, keymap, qopts, texts, stats):
@@ -379,6 +397,12 @@ class Enricher:
                 stats["completed"] += len(good2)
                 stats["quarantined"] += len(bad2)
             stats["batches_saved"] = stats.get("batches_saved", 0) + 1
+            n = stats["batches_saved"]
+            if n % 25 == 0 or n == self._progress["total"]:
+                el = time.time() - self._progress["t0"]
+                eta = (self._progress["total"] - n) * el / n
+                print(f"[enrich] {n:,}/{self._progress['total']:,} batches · {stats['completed']:,} texts · "
+                      f"${self.guard.run_spent:.4f} · {n / el:.2f} batch/s · ETA {eta / 60:.0f} min", flush=True)
             if INJECT["PIPELINE_KILL_AFTER_BATCHES"] and stats["batches_saved"] >= INJECT["PIPELINE_KILL_AFTER_BATCHES"]:
                 print(f"SYNTHETIC CRASH: hard-killing process after {stats['batches_saved']} saved batch(es)", flush=True)
                 os._exit(137)  # no cleanup, no final summary: like a power cut
