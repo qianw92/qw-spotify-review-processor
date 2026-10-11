@@ -10,6 +10,7 @@ Two request layouts (part of label_config, so results are never mixed):
 """
 import datetime
 import json
+import os
 import random
 import re
 import time
@@ -27,6 +28,17 @@ CHARS_PER_TOKEN_ESTIMATE = 3.0     # conservative (over-estimates tokens) until 
 RESERVE_FACTOR = 1.5               # reserve 1.5x the estimate before each request
 API_ATTEMPTS = 3                   # transient API errors: up to 3 attempts with backoff + jitter
 FIELDS = ("topic", "intent", "severity", "sentiment")
+
+# Synthetic fault injection for recovery tests (off unless set; every injected event is logged as synthetic).
+#   PIPELINE_INJECT_API_FAILURES=N    the first N API attempts of this process fail before reaching the API
+#   PIPELINE_INJECT_INVALID_OUTPUT=N  the first N parsed reviews get an out-of-taxonomy topic (forces retry path)
+#   PIPELINE_KILL_AFTER_BATCHES=N     hard-kill the process right after N batches are saved (simulated crash)
+INJECT = {k: int(os.environ.get(k, "0")) for k in
+          ("PIPELINE_INJECT_API_FAILURES", "PIPELINE_INJECT_INVALID_OUTPUT", "PIPELINE_KILL_AFTER_BATCHES")}
+
+
+class InjectedAPIFailure(Exception):
+    """Synthetic transient failure used only by recovery tests."""
 
 LABEL_SCHEMA = """
 CREATE TABLE IF NOT EXISTS labels (
@@ -141,6 +153,9 @@ def parse(answers, keymap, quote_options, texts, layout, request_id):
         try:
             a = {f: answers[f"{k}|{f}"] for f in FIELDS}
             topic, intent, sev = a["topic"].choice, a["intent"].choice, a["severity"].choice
+            if INJECT["PIPELINE_INJECT_INVALID_OUTPUT"] > 0:
+                INJECT["PIPELINE_INJECT_INVALID_OUTPUT"] -= 1
+                topic = "SYNTHETIC_INVALID_TOPIC"
             if topic not in rules.TOPICS or intent not in rules.INTENTS or sev not in rules.SEVERITY:
                 raise ValueError("label outside allowed set")
             score = float(a["sentiment"].score)
@@ -175,6 +190,8 @@ class Enricher:
         if layout == "single":
             batch_size = 1
         self.con = db.connect(db_path)
+        if not self.con.execute("SELECT 1 FROM sqlite_master WHERE name='text_map'").fetchone():
+            raise SystemExit("No duplicate-text map in this database: run `python -m pipeline dedupe` first.")
         self.con.executescript(LABEL_SCHEMA)
         self.layout, self.batch_size, self.limit = layout, batch_size, limit
         self.config = label_config(layout)
@@ -231,6 +248,9 @@ class Enricher:
         for attempt in range(1, API_ATTEMPTS + 1):
             started = time.time()
             try:
+                if INJECT["PIPELINE_INJECT_API_FAILURES"] > 0:
+                    INJECT["PIPELINE_INJECT_API_FAILURES"] -= 1
+                    raise InjectedAPIFailure("synthetic transient failure (recovery test)")
                 with TypeSafeClient(model=MODEL, retry=RetryPolicy(max_retries=0), timeout=60) as client:
                     resp = client.system_one(state=state, questions=questions)
                 u = resp.usage
@@ -241,10 +261,11 @@ class Enricher:
                               input_tokens=tin, output_tokens=tout, estimated_input_tokens=est,
                               cost_usd=round(usd, 8), seconds=round(time.time() - started, 3), model=resp.model)
                 return resp, keymap, quote_options
-            except TypeSafeError as e:
+            except (TypeSafeError, InjectedAPIFailure) as e:
                 local_id = f"local-{datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')}"
                 self.log_call(request_id=local_id, review_ids=ids, outcome="failed", attempt=attempt,
                               input_tokens=0, output_tokens=0, usage_note="no usage reported for failed call",
+                              synthetic_test=isinstance(e, InjectedAPIFailure),
                               error=f"{type(e).__name__}: {str(e)[:200]}", seconds=round(time.time() - started, 3))
                 if attempt == API_ATTEMPTS:
                     raise
@@ -287,6 +308,10 @@ class Enricher:
                     self.save(good2, bad2, final=True)
                     stats["completed"] += len(good2)
                     stats["quarantined"] += len(bad2)
+                stats["batches_saved"] = stats.get("batches_saved", 0) + 1
+                if INJECT["PIPELINE_KILL_AFTER_BATCHES"] and stats["batches_saved"] >= INJECT["PIPELINE_KILL_AFTER_BATCHES"]:
+                    print(f"SYNTHETIC CRASH: hard-killing process after {stats['batches_saved']} saved batch(es)", flush=True)
+                    os._exit(137)  # no cleanup, no final summary: like a power cut
         except budget.BudgetExceeded as e:
             stats["stopped_reason"] = f"budget: {e}"
         stats["aliases_completed_from_cache"] = self.propagate()

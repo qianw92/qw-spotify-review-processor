@@ -1,0 +1,87 @@
+{
+  "stage": "dedupe",
+  "model_calls": 0,
+  "created_at": "2026-10-10T23:22:23+00:00",
+  "rule": "exact byte-identical review_text (SHA-256); canonical = earliest source row; aliases reuse its label via cache_source_id",
+  "counts": {
+    "nonempty_rows": 150,
+    "canonical_texts_to_classify": 144,
+    "alias_rows_reusing_a_label": 6,
+    "work_reduction_pct": 4.0
+  },
+  "integrity_checks_all_zero": true,
+  "integrity_checks": {
+    "nonempty_rows_not_mapped": 0,
+    "alias_text_differs_from_canonical": 0,
+    "alias_points_to_non_canonical (chain)": 0,
+    "canonical_not_pointing_to_itself": 0,
+    "empty_text_rows_mapped": 0
+  },
+  "group_size_distribution": {
+    "1 (unique)": 139,
+    "2-5": 5
+  },
+  "most_repeated_texts": [
+    {
+      "text": "Nice",
+      "rows": 3
+    },
+    {
+      "text": "Best music app",
+      "rows": 2
+    },
+    {
+      "text": "Love it",
+      "rows": 2
+    },
+    {
+      "text": "Good",
+      "rows": 2
+    },
+    {
+      "text": "Nice app",
+      "rows": 2
+    },
+    {
+      "text": "Does this app ever work? updated 11/2023.. like seriously does it ever?",
+      "rows": 1
+    },
+    {
+      "text": "I hate this app i love 🇮🇳india",
+      "rows": 1
+    },
+    {
+      "text": "They just want money",
+      "rows": 1
+    },
+    {
+      "text": "Good app want to see Jape's song",
+      "rows": 1
+    },
+    {
+      "text": "It always crashing down; unable to play and just stop working everytime I use it",
+      "rows": 1
+    },
+    {
+      "text": "THE worst app. first my account automatically Log out and then all my favourite songs are gone. I update this app but still nothing. And I'm also uninstalling this. 😤😤😤😤😤",
+      "rows": 1
+    },
+    {
+      "text": "The variety of music available is amazing, however an option for most listened to music should be availed",
+      "rows": 1
+    },
+    {
+      "text": "You have only 1 work to play music and that also you can't do properly worst app😡",
+      "rows": 1
+    },
+    {
+      "text": "Reasonable",
+      "rows": 1
+    },
+    {
+      "text": "Smooth",
+      "rows": 1
+    }
+  ],
+  "seconds": 0.0
+}

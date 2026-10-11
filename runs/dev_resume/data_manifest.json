@@ -1,0 +1,18 @@
+{
+  "run_id": "ingest-20261010-162223",
+  "created_at": "2026-10-10T23:22:23+00:00",
+  "code_commit": "591faf057f1323f40697ae19c82651fc39400106",
+  "input": {
+    "path": "evals/dev/dev_resume_150.csv",
+    "bytes": 23263,
+    "sha256": "35beebabce9eef89f1c8293f7b1c4aa25bb41fbd8827a6a39a606e9912face33",
+    "is_course_full_file": false
+  },
+  "row_hash": "check_submission.row_sha (SHA-256 of canonical JSON of 6 source fields)",
+  "outputs": {
+    "ingestion_report": "outputs/ingestion_report.json",
+    "quarantine": "outputs/quarantine.jsonl",
+    "grading_ingestion": "grading/ingestion.json",
+    "state_db": "state/dev_resume.sqlite"
+  }
+}

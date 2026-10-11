@@ -1,0 +1,13 @@
+{
+ "test": "recovery + spend controls (synthetic faults, dev_resume_150)",
+ "checks": {
+  "before \u2282 after_crash \u2282 after": true,
+  "completed IDs re-sent after checkpoint (must be 0)": 0,
+  "IDs sent twice in successful calls (expected 2: the 2 injected bad answers, retried once)": 2,
+  "final completed": 150,
+  "quarantined": 0,
+  "aliases with cache_source_id": 6,
+  "labels with SYNTHETIC topic saved (must be 0)": 0,
+  "quotes not exact substrings (must be 0)": 0
+ }
+}

@@ -25,7 +25,22 @@ def main():
     p.add_argument("--limit", type=int, help="only the first N pending canonical reviews")
     p.add_argument("--max-spend", type=float, default=0.0, help="hard USD cap for this run")
     p.add_argument("--confirm-spend", action="store_true", help="actually call the paid API")
+    p = stages.add_parser("checkpoint", help="Snapshot completed review IDs (no model calls, $0)")
+    p.add_argument("--db", default="state/pipeline.sqlite")
+    p.add_argument("--out", required=True)
     args = parser.parse_args()
+
+    if args.stage == "checkpoint":
+        import datetime
+        import sqlite3
+        con = sqlite3.connect(args.db)
+        ids = [r[0] for r in con.execute("SELECT review_id FROM records WHERE status='completed' ORDER BY review_id")]
+        counts = dict(con.execute("SELECT status, COUNT(*) FROM records GROUP BY status").fetchall())
+        out = Path(args.out); out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps({"created_at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
+                                   "db": args.db, "status_counts": counts, "completed_ids": ids}, indent=1))
+        print(json.dumps({"saved": str(out), "status_counts": counts}))
+        return
 
     if args.stage == "enrich":
         from . import enrich

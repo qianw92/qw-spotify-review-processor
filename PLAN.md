@@ -69,13 +69,13 @@ Mark a step `[x]` when it's done.
 - `prompts/enricher_v1.md`: the instructions given to the AI
 - `outputs/enriched.jsonl`: one labeled record per review
 
-### [ ] Step 3.2: Add saving, caching and resume
+### [x] Step 3.2: Add saving, caching and resume
 **What you're doing:** Save results after every batch, so a crash loses nothing and a restart skips finished work. Reuse labels for duplicate texts.
 **Outputs:**
 - A status for every review (pending, completed or quarantined)
 - `outputs/run_log.jsonl`: a diary of every AI call (time, tokens, cost, success or failure)
 
-### [ ] Step 3.3: Add safety limits
+### [x] Step 3.3: Add safety limits
 **What you're doing:** Add a spending cap, a max number of workers, a token cap and retry limits. The pipeline stops cleanly when it hits a limit.
 **Outputs:**
 - Settings in a config file, documented in README section 10
