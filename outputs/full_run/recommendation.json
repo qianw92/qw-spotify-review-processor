@@ -1,0 +1,71 @@
+{
+  "recommended_area": "playback",
+  "headline": "Prioritize playback reliability for next quarter",
+  "memo_markdown": "## Recommendation\n\nAllocate next quarter’s product effort to **playback**. Among the four eligible areas, playback combines a substantial complaint volume with high reported severity: the area has 43602 complaints, a mean severity of 3.68, and 31050 severity-4-or-5 complaints. Its leading issue, ISS-playback-general, describes playback and library disruptions; its priority score is 103197 [C1]. The examples include playback stopping after an update (review 9110fa91-5ed7-4c32-b486-8957cf404a0e) and an app freeze that reportedly interrupted work (review 4fcd8963-4953-494a-be7a-cad5dbac6a9d). These reviews illustrate the issue, not its prevalence beyond the supplied counts.\n\n## Evidence\n\nPlayback stands out for the combination of volume and severity in the area totals. Access has a higher mean severity of 3.98, but considerably fewer complaints at 10732. Usability has the largest complaint share among the four choices at 23.6%, but a lower mean severity of 2.61. Billing_support has 62732 complaints and the largest cancellation-intent count among the four, 11190, but mean severity is 2.95. These aggregate figures support playback as a focused reliability bet rather than a claim about business impact.\n\n## Alternatives considered\n\nBilling_support is the closest alternative by issue priority: difficulty canceling, ISS-billing-paywall, has 42274 complaints [C2] and a priority score of 127309 [C3]. Reviews describe difficulty canceling or continued charges, including 6d9c7826-56da-4743-8b78-074f8c463625. It deserves attention, but the area’s lower mean severity than playback makes playback the preferred next-quarter focus. Usability also warrants consideration: ISS-usability-ads has 25142 complaints [C4] and priority score 55683 [C5], with reports of disruptive ads such as review d2be0967-e112-4a2d-8c58-e37f937c6d22. Its area mean severity is lower. Access has fewer total complaints; its login issue, ISS-access-login, has priority score 26008 [C6].\n\n## Limitations\n\nThe evidence covers Google Play reviews from 17 May 2022 to 15 Nov 2023. Reviews are self-selected and historical; cancellation language is intent, not observed churn; and there is no revenue data. Coverage reports 0 pending and 13 quarantined out of 660622 source rows. The pack cannot establish causal retention effects or revenue at risk, and review examples should not be treated as representative customer facts.",
+  "claims": [
+    {
+      "claim_id": "C1",
+      "issue_id": "ISS-playback-general",
+      "metric": "priority_score",
+      "value": "103197"
+    },
+    {
+      "claim_id": "C2",
+      "issue_id": "ISS-billing-paywall",
+      "metric": "complaint_count",
+      "value": "42274"
+    },
+    {
+      "claim_id": "C3",
+      "issue_id": "ISS-billing-paywall",
+      "metric": "priority_score",
+      "value": "127309"
+    },
+    {
+      "claim_id": "C4",
+      "issue_id": "ISS-usability-ads",
+      "metric": "complaint_count",
+      "value": "25142"
+    },
+    {
+      "claim_id": "C5",
+      "issue_id": "ISS-usability-ads",
+      "metric": "priority_score",
+      "value": "55683"
+    },
+    {
+      "claim_id": "C6",
+      "issue_id": "ISS-access-login",
+      "metric": "priority_score",
+      "value": "26008"
+    }
+  ],
+  "cited_review_ids": [
+    "9110fa91-5ed7-4c32-b486-8957cf404a0e",
+    "4fcd8963-4953-494a-be7a-cad5dbac6a9d",
+    "6d9c7826-56da-4743-8b78-074f8c463625",
+    "d2be0967-e112-4a2d-8c58-e37f937c6d22"
+  ],
+  "check": {
+    "status": "passed",
+    "checks": [
+      "claim values match ranking",
+      "claim IDs cited",
+      "issue IDs exist",
+      "review IDs from evidence pack",
+      "numbers appear in evidence pack"
+    ],
+    "recommended_area": "playback",
+    "area_with_highest_severity_sum": "billing_support",
+    "agrees_with_highest_severity_sum": false,
+    "model_call": {
+      "cached": false,
+      "request_id": "resp_0d816826b71433ce006acb1793414087d095c8b3a497fefe9a",
+      "cache_key": "54d26601cce93cf7587278034f0b3186140c14e0e13a1495dc99ea7de1f0952f",
+      "input_tokens": 3677,
+      "output_tokens": 988,
+      "attempts": 1
+    },
+    "human_review": "pending"
+  }
+}

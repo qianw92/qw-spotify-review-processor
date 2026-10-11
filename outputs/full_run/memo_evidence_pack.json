@@ -1,0 +1,359 @@
+{
+  "question": "Where should next quarter's product effort go: access, usability, playback, or billing/support?",
+  "period": "Google Play reviews, 17 May 2022 to 15 Nov 2023",
+  "coverage": {
+    "source_rows": 660622,
+    "completed": 660609,
+    "quarantined": 13,
+    "pending": 0
+  },
+  "total_complaint_and_cancellation_records": 293175,
+  "areas": {
+    "outside_options": {
+      "complaint_count": 107049,
+      "severity_sum": 225915,
+      "issues": 8,
+      "share_of_complaints_pct": "36.5",
+      "mean_severity": "2.11",
+      "severity_4_or_5_count": 3300,
+      "cancellation_intent_count": 8535,
+      "topics": [
+        "catalog",
+        "other"
+      ]
+    },
+    "billing_support": {
+      "complaint_count": 62732,
+      "severity_sum": 185030,
+      "issues": 5,
+      "share_of_complaints_pct": "21.4",
+      "mean_severity": "2.95",
+      "severity_4_or_5_count": 7448,
+      "cancellation_intent_count": 11190,
+      "topics": [
+        "billing",
+        "support"
+      ]
+    },
+    "playback": {
+      "complaint_count": 43602,
+      "severity_sum": 160591,
+      "issues": 7,
+      "share_of_complaints_pct": "14.9",
+      "mean_severity": "3.68",
+      "severity_4_or_5_count": 31050,
+      "cancellation_intent_count": 2840,
+      "topics": [
+        "playback",
+        "downloads"
+      ]
+    },
+    "usability": {
+      "complaint_count": 69060,
+      "severity_sum": 180210,
+      "issues": 5,
+      "share_of_complaints_pct": "23.6",
+      "mean_severity": "2.61",
+      "severity_4_or_5_count": 6836,
+      "cancellation_intent_count": 5265,
+      "topics": [
+        "usability"
+      ]
+    },
+    "access": {
+      "complaint_count": 10732,
+      "severity_sum": 42689,
+      "issues": 3,
+      "share_of_complaints_pct": "3.7",
+      "mean_severity": "3.98",
+      "severity_4_or_5_count": 10267,
+      "cancellation_intent_count": 652,
+      "topics": [
+        "access"
+      ]
+    }
+  },
+  "top_issues": [
+    {
+      "rank": "1",
+      "issue_id": "ISS-other-general",
+      "complaint_count": "80178",
+      "severity_sum": "158290",
+      "mean_severity": "1.974232",
+      "priority_score": "158290",
+      "name": "Privacy, Security, and Transparency Concerns",
+      "topic": "other",
+      "area": "outside_options",
+      "examples": [
+        {
+          "review_id": "dffcd1e6-534e-49d5-8a1b-d2cac64680e6",
+          "severity": 5,
+          "quote": "App asking my personal deatails mobile data that's why"
+        },
+        {
+          "review_id": "00bc487c-fd41-493d-991a-2b23d49980da",
+          "severity": 5,
+          "quote": "I listen this is unsecure app"
+        },
+        {
+          "review_id": "206e0d86-319e-4cc8-8f49-c59e695cde67",
+          "severity": 5,
+          "quote": "ARTISTS AS WELL AS PAYING CUSTOMERS SHOULD DEMAND TRANSPARENCY OF THIS COMPANY THEY ARE RIPPING OFF THE ARTISTS & THE PAYING CUSTOMERS THAT PAY TO LISTEN TO THE MUSIC THEY WANT TO LISTEN TO NOT SOMEON"
+        }
+      ]
+    },
+    {
+      "rank": "2",
+      "issue_id": "ISS-billing-paywall",
+      "complaint_count": "42274",
+      "severity_sum": "127309",
+      "mean_severity": "3.011520",
+      "priority_score": "127309",
+      "name": "Difficulty Canceling Paid Subscriptions",
+      "topic": "billing",
+      "area": "billing_support",
+      "examples": [
+        {
+          "review_id": "6d9c7826-56da-4743-8b78-074f8c463625",
+          "severity": 5,
+          "quote": "Unable to cancel subscription been billed for 1 year for something i never used disgusting google play dont help either"
+        },
+        {
+          "review_id": "1ec0e8b1-5322-46f9-bc84-95e5d5086f91",
+          "severity": 5,
+          "quote": "I would like to cancel my subscription BUT I can't so why are you scamming meee. Fix this. Please."
+        },
+        {
+          "review_id": "d1fc4112-0c4c-40db-a23a-9bdffecda4e9",
+          "severity": 5,
+          "quote": "Needs work but I love music and it has everyone I look up. Tell they kept charging me after I canceled my premium."
+        }
+      ]
+    },
+    {
+      "rank": "3",
+      "issue_id": "ISS-playback-general",
+      "complaint_count": "28307",
+      "severity_sum": "103197",
+      "mean_severity": "3.645635",
+      "priority_score": "103197",
+      "name": "Playback and Library Disruptions",
+      "topic": "playback",
+      "area": "playback",
+      "examples": [
+        {
+          "review_id": "4fcd8963-4953-494a-be7a-cad5dbac6a9d",
+          "severity": 5,
+          "quote": "I was working on a documentary while listening to music then it glitches then my whole screen froze and it turned off and turned back on with ALL my work gone!!!.."
+        },
+        {
+          "review_id": "9110fa91-5ed7-4c32-b486-8957cf404a0e",
+          "severity": 5,
+          "quote": "Desde la última actualización el app no funciona, no se escucha la música por que se detiene."
+        },
+        {
+          "review_id": "0ae4029d-44d7-4722-a387-0f00617ac608",
+          "severity": 5,
+          "quote": "It takes more data and it's harmful for me"
+        }
+      ]
+    },
+    {
+      "rank": "4",
+      "issue_id": "ISS-usability-general",
+      "complaint_count": "21876",
+      "severity_sum": "57343",
+      "mean_severity": "2.621274",
+      "priority_score": "57343",
+      "name": "Unexpected App Behavior and Settings",
+      "topic": "usability",
+      "area": "usability",
+      "examples": [
+        {
+          "review_id": "37c2d3d7-9ee2-45e4-83dd-2f6a22e798a4",
+          "severity": 5,
+          "quote": "Why is everything so zoomed in now? It makes it much harder to use. Also, Spotify is recognizing audio files on my phone despite it not having permission to look at my files."
+        },
+        {
+          "review_id": "91132204-877d-4ac1-9d08-20d03f1414f6",
+          "severity": 5,
+          "quote": "I had to delete and uninstall this app more than one time and I still have the same problem with it it's somehow decides to automatically start playing."
+        },
+        {
+          "review_id": "4011e2d3-9eba-4a42-8dc6-f33f1b127946",
+          "severity": 5,
+          "quote": "For some reason this app is now trying to open all of my personal audio without my permission and there is no option to stop it."
+        }
+      ]
+    },
+    {
+      "rank": "5",
+      "issue_id": "ISS-usability-ads",
+      "complaint_count": "25142",
+      "severity_sum": "55683",
+      "mean_severity": "2.214740",
+      "priority_score": "55683",
+      "name": "Disruptive and Intrusive Ads",
+      "topic": "usability",
+      "area": "usability",
+      "examples": [
+        {
+          "review_id": "d2be0967-e112-4a2d-8c58-e37f937c6d22",
+          "severity": 5,
+          "quote": "This ad popped up and my phone was locked. No permission was given. commercials and ads are getting worse, and here is one of them"
+        },
+        {
+          "review_id": "75702e8c-43ad-4643-969a-d76796741081",
+          "severity": 5,
+          "quote": "Why are you playing ads at such a ridiculously high intensity compared to the music?"
+        },
+        {
+          "review_id": "e0236f67-5668-4c60-9a47-9012f4ef979e",
+          "severity": 5,
+          "quote": "It has a nice selection of music but it's filled with ads that put a leach on my Google and evey time I open any app it opens a spam ad and tries to open itself."
+        }
+      ]
+    },
+    {
+      "rank": "6",
+      "issue_id": "ISS-billing-general",
+      "complaint_count": "17326",
+      "severity_sum": "48407",
+      "mean_severity": "2.793894",
+      "priority_score": "48407",
+      "name": "Billing and Subscription Charges",
+      "topic": "billing",
+      "area": "billing_support",
+      "examples": [
+        {
+          "review_id": "fc4676e9-640c-40ca-a2c7-efa7876a9d3c",
+          "severity": 5,
+          "quote": "Nunca lo pude usar y me estan cobrando"
+        },
+        {
+          "review_id": "4dd43101-521d-4c41-83cf-4d4b09f7d2eb",
+          "severity": 5,
+          "quote": "Took money outta my account 6 months after I canceled service."
+        },
+        {
+          "review_id": "c40c52a6-70e3-44a6-a6aa-d4d1ac27fe63",
+          "severity": 5,
+          "quote": "I bought an account for my family and Spotify cancelled one of my daughter's account because supposedly she didn't live with me."
+        }
+      ]
+    },
+    {
+      "rank": "7",
+      "issue_id": "ISS-usability-controls",
+      "complaint_count": "9391",
+      "severity_sum": "29243",
+      "mean_severity": "3.113939",
+      "priority_score": "29243",
+      "name": "Unreliable Playback Controls",
+      "topic": "usability",
+      "area": "usability",
+      "examples": [
+        {
+          "review_id": "6faac9bf-cd49-43fc-a5da-5a36963127d0",
+          "severity": 5,
+          "quote": "Everyone connected to the same wifi can see and control devices from all users in the wifi without an option to turn it off."
+        },
+        {
+          "review_id": "5c19227c-dfd3-4517-a8b6-b8a83eb2a670",
+          "severity": 5,
+          "quote": "10586 tracking attempts within 1 hour - I am paying for premium service membership so bugger off from my data - I didn't give you permission to use my data for marketing - legitimate interest or not j"
+        },
+        {
+          "review_id": "3bde52bc-2d99-45cc-b308-1380bda8b90e",
+          "severity": 5,
+          "quote": "you wasted hours of my time on a glitch that deleted playlists."
+        }
+      ]
+    },
+    {
+      "rank": "8",
+      "issue_id": "ISS-access-login",
+      "complaint_count": "6511",
+      "severity_sum": "26008",
+      "mean_severity": "3.994471",
+      "priority_score": "26008",
+      "name": "Login and Account Access Problems",
+      "topic": "access",
+      "area": "access",
+      "examples": [
+        {
+          "review_id": "8bb8e66c-e540-458c-b6a0-b20c2e3f3068",
+          "severity": 5,
+          "quote": "I had to delete my account because of people logging in to my account from other countries even though I keep changing my password."
+        },
+        {
+          "review_id": "7b58d46a-7d95-41ca-8b32-e886a82f393c",
+          "severity": 5,
+          "quote": "Someone hacked my account."
+        },
+        {
+          "review_id": "cccb8482-3dd0-4bfc-9e37-c0017857fc0f",
+          "severity": 5,
+          "quote": "Locked me out of my account."
+        }
+      ]
+    },
+    {
+      "rank": "9",
+      "issue_id": "ISS-other-update",
+      "complaint_count": "12552",
+      "severity_sum": "25596",
+      "mean_severity": "2.039197",
+      "priority_score": "25596",
+      "name": "Update-Related Security and Privacy Concerns",
+      "topic": "other",
+      "area": "outside_options",
+      "examples": [
+        {
+          "review_id": "6cc33027-4df1-4706-a066-ecd13ced1e21",
+          "severity": 5,
+          "quote": "It was great app but after last update to LG OLED WebOS screenserver was disabled intentionally what can causes damage of your screed by burning out pixels..sic!"
+        },
+        {
+          "review_id": "d38a1d00-44fa-4ec9-98c9-b9c82c439e45",
+          "severity": 5,
+          "quote": "The las update download a trojan version on my phone and lucky my nod32 detected. I cannot listen music now because needed to uninstall."
+        },
+        {
+          "review_id": "6154f8ed-fc5f-4763-a38b-6dfc1c7855e9",
+          "severity": 5,
+          "quote": "Malware found!! Trojan found with Eset on latest update. I deleted app. Please fix Spotify I am a Premium user. (Android/TrojanDropper.Agent.KBA)"
+        }
+      ]
+    },
+    {
+      "rank": "10",
+      "issue_id": "ISS-catalog-general",
+      "complaint_count": "8412",
+      "severity_sum": "24363",
+      "mean_severity": "2.896220",
+      "priority_score": "24363",
+      "name": "Objectionable Catalog Content",
+      "topic": "catalog",
+      "area": "outside_options",
+      "examples": [
+        {
+          "review_id": "93c63a9e-3e81-405f-b99a-ba784a428904",
+          "severity": 5,
+          "quote": "Gustakh E Nabi Ki Ek Saza Song by Allama Hafiz Bilal Qadri is a song that promotes \"sar tan se Juda\" a terror act slogan and you have include it in your app."
+        },
+        {
+          "review_id": "8e634e9f-d239-44bc-9d2e-38fda26ac1eb",
+          "severity": 5,
+          "quote": "Showing content which is glorifying terrorism and genocide. Asking people to kill other people"
+        },
+        {
+          "review_id": "6167328a-fef2-44ce-9fa9-d52d3be6b0b3",
+          "severity": 5,
+          "quote": "They support and give platform to songs like **Sar Tan Se Juda** which is really sad."
+        }
+      ]
+    }
+  ],
+  "ranking_rule": "priority_score = complaint_count x mean_severity = severity_sum"
+}

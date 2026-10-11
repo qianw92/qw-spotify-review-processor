@@ -1,0 +1,7 @@
+claim_id,issue_id,metric,value
+C1,ISS-playback-general,priority_score,103197
+C2,ISS-billing-paywall,complaint_count,42274
+C3,ISS-billing-paywall,priority_score,127309
+C4,ISS-usability-ads,complaint_count,25142
+C5,ISS-usability-ads,priority_score,55683
+C6,ISS-access-login,priority_score,26008

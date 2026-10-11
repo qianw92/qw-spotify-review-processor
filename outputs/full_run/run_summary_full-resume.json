@@ -1,0 +1,217 @@
+{
+  "run_label": "full-resume",
+  "input": "data/spotify_reviews_18months.csv",
+  "db": "state/pipeline.sqlite",
+  "started_at": "2026-10-11T02:34:07+00:00",
+  "max_spend_usd": 8.0,
+  "config": {
+    "enrich": "jev-1.13.0+enrich-v1+labels-v1+batched",
+    "verify": "jev-1.13.0+verify-v1+labels-v1",
+    "group_prompt": "group-names-v1",
+    "memo_prompt": "memo-v2",
+    "openai_model": "gpt-6-luna",
+    "openai_reasoning_effort": "none",
+    "jev_model": "jev-1.13.0",
+    "batch_size": 50,
+    "workers": 3,
+    "verify_rate": 0.01,
+    "verify_min": 20,
+    "verify_seed": "verify-seed-v1"
+  },
+  "stages": [
+    {
+      "stage": "ingest",
+      "status": "ok",
+      "seconds": 7.644,
+      "calls_logged": 0,
+      "spend_usd": {
+        "typesafe": 0.0,
+        "openai": 0.0
+      },
+      "result": {
+        "reused_saved_state_for_same_input": true,
+        "counts": {
+          "records": 660622,
+          "nonempty": 660609,
+          "empty_review_text": 13,
+          "missing_app_version": 159701,
+          "duplicate_review_ids": 0,
+          "distinct_nonempty_texts": 484189,
+          "multiline_text": 68
+        },
+        "record_status": {
+          "completed": 143321,
+          "pending": 517288,
+          "quarantined": 13
+        }
+      }
+    },
+    {
+      "stage": "dedupe",
+      "status": "ok",
+      "seconds": 8.07,
+      "calls_logged": 0,
+      "spend_usd": {
+        "typesafe": 0.0,
+        "openai": 0.0
+      },
+      "result": {
+        "nonempty_rows": 660609,
+        "canonical_texts_to_classify": 484189,
+        "alias_rows_reusing_a_label": 176420,
+        "work_reduction_pct": 26.71
+      }
+    },
+    {
+      "stage": "enrich",
+      "status": "ok",
+      "seconds": 8224.636,
+      "calls_logged": 9355,
+      "spend_usd": {
+        "typesafe": 6.42666421,
+        "openai": 0.0
+      },
+      "result": {
+        "requests": 9288,
+        "completed": 464389,
+        "quarantined": 0,
+        "stopped_reason": null,
+        "workers": 3,
+        "batches_saved": 9288,
+        "aliases_completed_from_cache": 52899,
+        "run_spent_usd": 6.426664,
+        "seconds": 8222.51
+      }
+    },
+    {
+      "stage": "export_records",
+      "status": "ok",
+      "seconds": 7.136,
+      "calls_logged": 0,
+      "spend_usd": {
+        "typesafe": 0.0,
+        "openai": 0.0
+      },
+      "result": {
+        "completed": 660609,
+        "quarantined": 13
+      }
+    },
+    {
+      "stage": "verify",
+      "status": "ok",
+      "seconds": 420.584,
+      "calls_logged": 102,
+      "spend_usd": {
+        "typesafe": 0.06660134,
+        "openai": 0.0
+      },
+      "result": {
+        "declared_rate": 0.01,
+        "declared_minimum": 20,
+        "seed": "verify-seed-v1",
+        "sample_size": 4842,
+        "already_verified": 0,
+        "requests": 97,
+        "invalid": 0,
+        "compared": 4842,
+        "agreement": {
+          "topic": 0.8936,
+          "intent": 0.9521,
+          "severity": 0.9023
+        },
+        "all_three_agree": 0.7811,
+        "severity_mae": 0.1049,
+        "sentiment_mae": 0.0615,
+        "disagreements": 1060
+      }
+    },
+    {
+      "stage": "group",
+      "status": "ok",
+      "seconds": 18.876,
+      "calls_logged": 1,
+      "spend_usd": {
+        "typesafe": 0.0,
+        "openai": 0.0012144
+      },
+      "result": {
+        "complaint_records": 293175,
+        "issues": 28,
+        "naming": {
+          "cached": false,
+          "request_id": "resp_0fe0c21c8df21ce1006acb178516ac87d08198f8555706800d",
+          "cache_key": "e6c518ecf9a1c89460fda26b8a8ed0c7b2a85faa6796d0998a716c3723826788",
+          "input_tokens": 6984,
+          "output_tokens": 1032,
+          "attempts": 1,
+          "model_used": true
+        },
+        "named_by_model": 28,
+        "fallback_named": 0
+      }
+    },
+    {
+      "stage": "rank",
+      "status": "ok",
+      "seconds": 1.656,
+      "calls_logged": 0,
+      "spend_usd": {
+        "typesafe": 0.0,
+        "openai": 0.0
+      },
+      "result": {
+        "issues_ranked": 28,
+        "top": [
+          {
+            "issue_id": "ISS-other-general",
+            "complaint_count": 80178,
+            "severity_sum": 158290,
+            "mean_severity": "1.974232",
+            "priority_score": 158290,
+            "rank": 1
+          },
+          {
+            "issue_id": "ISS-billing-paywall",
+            "complaint_count": 42274,
+            "severity_sum": 127309,
+            "mean_severity": "3.011520",
+            "priority_score": 127309,
+            "rank": 2
+          },
+          {
+            "issue_id": "ISS-playback-general",
+            "complaint_count": 28307,
+            "severity_sum": 103197,
+            "mean_severity": "3.645635",
+            "priority_score": 103197,
+            "rank": 3
+          }
+        ]
+      }
+    },
+    {
+      "stage": "memo",
+      "status": "ok",
+      "seconds": 9.711,
+      "calls_logged": 1,
+      "spend_usd": {
+        "typesafe": 0.0,
+        "openai": 0.0008617
+      },
+      "result": {
+        "status": "passed",
+        "recommended_area": "playback",
+        "claims": 6,
+        "cached": false
+      }
+    }
+  ],
+  "record_status": {
+    "completed": 660609,
+    "quarantined": 13
+  },
+  "wall_clock_seconds": 8698.996,
+  "run_spent_usd": 6.4953417,
+  "finished_at": "2026-10-11T04:59:06+00:00"
+}

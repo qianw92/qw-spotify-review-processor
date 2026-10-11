@@ -1,0 +1,29 @@
+rank,issue_id,complaint_count,severity_sum,mean_severity,priority_score,topic,name,name_source,cancellation_count,share_of_complaints_pct
+1,ISS-other-general,80178,158290,1.974232,158290,other,"Privacy, Security, and Transparency Concerns",model,6432,27.3
+2,ISS-billing-paywall,42274,127309,3.011520,127309,billing,Difficulty Canceling Paid Subscriptions,model,7651,14.4
+3,ISS-playback-general,28307,103197,3.645635,103197,playback,Playback and Library Disruptions,model,1754,9.7
+4,ISS-usability-general,21876,57343,2.621274,57343,usability,Unexpected App Behavior and Settings,model,1665,7.5
+5,ISS-usability-ads,25142,55683,2.214740,55683,usability,Disruptive and Intrusive Ads,model,1216,8.6
+6,ISS-billing-general,17326,48407,2.793894,48407,billing,Billing and Subscription Charges,model,3054,5.9
+7,ISS-usability-controls,9391,29243,3.113939,29243,usability,Unreliable Playback Controls,model,998,3.2
+8,ISS-access-login,6511,26008,3.994471,26008,access,Login and Account Access Problems,model,367,2.2
+9,ISS-other-update,12552,25596,2.039197,25596,other,Update-Related Security and Privacy Concerns,model,1402,4.3
+10,ISS-catalog-general,8412,24363,2.896220,24363,catalog,Objectionable Catalog Content,model,481,2.9
+11,ISS-usability-library,7518,23124,3.075818,23124,usability,Playlist and Library Problems,model,586,2.6
+12,ISS-downloads-offline,5005,18486,3.693506,18486,downloads,Download and Offline Access Problems,model,232,1.7
+13,ISS-playback-update,4472,17046,3.811717,17046,playback,Playback Problems After Updates,model,431,1.5
+14,ISS-usability-update,5133,14817,2.886616,14817,usability,Update and Installation Difficulties,model,800,1.8
+15,ISS-playback-crashes,3352,13207,3.940036,13207,playback,App Crashes During Use,model,193,1.1
+16,ISS-access-general,3027,11856,3.916749,11856,access,Unauthorized Access and Account Mix-Ups,model,182,1.0
+17,ISS-catalog-lyrics,3696,11219,3.035444,11219,catalog,Missing Song Lyrics,model,68,1.3
+18,ISS-access-account,1194,4825,4.041039,4825,access,Compromised Spotify Accounts,model,103,0.4
+19,ISS-playback-devices,1280,4692,3.665625,4692,playback,Bluetooth and Connected Device Problems,model,163,0.4
+20,ISS-billing-price,1602,3972,2.479401,3972,billing,Unexpected Plan and Price Changes,model,242,0.5
+21,ISS-billing-charges,844,3231,3.828199,3231,billing,Unexpected or Continued Charges,model,170,0.3
+22,ISS-downloads-general,791,2863,3.619469,2863,downloads,Lost Songs and Download Changes,model,47,0.3
+23,ISS-catalog-search,812,2756,3.394089,2756,catalog,Explicit Search Results,model,47,0.3
+24,ISS-support-general,686,2111,3.077259,2111,support,Difficulty Getting Customer Support,model,73,0.2
+25,ISS-catalog-podcasts,593,1789,3.016863,1789,catalog,Concerns About Podcast Content,model,46,0.2
+26,ISS-catalog-recommendations,454,1185,2.610132,1185,catalog,Poor Recommendations and Music Discovery,model,26,0.2
+27,ISS-playback-audio,395,1100,2.784810,1100,playback,Audio Quality and Network Playback Issues,model,20,0.1
+28,ISS-other-ads,352,717,2.036932,717,other,Concerns About Ads and Tracking,model,33,0.1

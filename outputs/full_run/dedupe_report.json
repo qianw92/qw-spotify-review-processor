@@ -1,0 +1,90 @@
+{
+  "stage": "dedupe",
+  "model_calls": 0,
+  "created_at": "2026-10-11T02:34:23+00:00",
+  "rule": "exact byte-identical review_text (SHA-256); canonical = earliest source row; aliases reuse its label via cache_source_id",
+  "counts": {
+    "nonempty_rows": 660609,
+    "canonical_texts_to_classify": 484189,
+    "alias_rows_reusing_a_label": 176420,
+    "work_reduction_pct": 26.71
+  },
+  "integrity_checks_all_zero": true,
+  "integrity_checks": {
+    "nonempty_rows_not_mapped": 0,
+    "alias_text_differs_from_canonical": 0,
+    "alias_points_to_non_canonical (chain)": 0,
+    "canonical_not_pointing_to_itself": 0,
+    "empty_text_rows_mapped": 0
+  },
+  "group_size_distribution": {
+    "1 (unique)": 468267,
+    "2-5": 12400,
+    "501+": 48,
+    "51-500": 341,
+    "6-50": 3133
+  },
+  "most_repeated_texts": [
+    {
+      "text": "Good",
+      "rows": 12845
+    },
+    {
+      "text": "Nice",
+      "rows": 5551
+    },
+    {
+      "text": "Excellent",
+      "rows": 4096
+    },
+    {
+      "text": "Great",
+      "rows": 3948
+    },
+    {
+      "text": "Awesome",
+      "rows": 3359
+    },
+    {
+      "text": "Love it",
+      "rows": 3136
+    },
+    {
+      "text": "Very good",
+      "rows": 2769
+    },
+    {
+      "text": "Nice app",
+      "rows": 2134
+    },
+    {
+      "text": "Amazing",
+      "rows": 1973
+    },
+    {
+      "text": "Worst app",
+      "rows": 1901
+    },
+    {
+      "text": "Good app",
+      "rows": 1871
+    },
+    {
+      "text": "Super",
+      "rows": 1837
+    },
+    {
+      "text": "Best",
+      "rows": 1666
+    },
+    {
+      "text": "Great app",
+      "rows": 1617
+    },
+    {
+      "text": "Hate this application 👎",
+      "rows": 1417
+    }
+  ],
+  "seconds": 8.1
+}

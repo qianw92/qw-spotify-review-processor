@@ -22,3 +22,6 @@ node_modules/
 
 # Local pipeline state database (rebuilt by `python -m pipeline ingest`)
 state/
+
+# Full-run record file is 273 MB (GitHub limit 100 MB); a gzip copy is published in grading/
+outputs/full_run/enriched.jsonl

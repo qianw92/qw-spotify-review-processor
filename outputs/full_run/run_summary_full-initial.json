@@ -1,0 +1,110 @@
+{
+  "run_label": "full-initial",
+  "input": "data/spotify_reviews_18months.csv",
+  "db": "state/pipeline.sqlite",
+  "started_at": "2026-10-11T02:29:20+00:00",
+  "max_spend_usd": 8.0,
+  "config": {
+    "enrich": "jev-1.13.0+enrich-v1+labels-v1+batched",
+    "verify": "jev-1.13.0+verify-v1+labels-v1",
+    "group_prompt": "group-names-v1",
+    "memo_prompt": "memo-v2",
+    "openai_model": "gpt-6-luna",
+    "openai_reasoning_effort": "none",
+    "jev_model": "jev-1.13.0",
+    "batch_size": 50,
+    "workers": 3,
+    "verify_rate": 0.01,
+    "verify_min": 20,
+    "verify_seed": "verify-seed-v1"
+  },
+  "stages": [
+    {
+      "stage": "ingest",
+      "status": "ok",
+      "seconds": 7.402,
+      "calls_logged": 0,
+      "spend_usd": {
+        "typesafe": 0.0,
+        "openai": 0.0
+      },
+      "result": {
+        "reused_saved_state_for_same_input": true,
+        "counts": {
+          "records": 660622,
+          "nonempty": 660609,
+          "empty_review_text": 13,
+          "missing_app_version": 159701,
+          "duplicate_review_ids": 0,
+          "distinct_nonempty_texts": 484189,
+          "multiline_text": 68
+        },
+        "record_status": {
+          "pending": 660609,
+          "quarantined": 13
+        }
+      }
+    },
+    {
+      "stage": "dedupe",
+      "status": "ok",
+      "seconds": 7.819,
+      "calls_logged": 0,
+      "spend_usd": {
+        "typesafe": 0.0,
+        "openai": 0.0
+      },
+      "result": {
+        "nonempty_rows": 660609,
+        "canonical_texts_to_classify": 484189,
+        "alias_rows_reusing_a_label": 176420,
+        "work_reduction_pct": 26.71
+      }
+    },
+    {
+      "stage": "enrich",
+      "status": "ok",
+      "seconds": 199.661,
+      "calls_logged": 399,
+      "spend_usd": {
+        "typesafe": 0.2669141,
+        "openai": 0.0
+      },
+      "result": {
+        "requests": 396,
+        "completed": 19800,
+        "quarantined": 0,
+        "stopped_reason": "interrupted by user (Ctrl+C); rerun the same command to resume",
+        "workers": 3,
+        "batches_saved": 396,
+        "aliases_completed_from_cache": 123521,
+        "run_spent_usd": 0.266914,
+        "seconds": 197.3
+      }
+    },
+    {
+      "stage": "export_records",
+      "status": "ok",
+      "seconds": 4.26,
+      "calls_logged": 0,
+      "spend_usd": {
+        "typesafe": 0.0,
+        "openai": 0.0
+      },
+      "result": {
+        "completed": 143321,
+        "pending": 517288,
+        "quarantined": 13
+      }
+    }
+  ],
+  "stopped": "enrichment incomplete: {'completed': 143321, 'pending': 517288, 'quarantined': 13}; downstream stages not run (use --allow-partial)",
+  "record_status": {
+    "completed": 143321,
+    "pending": 517288,
+    "quarantined": 13
+  },
+  "wall_clock_seconds": 219.175,
+  "run_spent_usd": 0.26691407,
+  "finished_at": "2026-10-11T02:32:59+00:00"
+}
