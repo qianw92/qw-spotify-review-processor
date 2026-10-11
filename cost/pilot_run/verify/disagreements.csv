@@ -1,0 +1,3 @@
+review_id,fields,review_text,enricher_topic,enricher_intent,enricher_severity,verifier_topic,verifier_intent,verifier_severity,enricher_confidences
+33526c6f-7a49-4b3d-bd20-d1bc191c494c,topic,"RUDE APP , THIS APP SUPPORT GUYS 🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮. تطبيق سيء ، بدعم المثليين 🤮🤮🤮",support,complaint,2,other,complaint,2,"{""topic"": 0.69, ""intent"": 0.86, ""severity"": 0.69, ""sentiment"": 0.97}"
+486d1d7a-d6f6-41ea-81ad-ed875452729c,severity,Vary bad experience.i am uninstalling this app they burn quran and i will bycot this app as it is launched by swedan 🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕🖕,other,cancellation,2,other,cancellation,1,"{""topic"": 1.0, ""intent"": 0.92, ""severity"": 0.26, ""sentiment"": 1.0}"

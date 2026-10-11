@@ -1,0 +1,18 @@
+rank,issue_id,complaint_count,severity_sum,mean_severity,priority_score,topic,name,name_source,cancellation_count,share_of_complaints_pct
+1,ISS-billing-paywall,8,24,3.000000,24,billing,Basic Features Behind Premium,model,2,16.0
+2,ISS-playback-general,5,19,3.800000,19,playback,Playback and Connectivity Problems,model,0,10.0
+3,ISS-other-general,9,17,1.888889,17,other,General Dissatisfaction,model,1,18.0
+4,ISS-usability-controls,3,10,3.333333,10,usability,Limited Playback Controls,model,1,6.0
+5,ISS-other-update,3,8,2.666667,8,other,Dissatisfaction With Updates,model,1,6.0
+6,ISS-usability-library,3,8,2.666667,8,usability,Recommendations and Home Screen,model,1,6.0
+7,ISS-downloads-offline,2,7,3.500000,7,downloads,Offline and Download Problems,model,1,4.0
+8,ISS-usability-general,3,7,2.333333,7,usability,General Usability Complaints,model,0,6.0
+9,ISS-usability-update,2,7,3.500000,7,usability,Removed Features After Update,model,1,4.0
+10,ISS-catalog-lyrics,2,6,3.000000,6,catalog,Missing Song Lyrics,model,0,4.0
+11,ISS-billing-general,2,5,2.500000,5,billing,General Billing Complaints,model,0,4.0
+12,ISS-catalog-general,2,5,2.500000,5,catalog,Missing Music in Catalog,model,0,4.0
+13,ISS-access-account,1,4,4.000000,4,access,Unable to Access Account,model,0,2.0
+14,ISS-access-login,1,4,4.000000,4,access,Password Login Failure,model,0,2.0
+15,ISS-playback-crashes,1,4,4.000000,4,playback,App Crashes on Launch,model,0,2.0
+16,ISS-usability-ads,2,4,2.000000,4,usability,Excessive or Loud Ads,model,0,4.0
+17,ISS-support-general,1,2,2.000000,2,support,Support Dissatisfaction,model,0,2.0

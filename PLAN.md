@@ -1,210 +1,169 @@
 # Project Plan
 
-**Due:** Oct 13, 2026, 11:59 pm PT (7 days from Oct 6)
-**Checkpoint (Class 7):** bring the golden 50, a finished 500-review run, evaluation results, and the cost calculator.
+**Due:** Oct 13, 2026, 11:59 pm PT · **Budget:** $10 total (Jev + OpenAI, tracked separately in `budget/spend_ledger.csv`)
 
-Each step lists **what you're doing** and **what it produces**. Each output says in plain words what it is.
-Mark a step `[x]` when it's done.
+## 📍 Where we are
 
----
+| | |
+|---|---|
+| **Current step** | **4.2 — Build the cost calculator** ($0) |
+| **Next paid step** | 4.3 — 500-review run (needs price preview + approval) |
+| **Progress** | 13 of 27 steps done |
+| **Spent so far** | Jev $0.0049 · OpenAI $0.0013 · **Total $0.0065 of $10** |
+| **Last updated** | Oct 10 |
 
-## Phase 0: Set up the project (Day 1)
+**Status key:** ✅ done · 🔨 code built, still needs its full-data run · ⏳ to do
 
-### [x] Step 0.1: Create the repo and protect secrets
-**What you're doing:** Make a GitHub repo and set it up so API keys can never be uploaded by accident.
-**Outputs:**
-- `.gitignore`: tells Git to never upload the `.env` file that holds real keys
-- `.env.example`: a blank template listing which keys are needed, with no real values
-- `.env` (local only, never committed): your real keys
+### Remaining schedule
 
-### [x] Step 0.2: Download the dataset
-**What you're doing:** Download the course ZIP, unzip it into `data/`, and read `GRADING_CONTRACT.md` and `COST_CALCULATOR.md`. These two files contain the exact rules the grader checks.
-**Outputs:**
-- `data/` folder (not committed): the review CSV plus sample files like `cost_100.csv` and `golden_50_to_label.csv`
+| Day | Steps |
+|---|---|
+| **Oct 10–11** | 4.2 calculator → 4.3 500 reviews → 5.1 golden-50 evaluation → 5.3 system tests |
+| **Oct 11–12** | 6.1 10,000 reviews → 6.2 full run + interruption recording → 7.x group/rank/memo on full data |
+| **Oct 12–13** | 8.x database, backend, dashboard → 9.x grading export, checker, README, submit |
 
-### [x] Step 0.3: Choose tools
-**What you're doing:** Pick a programming language, an AI model for labeling (a cheap, small one), a database, and a hosting service for the dashboard.
-**Outputs:**
-- Notes in README section 8 explaining the choices
+Rules for every step: explain outputs in plain words · price preview + approval before any paid run · commit after each step.
 
 ---
 
-## Phase 1: Understand the data (Day 1)
+## Phase 0: Set up the project ✅
 
-### [x] Step 1.1: Ingest and profile all 660,622 reviews
-**What you're doing:** Use code (no AI) to read every row, count everything, and check for problems: empty reviews, missing versions, duplicate IDs, and duplicate texts.
-**Outputs:**
-- `outputs/data_manifest.json`: an "ID card" for the input file (its fingerprint/checksum, size and row count) so we can prove which data we used
-- `outputs/ingestion_report.json`: a health check of the data (how many rows, how many are empty or missing values, the date range)
-- `outputs/quarantine.jsonl`: the 13 empty reviews, set aside with a reason
-- Pending queue: the list of review IDs still waiting to be labeled
+### ✅ Step 0.1: Create the repo and protect secrets
+**What you're doing:** Make a public GitHub repo set up so API keys can never be uploaded.
+**Outputs:** `.gitignore` (blocks `.env`, `data/`, `state/`) · `.env.example` (blank key names) · `.env` (your keys, local only)
 
-### [x] Step 1.2: Find duplicate texts
-**What you're doing:** Group identical review texts so the AI labels each unique text only once. This cuts the work from 660,609 reviews to 484,189 unique texts.
-**Outputs:**
-- A mapping from each review ID to its unique text, so every original ID is still tracked
+### ✅ Step 0.2: Download the dataset
+**What you're doing:** Download the course ZIP into `data/` and verify every file's fingerprint against `manifest.json`.
+**Outputs:** `data/` (not committed) · checksum in README Setup
 
----
-
-## Phase 2: Define labels and hand-label (Day 1–2)
-
-### [x] Step 2.1: Write the label rules
-**What you're doing:** Write down the 8 topics, 5 intents and 5 severity levels, with examples, following `GRADING_CONTRACT.md` exactly.
-**Outputs:**
-- `schema/labels.md`: the rulebook for how to label a review
-- `schema/record_schema.json`: the exact format every labeled review must follow
-
-### [x] Step 2.2: Hand-label the golden 50
-**What you're doing:** You read 50 reviews and label them yourself, without AI help. These are the "answer key" for testing the AI. Never show them to the AI as examples.
-**Outputs:**
-- `evals/golden/golden_50_labeled.csv`: your 50 human labels
+### ✅ Step 0.3: Choose tools
+**What you're doing:** Pick the tools and test both API keys with one tiny call each.
+**Outputs:** Python 3.14 · Jev `jev-1.13.0` (labeling) · OpenAI `gpt-6-luna` (naming + memo) · `outputs/smoke/` (test-call records) · `budget/` (spend tracker)
 
 ---
 
-## Phase 3: Build the labeling pipeline (Day 2–3)
+## Phase 1: Understand the data ✅
 
-### [x] Step 3.1: Build the enricher (Stage 2: Classify)
-**What you're doing:** Write code that sends batches of up to 50 reviews to the AI and gets back labels. Code then checks each answer: correct format, allowed values, and a quote that really appears in the review. Bad answers are retried once, then quarantined.
-**Outputs:**
-- `prompts/enricher_v1.md`: the instructions given to the AI
-- `outputs/enriched.jsonl`: one labeled record per review
+### ✅ Step 1.1: Ingest and profile all 660,622 reviews
+**What you're doing:** Read every row with code (no AI), count everything, set aside empty reviews.
+**Outputs:** `pipeline/ingest.py` · `outputs/ingestion_report.json` (all counts match the assignment) · `outputs/data_manifest.json` · `outputs/quarantine.jsonl` (13 empty) · `grading/ingestion.json` (made with the grader's helper)
 
-### [x] Step 3.2: Add saving, caching and resume
-**What you're doing:** Save results after every batch, so a crash loses nothing and a restart skips finished work. Reuse labels for duplicate texts.
-**Outputs:**
-- A status for every review (pending, completed or quarantined)
-- `outputs/run_log.jsonl`: a diary of every AI call (time, tokens, cost, success or failure)
-
-### [x] Step 3.3: Add safety limits
-**What you're doing:** Add a spending cap, a max number of workers, a token cap and retry limits. The pipeline stops cleanly when it hits a limit.
-**Outputs:**
-- Settings in a config file, documented in README section 10
+### ✅ Step 1.2: Find duplicate texts
+**What you're doing:** Map identical texts so each is labeled once; copies reuse the label.
+**Outputs:** `pipeline/dedupe.py` · `outputs/dedupe_report.json` (484,189 unique texts; 176,420 copies; all safety checks 0)
 
 ---
 
-## Phase 4: Cost calculator and pilots (Day 3)
+## Phase 2: Define labels and hand-label ✅
 
-> **Order fix (Oct 10):** the official 100-review pilot must include every stage (enrich, verify sample, group, rank, memo),
-> so the verifier (5.2), grouping (7.1), ranking (7.2) and memo (7.3) code is built **before** step 4.1.
-> Scaling order is unchanged: 100 → 500 → 10,000 → full run.
+### ✅ Step 2.1: Write the label rules
+**What you're doing:** Write the rulebook (8 topics, 5 intents, 5 severity levels) with real examples.
+**Outputs:** `schema/labels.md` · `schema/record_schema.json` · `schema/entities.json`
 
-### [x] Step 4.0: Build verify, group, rank and memo stages + orchestrator (code only, $0)
-**What you're doing:** Build the four remaining stages and one command that runs them all, so the pilot can measure every stage.
-**Outputs:** `pipeline/verify.py`, `group.py`, `rank.py`, `memo.py`, `llm.py`, `export.py`, `run.py`; `schema/issues.json`
-
-### [ ] Step 4.1: Run the 100-review pilot (cold, then warm)
-**What you're doing:** Run the whole pipeline on `cost_100.csv` with an empty cache and 1 worker, and measure real cost and time. Then run it again: it should make 0 new labeling calls because everything is already saved.
-**Outputs:**
-- `cost/pilot_records.jsonl`: the result for each of the 100 reviews
-- `cost/pilot_calls.jsonl`: every AI call made, including failures
-- `cost/usage.csv`: tokens used per call
-
-### [ ] Step 4.2: Build the calculator
-**What you're doing:** Write a tool that recalculates cost from saved usage and editable prices without calling the AI. It also projects full-run cost and time and warns if the projection goes over budget.
-**Outputs:**
-- `cost/rates.csv`: model prices, with the date and source link for each
-- `cost/report.md`: measured results plus full-run estimates (base, conservative, and no-reuse)
-- A replay command anyone can run for free
-
-### [ ] Step 4.3: Run 500 reviews (Class 7 checkpoint)
-**What you're doing:** Run `checkpoint_500.csv` and update the cost estimate.
-**Outputs:**
-- Updated `cost/report.md` with the 500-review numbers
+### ✅ Step 2.2: Hand-label the golden 50
+**What you're doing:** You labeled 50 reviews by hand as the answer key (never shown to the AI).
+**Outputs:** `evals/golden/golden_50_labeling.xlsx` · `evals/golden/golden_50_labeled.csv` (4 marked ambiguous)
 
 ---
 
-## Phase 5: Evaluate quality (Day 3–4)
+## Phase 3: Build the labeling pipeline ✅
 
-### [ ] Step 5.1: Compare AI labels with the golden 50
-**What you're doing:** Run the AI on the golden 50 and use code to compare its answers with yours, field by field. Study where it got things wrong.
-**Outputs:**
-- `evals/golden/results.csv`: a side-by-side comparison of your labels and the AI's labels
-- `evals/golden/report.md`: agreement scores, a confusion table, and an explanation of the mistakes
+### ✅ Step 3.1: Build the enricher (Stage 2: Classify)
+**What you're doing:** Code sends ≤50 reviews per Jev request, validates every answer, saves after each batch. A design test picked "batched" (as accurate, 3× cheaper).
+**Outputs:** `pipeline/enrich.py` · `pipeline/rules.py` (prompt `enrich-v1`) · `pipeline/budget.py` · `evals/dev/dev_rulebook_24.csv` · `runs/dev_batched/`, `runs/dev_single/` (design test)
 
-### [ ] Step 5.2: Build the verifier (Stage 3)
-**What you're doing:** A second AI labels a random sample without seeing the first AI's answers. Code compares the two, and you look into the disagreements.
-**Outputs:**
-- `prompts/verifier_v1.md`: the verifier's instructions
-- `evals/verifier/disagreements.csv`: cases where the two AIs disagreed, with notes
-
-### [ ] Step 5.3: Run system tests
-**What you're doing:** Break things on purpose: plant a wrong label, hide an instruction in a fake review, send malformed output, and simulate an API error. Record what actually happened.
-**Outputs:**
-- `evals/system_tests/results.md`: each test with its expected and actual result
+### ✅ Step 3.2: Add saving, caching and resume
+### ✅ Step 3.3: Add safety limits
+**What you're doing:** Prove a crash loses nothing, resume never re-pays, retries are bounded, and the spend cap stops the run.
+**Outputs:** `runs/dev_resume/` (calls log, 3 checkpoints, `recovery_test_report.json`: 0 re-sent IDs) · `checkpoint` command
 
 ---
 
-## Phase 6: Scale up and do the full run (Day 4–5)
+## Phase 4: Pilot and cost calculator
 
-### [ ] Step 6.1: Run 10,000 reviews
-**What you're doing:** Run `analysis_10000.csv`, refresh the cost estimate, and confirm the full run fits the budget.
-**Outputs:**
-- Updated `cost/report.md`
+> **Order fix (Oct 10):** the official pilot must include every stage, so verify/group/rank/memo code was built first (step 4.0).
+> Scaling order unchanged: 100 → 500 → 10,000 → full run.
 
-### [ ] Step 6.2: Full run plus an interruption demo
-**What you're doing:** Run all 660,622 reviews. Partway through, stop it on purpose (record your screen), then resume, to show it continues without paying again for finished reviews.
-**Outputs:**
-- `outputs/enriched.jsonl`: labels for every review
-- `outputs/run_summary.json`: totals for counts, cost, time and failures
-- `grading/checkpoint_before.json` / `grading/checkpoint_after.json`: snapshots taken before and after the interruption
-- A screen recording of the interruption and resume
+### ✅ Step 4.0: Build verify, group, rank, memo + orchestrator ($0)
+**What you're doing:** Build the remaining four stages and one `run` command that executes all of them on any CSV.
+**Outputs:** `pipeline/verify.py`, `group.py`, `rank.py`, `memo.py`, `llm.py`, `export.py`, `run.py` · `schema/issues.json` · offline tests passed ($0)
 
----
+### ✅ Step 4.1: Run the 100-review pilot (cold, then warm)
+**What you're doing:** Run every stage on `cost_100.csv`: cold (nothing saved) then warm (should reuse everything).
+**Outputs:** `cost/pilot_run/` — cold $0.00295 in 18.9 s; warm $0 in 0.27 s with **0 new calls**; memo passed all checks; verifier agreed 18/20
 
-## Phase 7: Group, rank and write the memo (Day 5)
+### ⏳ Step 4.2: Build the calculator ($0) ← **current**
+**What you're doing:** A tool that recomputes cost from saved usage and editable prices (no API key), and projects the full run with budget warnings.
+**Outputs:** `cost/rates.csv` · `cost/usage.csv` · `cost/pilot_records.jsonl` · `cost/pilot_calls.jsonl` · `cost/report.md` · offline replay command
 
-### [ ] Step 7.1: Group complaints into issues (Stage 4)
-**What you're doing:** Code groups complaint and cancellation reviews into issues. The AI may suggest names for the issues. The mapping is saved so ranking never needs the AI again.
-**Outputs:**
-- `outputs/issues.csv`: the list of issues, each with a stable ID
-- `grading/membership.csv`: which reviews belong to which issue
-
-### [ ] Step 7.2: Rank issues (Stage 5)
-**What you're doing:** Code scores each issue as count × average severity and sorts from highest to lowest.
-**Outputs:**
-- `outputs/aggregates.csv`: counts and averages per issue
-- `grading/ranking.csv`: the final ranked list
-
-### [ ] Step 7.3: Write the memo (Stage 6)
-**What you're doing:** The AI writes a recommendation using only the ranking and a small set of example reviews. Code checks that every number and ID it cites is real. You then read it and edit it.
-**Outputs:**
-- `memo.md`: the recommendation to Spotify
-- `grading/claims.csv`: every number in the memo, linked to where it came from
+### ⏳ Step 4.3: Run 500 reviews (paid, ~$0.02)
+**What you're doing:** Run `checkpoint_500.csv`, refresh the estimate; test shorter question wording to cut full-run cost.
+**Outputs:** `cost/checkpoint_500_run/` · updated `cost/report.md`
 
 ---
 
-## Phase 8: Database, backend and dashboard (Day 6)
+## Phase 5: Evaluate quality
 
-### [ ] Step 8.1: Load the results into a database
-**What you're doing:** Put the labeled reviews, rankings and recommendations into a hosted database.
-**Outputs:**
-- Database tables, plus a load script
+### ⏳ Step 5.1: Compare AI labels with the golden 50 (paid, <$0.01)
+**What you're doing:** Run Jev on the golden 50 and compare with your labels, field by field.
+**Outputs:** `evals/golden/results.csv` · `evals/golden/report.md` (agreement, confusion table, error analysis)
 
-### [ ] Step 8.2: Deploy the backend
-**What you're doing:** Build a small server that reads from the database and sends the data to the dashboard.
-**Outputs:**
-- A live backend URL
+### 🔨 Step 5.2: Build the verifier (Stage 3)
+**What you're doing:** A second, independent Jev task re-labels a declared random sample; code compares.
+**Outputs:** `pipeline/verify.py` (built, ran in pilot: 18/20 agree) · full-run report comes in 6.2
 
-### [ ] Step 8.3: Deploy the dashboard
-**What you're doing:** Build a website showing overall metrics, issue rankings, and AI recommendations with links to supporting reviews.
-**Outputs:**
-- A live dashboard URL
+### ⏳ Step 5.3: Run system tests ($0–0.01)
+**What you're doing:** Planted wrong labels, a hidden instruction in a fake review, malformed output, API failure — record actual outcomes.
+**Outputs:** `evals/system_tests/results.md` (reuses the recovery test from 3.2/3.3)
 
 ---
 
-## Phase 9: Package and submit (Day 7)
+## Phase 6: Scale up and do the full run
 
-### [ ] Step 9.1: Build the grading export and run the checker
-**What you're doing:** Put the required files in `grading/` in the exact format the grader expects, then run `check_submission.py` to self-check.
-**Outputs:**
-- `grading/`: `run.json`, `ingestion.json`, `records.jsonl`, `membership.csv`, `ranking.csv`, `claims.csv`, `calls.jsonl`, checkpoints
+### ⏳ Step 6.1: Run 10,000 reviews (paid, ~$0.15)
+**What you're doing:** Run `analysis_10000.csv`, refresh the estimate, confirm the full run fits the budget.
+**Outputs:** `cost/analysis_10000_run/` · updated `cost/report.md`
 
-### [ ] Step 9.2: Finish the README
-**What you're doing:** Replace every `TODO` with real numbers and links. Fill in the end-to-end trace and the architecture diagram.
-**Outputs:**
-- A completed `README.md`
+### ⏳ Step 6.2: Full run + interruption demo (paid, ~$6–7)
+**What you're doing:** Label all 484,189 unique texts. Stop it partway on purpose (screen recording), then resume.
+**Outputs:** full run folder · `grading/checkpoint_before.json`, `checkpoint_after.json` · screen recording
 
-### [ ] Step 9.3: Final checks and submit
-**What you're doing:** Open the repo while logged out to confirm everything is public, check that no keys were committed, test the dashboard, and submit the repo URL on the course portal.
-**Outputs:**
-- The submitted GitHub URL
+---
+
+## Phase 7: Group, rank and write the memo (full data)
+
+### 🔨 Step 7.1: Group complaints into issues (Stage 4)
+**Outputs:** `pipeline/group.py` (built, ran in pilot) · full-data `issues.csv`, `grading/membership.csv`
+
+### 🔨 Step 7.2: Rank issues (Stage 5)
+**Outputs:** `pipeline/rank.py` (built; rebuild-from-saved-files verified) · full-data `aggregates.csv`, `grading/ranking.csv`
+
+### 🔨 Step 7.3: Write the memo (Stage 6)
+**What you're doing:** OpenAI writes from the ranking + evidence pack only; code fact-checks; **you read and approve it**.
+**Outputs:** `pipeline/memo.py` (built, passed checks in pilot) · full-data `memo.md`, `grading/claims.csv`
+
+---
+
+## Phase 8: Database, backend and dashboard
+
+### ⏳ Step 8.1: Load the results into a database
+**Outputs:** hosted Postgres (Neon) tables + load script
+
+### ⏳ Step 8.2: Deploy the backend
+**Outputs:** live API URL that reads from the database
+
+### ⏳ Step 8.3: Deploy the dashboard
+**Outputs:** live dashboard URL (metrics, issue ranking, AI recommendation with evidence links)
+
+---
+
+## Phase 9: Package and submit
+
+### ⏳ Step 9.1: Build the grading export and run the checker
+**Outputs:** `grading/` (run.json, ingestion.json, records.jsonl, membership.csv, ranking.csv, claims.csv, calls.jsonl, checkpoints) · self-check report
+
+### ⏳ Step 9.2: Finish the README
+**Outputs:** completed `README.md` (no TODOs; disclose the 150-review recovery test and AI-assisted golden-label consistency review)
+
+### ⏳ Step 9.3: Final checks and submit
+**Outputs:** public repo verified signed-out · no keys in history · repo URL submitted on the course portal

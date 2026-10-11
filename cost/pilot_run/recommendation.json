@@ -1,0 +1,56 @@
+{
+  "recommended_area": "playback",
+  "headline": "Prioritize playback reliability and offline listening next quarter",
+  "memo_markdown": "## Recommendation\nInvest next quarter in **playback**, focusing on playback/connectivity reliability and downloads. The area has 8 complaints, a mean severity of 3.75, and 6 severity-4-or-5 complaints. Its top issue, ISS-playback-general, has a priority score of 19 [C1], with reports of connectivity failures, assistant playback not starting, and playback stopping unexpectedly. This is a focused product problem with substantial reported severity; the evidence supports prioritizing it, not a claim about downstream retention or revenue.\n\n## Evidence\nISS-playback-general records 5 complaints and a priority score of 19 [C1]. Representative reports include a premium user's Wi-Fi connection failure (review 4ab2089a-ffa8-49e7-a8a3-aeb583a96796), assistant playback failing to start (46ff0c74-5e86-4e5b-b4cd-36201aab0f9e), and playback stopping mid-song (6c257eba-3dca-49f6-b7f0-4c4484d81e26). Offline problems also appear in ISS-downloads-offline, with 2 complaints and priority score 7 [C2]; review dcff57c6-abd6-413b-b255-aec3dc34fcbd reports offline playback not working.\n\n## Alternatives considered\nBilling/support has more area-level complaints (11) than playback (8), but its mean severity is 2.82 and it has no severity-4-or-5 complaints. Its leading issue, ISS-billing-paywall, has priority score 24 [C3], so it merits attention; however, playback combines high severity with more severe complaints at the area level. Usability also has more area-level complaints (13), but mean severity is 2.77. Its leading issue, ISS-usability-controls, has priority score 10 [C4], lower than playback's leading issue. Access has only 2 area-level complaints, despite a 4.00 mean severity, making it a narrower signal in this pack.\n\n## Limitations\nThese are Google Play reviews from 17 May 2022 to 15 Nov 2023; reviews are self-selected and historical. Cancellation language is intent, not observed churn. There is no revenue data. Coverage reports 0 pending and 0 quarantined records (100 completed of 100 source rows). Area and issue counts describe this review sample and should not be treated as causal estimates or representative customer rates.",
+  "claims": [
+    {
+      "claim_id": "C1",
+      "issue_id": "ISS-playback-general",
+      "metric": "priority_score",
+      "value": "19"
+    },
+    {
+      "claim_id": "C2",
+      "issue_id": "ISS-downloads-offline",
+      "metric": "priority_score",
+      "value": "7"
+    },
+    {
+      "claim_id": "C3",
+      "issue_id": "ISS-billing-paywall",
+      "metric": "priority_score",
+      "value": "24"
+    },
+    {
+      "claim_id": "C4",
+      "issue_id": "ISS-usability-controls",
+      "metric": "priority_score",
+      "value": "10"
+    }
+  ],
+  "cited_review_ids": [
+    "4ab2089a-ffa8-49e7-a8a3-aeb583a96796",
+    "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e",
+    "6c257eba-3dca-49f6-b7f0-4c4484d81e26",
+    "dcff57c6-abd6-413b-b255-aec3dc34fcbd"
+  ],
+  "check": {
+    "status": "passed",
+    "checks": [
+      "claim values match ranking",
+      "claim IDs cited",
+      "issue IDs exist",
+      "review IDs from evidence pack",
+      "numbers appear in evidence pack"
+    ],
+    "recommended_area": "playback",
+    "area_with_highest_severity_sum": "usability",
+    "agrees_with_highest_severity_sum": false,
+    "model_call": {
+      "cached": true,
+      "request_id": "resp_0cdd3bba981a243d006acadffc88e487d086ea00a302090cf3",
+      "cache_key": "d8aa48165efae2f5dc65365ddb6ebb372ba7e88c10af785d82bc82ccd20e8b18"
+    },
+    "human_review": "pending"
+  }
+}

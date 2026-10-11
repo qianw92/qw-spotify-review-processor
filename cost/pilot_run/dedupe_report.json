@@ -1,0 +1,86 @@
+{
+  "stage": "dedupe",
+  "model_calls": 0,
+  "created_at": "2026-10-11T01:01:56+00:00",
+  "rule": "exact byte-identical review_text (SHA-256); canonical = earliest source row; aliases reuse its label via cache_source_id",
+  "counts": {
+    "nonempty_rows": 100,
+    "canonical_texts_to_classify": 100,
+    "alias_rows_reusing_a_label": 0,
+    "work_reduction_pct": 0.0
+  },
+  "integrity_checks_all_zero": true,
+  "integrity_checks": {
+    "nonempty_rows_not_mapped": 0,
+    "alias_text_differs_from_canonical": 0,
+    "alias_points_to_non_canonical (chain)": 0,
+    "canonical_not_pointing_to_itself": 0,
+    "empty_text_rows_mapped": 0
+  },
+  "group_size_distribution": {
+    "1 (unique)": 100
+  },
+  "most_repeated_texts": [
+    {
+      "text": "Thik thak hi hai",
+      "rows": 1
+    },
+    {
+      "text": "Good at all",
+      "rows": 1
+    },
+    {
+      "text": "Great",
+      "rows": 1
+    },
+    {
+      "text": "You can't even listen to music you want it just shuffles it, like what the hell? This app is killing it self and forcing you to pay premium for basic things like just listening to music.",
+      "rows": 1
+    },
+    {
+      "text": "This was fine till the last update, now you can't even pick a certain song without Spotify premium, and now you can only skip 6 songs, like please just let the songs fit my mood!",
+      "rows": 1
+    },
+    {
+      "text": "Love it",
+      "rows": 1
+    },
+    {
+      "text": "Fantastic experience",
+      "rows": 1
+    },
+    {
+      "text": "Awesome app and music",
+      "rows": 1
+    },
+    {
+      "text": "Best for listening songs",
+      "rows": 1
+    },
+    {
+      "text": "Kudos spotify",
+      "rows": 1
+    },
+    {
+      "text": "Great music",
+      "rows": 1
+    },
+    {
+      "text": "Why it requires premium just to play next music / to choose music ?? And why the specific part of song cannot be played ?",
+      "rows": 1
+    },
+    {
+      "text": "Excellent!",
+      "rows": 1
+    },
+    {
+      "text": "Good aap",
+      "rows": 1
+    },
+    {
+      "text": "Top music app and i can see why.",
+      "rows": 1
+    }
+  ],
+  "seconds": 0.0
+}
