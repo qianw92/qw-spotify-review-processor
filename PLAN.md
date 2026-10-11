@@ -6,11 +6,12 @@
 
 | | |
 |---|---|
-| **Current step** | **6.2 — full run + interruption recording** (awaiting approval) |
-| **Next paid step** | 6.2 full run (~$6.69 base / $7.47 conservative, cap $8) |
-| **Progress** | 19 of 27 steps done |
-| **Spent so far** | Jev $0.1280 · OpenAI $0.0068 · **Total $0.1348 of $10** |
-| **Last updated** | Oct 11 |
+| **Current step** | **7.1/7.3 fix — issue names + memo examples** (awaiting approval of ≤$0.005 OpenAI re-run) |
+| **Open decision** | Approve fix: names/memo examples were picked from the most severe (rare) reviews → misleading names (e.g. ISS-other-general named "Privacy…" but is 91% generic "bad app"). Fix = typical examples (`group-names-v2`, `memo-v3`); labels, membership and ranking unchanged |
+| **Then** | Review memo (playback recommended vs billing/support highest severity sum) → 8.x database/backend/dashboard → 9.x grading export, README, submit |
+| **Progress** | 20 of 27 steps done |
+| **Spent so far** | Jev $6.889 · OpenAI $0.008 · **Total $6.897 of $10** ($3.10 left) |
+| **Last updated** | Oct 11 (paused; resume Oct 12) |
 
 **Status key:** ✅ done · 🔨 code built, still needs its full-data run · ⏳ to do
 
@@ -18,9 +19,9 @@
 
 | Day | Steps |
 |---|---|
-| **Oct 10–11** | 4.2 calculator → 4.3 500 reviews → 5.1 golden-50 evaluation → 5.3 system tests |
-| **Oct 11–12** | 6.1 10,000 reviews → 6.2 full run + interruption recording → 7.x group/rank/memo on full data |
-| **Oct 12–13** | 8.x database, backend, dashboard → 9.x grading export, checker, README, submit |
+| **Oct 10–11** | ✅ 4.2–6.2 done (calculator, 500, golden eval, system tests, 10k, full run) |
+| **Oct 12** | Fix issue names/memo examples → review memo → 8.x database, backend, dashboard |
+| **Oct 13** | 9.x grading export (gzip records), checker, README, submit by 11:59 pm PT |
 
 Rules for every step: explain outputs in plain words · price preview + approval before any paid run · commit after each step.
 
@@ -124,9 +125,9 @@ Rules for every step: explain outputs in plain words · price preview + approval
 **What you're doing:** Run `analysis_10000.csv`, refresh the estimate, confirm the full run fits the budget.
 **Outputs:** `cost/analysis_10000_run/` — 10,000/10,000 completed, 0 quarantined, 2 workers (1.9× faster than 1), 1 real connection error retried OK, verifier 74% all-three agree · `cost/report.md`: full run base $6.69 / conservative $7.47
 
-### ⏳ Step 6.2: Full run + interruption demo (paid, ~$6.7) ← **current**
+### ✅ Step 6.2: Full run + interruption demo (paid, $6.50)
 **What you're doing:** Label all 484,189 unique texts. Stop it partway on purpose (screen recording), then resume.
-**Outputs:** full run folder · `grading/checkpoint_before.json`, `checkpoint_after.json` · screen recording
+**Outputs:** `outputs/full_run/` — 660,609 completed + 13 quarantined, 0 pending; 71 connection drops all retried · `grading/checkpoint_before.json` (143,321) → `checkpoint_after.json` (660,609), 0 re-sent · screen recording (user's file) · verifier 4,842 reviews, 78% all-three agree
 
 ---
 
