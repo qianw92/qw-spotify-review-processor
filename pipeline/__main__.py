@@ -25,11 +25,50 @@ def main():
     p.add_argument("--limit", type=int, help="only the first N pending canonical reviews")
     p.add_argument("--max-spend", type=float, default=0.0, help="hard USD cap for this run")
     p.add_argument("--confirm-spend", action="store_true", help="actually call the paid API")
+    p = stages.add_parser("run", help="All stages on one CSV. Shows a price preview; spends only with --confirm-spend")
+    p.add_argument("--input", required=True)
+    p.add_argument("--db", required=True)
+    p.add_argument("--run-dir", required=True)
+    p.add_argument("--label", default="run", help="e.g. cold / warm")
+    p.add_argument("--max-spend", type=float, default=0.0)
+    p.add_argument("--verify-rate", type=float, default=0.01)
+    p.add_argument("--verify-min", type=int, default=20)
+    p.add_argument("--allow-partial", action="store_true")
+    p.add_argument("--confirm-spend", action="store_true")
+    p = stages.add_parser("rank", help="Rebuild ranking.csv from saved files only (no database, no model, $0)")
+    p.add_argument("--records", required=True, help="records.jsonl or enriched.jsonl (.gz ok)")
+    p.add_argument("--membership", required=True)
+    p.add_argument("--out", required=True)
+    p = stages.add_parser("planted-test", help="Synthetic planted-error test on saved verifier output ($0)")
+    p.add_argument("--db", required=True)
+    p.add_argument("--run-dir", required=True)
+    p.add_argument("--n", type=int, default=10)
     p = stages.add_parser("checkpoint", help="Snapshot completed review IDs (no model calls, $0)")
     p.add_argument("--db", default="state/pipeline.sqlite")
     p.add_argument("--out", required=True)
     args = parser.parse_args()
 
+    if args.stage == "run":
+        from . import run as orchestrator
+        pv = orchestrator.preview(args.input, args.db, args.run_dir, args.verify_rate, args.verify_min)
+        print("PRICE PREVIEW\n" + json.dumps(pv, indent=2))
+        if not args.confirm_spend:
+            print("\nNo API calls made. Re-run with --confirm-spend and --max-spend to execute.")
+            return
+        s = orchestrator.run(args.input, args.db, args.run_dir, args.max_spend, args.verify_rate, args.verify_min,
+                             args.label, args.allow_partial)
+        print(json.dumps({k: s[k] for k in ("record_status", "wall_clock_seconds", "run_spent_usd")}, indent=2))
+        return
+    if args.stage == "rank":
+        from . import rank
+        rows = rank.from_saved(args.records, args.membership, args.out)
+        print(json.dumps({"issues_ranked": len(rows), "saved": args.out, "top": rows[:3]}, indent=2))
+        return
+    if args.stage == "planted-test":
+        import sqlite3
+        from . import verify
+        print(json.dumps(verify.planted_error_test(sqlite3.connect(args.db), args.run_dir, args.n), indent=2))
+        return
     if args.stage == "checkpoint":
         import datetime
         import sqlite3

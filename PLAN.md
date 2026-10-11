@@ -84,6 +84,14 @@ Mark a step `[x]` when it's done.
 
 ## Phase 4: Cost calculator and pilots (Day 3)
 
+> **Order fix (Oct 10):** the official 100-review pilot must include every stage (enrich, verify sample, group, rank, memo),
+> so the verifier (5.2), grouping (7.1), ranking (7.2) and memo (7.3) code is built **before** step 4.1.
+> Scaling order is unchanged: 100 → 500 → 10,000 → full run.
+
+### [x] Step 4.0: Build verify, group, rank and memo stages + orchestrator (code only, $0)
+**What you're doing:** Build the four remaining stages and one command that runs them all, so the pilot can measure every stage.
+**Outputs:** `pipeline/verify.py`, `group.py`, `rank.py`, `memo.py`, `llm.py`, `export.py`, `run.py`; `schema/issues.json`
+
 ### [ ] Step 4.1: Run the 100-review pilot (cold, then warm)
 **What you're doing:** Run the whole pipeline on `cost_100.csv` with an empty cache and 1 worker, and measure real cost and time. Then run it again: it should make 0 new labeling calls because everything is already saved.
 **Outputs:**

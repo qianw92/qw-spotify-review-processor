@@ -1,0 +1,19 @@
+issue_id,topic,rule_key,name,description,name_source,members,example_review_ids
+ISS-access-account,access,account,Access: account,,fallback,2,7142ad2b-7178-4353-aa39-1393bfd2cda1 15ff50dc-b813-40d5-90d7-e7a7f2426613
+ISS-access-general,access,general,Access: general complaints,,fallback,3,7a9422f5-7266-4f53-adf3-7cc65803e8bf 7d62e05d-4d25-4aea-9389-e6c1764c5fd1 c5a0dcdf-6bbe-42a8-8a42-616c817ffc6d
+ISS-access-login,access,login,Access: login,,fallback,1,4f6feaff-f6fb-430d-8681-592c5833d3c1
+ISS-billing-general,billing,general,Billing: general complaints,,fallback,7,f3a4c132-c779-4107-9514-49bec6a77687 c731fdfa-3607-4ffe-a0df-c9bd06c7e5c7 e4bdd332-7fd3-47c7-95ef-0d401ee06665 adbe60b6-9a38-4be9-b502-225710a537d1
+ISS-billing-paywall,billing,paywall,Billing: paywall,,fallback,12,47ab8a7e-e9da-45ef-bcfd-036fff3896a3 9291c867-e086-4719-a0af-7e70197e61ad fa0cf08c-968d-40ba-afa0-a30223c680fc b06534cf-f48e-4a2f-97a1-47e89c28554f
+ISS-catalog-lyrics,catalog,lyrics,Catalog: lyrics,,fallback,1,b76be87b-07db-4fbc-9fed-bfa14fe9bba6
+ISS-downloads-offline,downloads,offline,Downloads: offline,,fallback,1,9397488c-6376-4fb9-9b34-747fc7559df9
+ISS-other-general,other,general,Other: general complaints,,fallback,22,981ef0e7-a420-4942-b48f-a26b369aee7c 12c34d9b-a093-4ff1-a4e0-f6b855ec5313 a6f8dcfb-2a8d-4bec-b01a-d128187e4167 53f662ca-9361-453c-8b60-f38d96ff3825
+ISS-other-update,other,update,Other: update,,fallback,4,c3a26471-eedb-4ee6-876a-4e8e133d67b8 7589286d-1cc0-4c7c-8bd8-e91cd2cb55d5 49cda0a1-99fd-4c1f-9a91-9e7dc4ca8e7c 2037ccd0-4957-4d55-bc86-55eeab9a80b1
+ISS-playback-audio,playback,audio,Playback: audio,,fallback,1,f11035b1-51b7-4bca-be50-7c17deb6ff53
+ISS-playback-crashes,playback,crashes,Playback: crashes,,fallback,1,8cf70f3f-cbe6-4fd1-b97b-e160950e16be
+ISS-playback-general,playback,general,Playback: general complaints,,fallback,6,d5d18196-7a49-4d7e-8ded-9cdf0c074514 a62c808d-e338-43c8-907f-67a199ec986b 014b25ee-99ce-4866-89a8-f4f249dcbf34 6674074b-b3e5-42a7-a649-39bef4f79e74
+ISS-playback-update,playback,update,Playback: update,,fallback,1,4efe4752-20fd-4539-a8c6-d10c4b4acd7d
+ISS-usability-ads,usability,ads,Usability: ads,,fallback,2,f99f2c70-7dda-4898-9c4a-18f13b0e6bf6 6cf35ef1-96f5-4508-9972-0f022a5398a1
+ISS-usability-controls,usability,controls,Usability: controls,,fallback,1,23685af6-de32-4187-91d8-9471fd69fc20
+ISS-usability-general,usability,general,Usability: general complaints,,fallback,6,8826376c-26ef-4b8e-a67c-a4df1aa232c8 1b4e7551-a5a8-4f02-818d-f4d9dda60b0c b4a19b9c-6b4f-4dc8-8c29-0065c59a6c63 0b54bc56-5956-4aea-9b6c-051f3902370f
+ISS-usability-library,usability,library,Usability: library,,fallback,2,45f50a2d-4f73-49b3-8c92-02e6950ff041 df3b0a01-8b8a-4fb6-b82d-3b3cafe26f43
+ISS-usability-update,usability,update,Usability: update,,fallback,1,396d6639-37bc-41e1-a5db-773c26884f6e

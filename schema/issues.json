@@ -1,0 +1,36 @@
+{
+  "version": "issues-v1",
+  "description": "Deterministic issue assignment for complaint/cancellation records. Each record gets exactly one issue: within its topic, the first rule whose entities appear in the record's entity list wins; otherwise the topic's 'general' issue. Issue IDs never depend on a model.",
+  "id_format": "ISS-{topic}-{key}",
+  "rules": {
+    "access":    [{"key": "login",       "entities": ["login"]},
+                  {"key": "account",     "entities": ["account"]}],
+    "usability": [{"key": "ads",         "entities": ["ads"]},
+                  {"key": "controls",    "entities": ["shuffle", "queue", "repeat", "skip"]},
+                  {"key": "library",     "entities": ["playlist", "library"]},
+                  {"key": "update",      "entities": ["update"]}],
+    "playback":  [{"key": "crashes",     "entities": ["crash"]},
+                  {"key": "devices",     "entities": ["bluetooth", "car", "widget"]},
+                  {"key": "audio",       "entities": ["audio_quality"]},
+                  {"key": "update",      "entities": ["update"]}],
+    "downloads": [{"key": "offline",     "entities": ["offline", "download"]}],
+    "catalog":   [{"key": "lyrics",      "entities": ["lyrics"]},
+                  {"key": "podcasts",    "entities": ["podcast"]},
+                  {"key": "recommendations", "entities": ["recommendations"]},
+                  {"key": "search",      "entities": ["search"]}],
+    "billing":   [{"key": "charges",     "entities": ["charge", "refund"]},
+                  {"key": "price",       "entities": ["price"]},
+                  {"key": "paywall",     "entities": ["premium", "shuffle", "queue", "repeat", "skip", "offline"]}],
+    "support":   [],
+    "other":     [{"key": "update",      "entities": ["update"]},
+                  {"key": "ads",         "entities": ["ads"]}]
+  },
+  "areas": {
+    "description": "The four decision options in the assignment; catalog and other are reported separately as 'not a decision option'.",
+    "access": ["access"],
+    "usability": ["usability"],
+    "playback": ["playback", "downloads"],
+    "billing_support": ["billing", "support"],
+    "outside_options": ["catalog", "other"]
+  }
+}

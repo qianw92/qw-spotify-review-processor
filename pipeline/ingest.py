@@ -55,7 +55,14 @@ def run(input_csv, db_path=db.DEFAULT_DB, out_dir=ROOT / "outputs", grading_dir=
     file_sha = grader.sha(input_csv)
 
     con = db.connect(db_path)
-    con.execute("DELETE FROM records"); con.execute("DELETE FROM reviews")  # ingest is a full, deterministic rebuild
+    previous = con.execute("SELECT value FROM meta WHERE key='input_sha256'").fetchone()
+    if previous and previous[0] == file_sha:
+        # Same input file: keep saved statuses and results (this is what makes a warm rerun free).
+        reuse_existing = True
+    else:
+        db.reset_for_new_input(con)
+        con.execute("INSERT OR REPLACE INTO meta VALUES ('input_sha256', ?)", (file_sha,))
+        reuse_existing = False
 
     counts = Counter()
     seen_ids, text_counts = set(), Counter()
@@ -100,11 +107,11 @@ def run(input_csv, db_path=db.DEFAULT_DB, out_dir=ROOT / "outputs", grading_dir=
         else:
             batch_records.append((rid, "pending", None, 0, stamp))
         if len(batch_reviews) >= 20000:
-            con.executemany("INSERT INTO reviews VALUES (?,?,?,?,?,?,?,?,?,?)", batch_reviews)
-            con.executemany("INSERT INTO records VALUES (?,?,?,?,?)", batch_records)
+            con.executemany("INSERT OR IGNORE INTO reviews VALUES (?,?,?,?,?,?,?,?,?,?)", batch_reviews)
+            con.executemany("INSERT OR IGNORE INTO records VALUES (?,?,?,?,?)", batch_records)
             con.commit(); batch_reviews.clear(); batch_records.clear()
-    con.executemany("INSERT INTO reviews VALUES (?,?,?,?,?,?,?,?,?,?)", batch_reviews)
-    con.executemany("INSERT INTO records VALUES (?,?,?,?,?)", batch_records)
+    con.executemany("INSERT OR IGNORE INTO reviews VALUES (?,?,?,?,?,?,?,?,?,?)", batch_reviews)
+    con.executemany("INSERT OR IGNORE INTO records VALUES (?,?,?,?,?)", batch_records)
     con.commit()
 
     nonempty = counts["records"] - counts["duplicate_review_ids"] - counts["empty_review_text"]
@@ -130,6 +137,7 @@ def run(input_csv, db_path=db.DEFAULT_DB, out_dir=ROOT / "outputs", grading_dir=
 
     report = {
         "run_id": run_id, "created_at": now(), "stage": "prepare", "model_calls": 0,
+        "reused_saved_state_for_same_input": reuse_existing,
         "input": {"path": str(input_csv), "bytes": input_csv.stat().st_size, "sha256": file_sha,
                   "is_course_full_file": is_full_file},
         "counts": {**observed, "multiline_text": counts["multiline_text"]},

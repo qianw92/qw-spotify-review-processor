@@ -185,7 +185,7 @@ def parse(answers, keymap, quote_options, texts, layout, request_id):
 # ---------- the stage ----------
 
 class Enricher:
-    def __init__(self, db_path, run_dir, layout="batched", batch_size=50, max_spend=0.0, limit=None):
+    def __init__(self, db_path, run_dir, layout="batched", batch_size=50, max_spend=0.0, limit=None, guard=None):
         assert 1 <= batch_size <= 50, "enrichment requests must contain at most 50 reviews"
         if layout == "single":
             batch_size = 1
@@ -198,7 +198,7 @@ class Enricher:
         self.run_dir = Path(run_dir)
         self.run_dir.mkdir(parents=True, exist_ok=True)
         self.calls_path = self.run_dir / "calls.jsonl"
-        self.guard = budget.Guard(max_spend)
+        self.guard = guard or budget.Guard(max_spend)
         done = self.con.execute("SELECT COUNT(*) FROM labels WHERE label_config = ?", (self.config,)).fetchone()[0]
         self.phase = "resume" if done else "initial"
 
