@@ -1,0 +1,23 @@
+rank,issue_id,complaint_count,severity_sum,mean_severity,priority_score,topic,name,name_source,cancellation_count,share_of_complaints_pct
+1,ISS-billing-paywall,40,123,3.075000,123,billing,Subscription Purchase and Access Issues,model,5,16.8
+2,ISS-playback-general,30,114,3.800000,114,playback,Playback and Connection Problems,model,3,12.6
+3,ISS-other-general,53,102,1.924528,102,other,General Dissatisfaction,model,5,22.3
+4,ISS-usability-general,17,43,2.529412,43,usability,Usability and Navigation Problems,model,0,7.1
+5,ISS-usability-ads,20,41,2.050000,41,usability,Too Many or Loud Ads,model,0,8.4
+6,ISS-access-login,7,28,4.000000,28,access,Login Problems,model,0,2.9
+7,ISS-billing-general,11,28,2.545455,28,billing,Paid Features and Restrictions,model,2,4.6
+8,ISS-usability-update,8,25,3.125000,25,usability,Missing Features After Updates,model,2,3.4
+9,ISS-usability-controls,7,24,3.428571,24,usability,Limited Music Selection and Controls,model,1,2.9
+10,ISS-downloads-offline,6,21,3.500000,21,downloads,Downloads and Offline Listening Problems,model,2,2.5
+11,ISS-catalog-lyrics,6,18,3.000000,18,catalog,Missing or Unavailable Lyrics,model,0,2.5
+12,ISS-catalog-general,6,16,2.666667,16,catalog,Missing Songs and Music,model,0,2.5
+13,ISS-other-update,7,16,2.285714,16,other,Negative Reactions to Updates,model,2,2.9
+14,ISS-playback-update,4,15,3.750000,15,playback,Playback Problems After Updates,model,1,1.7
+15,ISS-usability-library,5,14,2.800000,14,usability,Library and Discovery Difficulties,model,1,2.1
+16,ISS-playback-crashes,3,12,4.000000,12,playback,App Crashes During Playback,model,0,1.3
+17,ISS-access-general,2,9,4.500000,9,access,General Access Problems,model,1,0.8
+18,ISS-billing-charges,2,6,3.000000,6,billing,Charges for Basic Features,model,0,0.8
+19,ISS-access-account,1,4,4.000000,4,access,Account Access Problems,model,0,0.4
+20,ISS-catalog-recommendations,1,3,3.000000,3,catalog,Unwanted Song Recommendations,model,0,0.4
+21,ISS-other-ads,1,2,2.000000,2,other,Ads Make App Feel Like Advertisement,model,0,0.4
+22,ISS-support-general,1,2,2.000000,2,support,Negative Reaction to Support,model,0,0.4

@@ -139,9 +139,46 @@ def measured(rates):
     }
 
 
+# ---------------------------------------------------------------- estimate refreshes (larger checkpoints)
+
+REFRESH_RUNS = [("100 (pilot)", PILOT), ("500", HERE / "checkpoint_500_run"), ("10,000", HERE / "analysis_10000_run")]
+
+
+def run_stats(run_dir, rates):
+    """Per-stage usage, cost and timing from a checkpoint run's own calls.jsonl + run summary."""
+    summary = json.loads((run_dir / "run_summary_cold.json").read_text())
+    calls = [json.loads(l) for l in open(run_dir / "calls.jsonl", encoding="utf-8")]
+    calls = [c for c in calls if summary["started_at"] <= c["ts"] <= summary["finished_at"]]
+    stages = {}
+    for role in ROLES:
+        rc = [c for c in calls if c["role"] == role]
+        prov = STAGE_PROVIDER[role]
+        tokens = defaultdict(int)
+        for c in rc:
+            if prov == "typesafe":
+                tokens["input_tokens"] += c["input_tokens"]; tokens["output_tokens"] += c["output_tokens"]
+            else:
+                cached = c.get("cached_input_tokens") or 0
+                tokens["input_tokens_uncached"] += c["input_tokens"] - cached
+                tokens["cached_input_tokens"] += cached; tokens["output_tokens"] += c["output_tokens"]
+        secs = [c.get("seconds", 0) for c in rc if c["outcome"] == "succeeded"]
+        stages[role] = {"provider": prov, "tokens": dict(tokens), "cost_usd": bill(rates, prov, tokens),
+                        "reviews_sent": sum(len(c["review_ids"]) for c in rc if c["outcome"] == "succeeded"),
+                        "requests": len({c["request_id"] for c in rc}), "attempts": len(rc),
+                        "failed_attempts": sum(c["outcome"] == "failed" for c in rc),
+                        "stage_seconds": next(x["seconds"] for x in summary["stages"] if x["stage"] == role),
+                        "seconds_per_request_mean": sum(secs) / len(secs) if secs else 0,
+                        "seconds_per_request_max": max(secs) if secs else 0}
+    rows = summary["record_status"]
+    return {"rows": sum(rows.values()), "completed": rows.get("completed", 0), "stages": stages,
+            "api_cost_usd": sum(x["cost_usd"] for x in stages.values()),
+            "wall_clock_seconds": summary["wall_clock_seconds"],
+            "issues": max(0, len(open(run_dir / "ranking.csv").readlines()) - 1)}
+
+
 # ---------------------------------------------------------------- projection
 
-def project(m, rates, a, distinct_override=None):
+def project(m, rates, a, distinct_override=None, issues_measured=None):
     full = a["full_run"]
     texts = distinct_override or full["distinct_nonempty_texts"]
     out = {}
@@ -160,7 +197,8 @@ def project(m, rates, a, distinct_override=None):
             st[role] = {"reviews": n, "requests": math.ceil(requests), "tokens": {k: round(v) for k, v in tokens.items()},
                         "cost_usd": bill(rates, s["provider"], tokens), "sequential_seconds": secs,
                         "modeled_wall_seconds": wall}
-        issue_scale = a["expected_full_run_issues"] / max(1, len(open(PILOT / "ranking.csv").readlines()) - 1)
+        issue_scale = a["expected_full_run_issues"] / max(1, issues_measured or
+                                                          (len(open(PILOT / "ranking.csv").readlines()) - 1))
         for role, scale_key in (("group", "group_attempts"), ("memo", "memo_attempts")):
             s = m["stages"][role]
             scale = (issue_scale if role == "group" else 1) * sc[scale_key]
@@ -187,7 +225,7 @@ def money(x, d=4):
     return "unknown" if x is None else f"${x:,.{d}f}"
 
 
-def report(m, proj, noreuse, rates, a):
+def report(m, proj, noreuse, rates, a, refreshes):
     L = []
     w = L.append
     w("# Cost & runtime report — 100-review pilot\n")
@@ -221,6 +259,18 @@ def report(m, proj, noreuse, rates, a):
         w(f"| {p} | {r['model']} | {item} | {r['price_usd']} | {r['per_units']} {r['unit']}s | {r['source_url'] or '—'} | {r['checked_date']} |")
     w("")
     full = a["full_run"]
+    w("## Estimate refreshes (larger development checkpoints, same configuration)\n")
+    w("| Checkpoint | Rows | Completed | Requests (enrich) | Jev tokens / review (enrich) | Enrich s/request (mean / max) "
+      "| Run API cost | Wall-clock | → Full-run base | → Conservative |")
+    w("|---|---|---|---|---|---|---|---|---|---|")
+    for r in refreshes:
+        st, e = r["stats"], r["stats"]["stages"]["enrich"]
+        w(f"| {r['label']} | {st['rows']:,} | {st['completed']:,} | {e['requests']} | "
+          f"{e['tokens'].get('input_tokens', 0) / max(1, e['reviews_sent']):.0f} | "
+          f"{e['seconds_per_request_mean']:.2f} / {e['seconds_per_request_max']:.2f} | {money(st['api_cost_usd'], 4)} | "
+          f"{st['wall_clock_seconds']:.1f}s | {money(r['projection']['base']['api_cost_usd'], 2)} | "
+          f"{money(r['projection']['conservative']['api_cost_usd'], 2)} |")
+    w(f"\nThe projection below uses the largest checkpoint so far (**{refreshes[-1]['label']}**).\n")
     w("## Estimated: full run (projection, not a measurement)\n")
     w(f"- {full['source_rows']:,} rows accounted for: {full['nonempty_to_classify']:,} nonempty classified, "
       f"{full['empty_text_quarantines']} empty-text quarantines")
@@ -263,10 +313,19 @@ def main():
     rates = load_rates(args.rates)
     a = json.loads(Path(args.assumptions).read_text())
     m = measured(rates)
-    proj = project(m, rates, a)
-    noreuse = project(m, rates, a, distinct_override=a["full_run"]["nonempty_to_classify"])
-    report(m, proj, noreuse, rates, a)
-    (HERE / "report.json").write_text(json.dumps({"measured": m, "projection": proj, "projection_no_reuse": noreuse},
+    refreshes = []
+    for label, d in REFRESH_RUNS:
+        if (d / "run_summary_cold.json").exists():
+            st = run_stats(d, rates)
+            refreshes.append({"label": label, "stats": st,
+                              "projection": project(st, rates, a, issues_measured=st["issues"])})
+    latest = refreshes[-1]
+    proj = latest["projection"]
+    noreuse = project(latest["stats"], rates, a, distinct_override=a["full_run"]["nonempty_to_classify"],
+                      issues_measured=latest["stats"]["issues"])
+    report(m, proj, noreuse, rates, a, refreshes)
+    (HERE / "report.json").write_text(json.dumps({"measured": m, "refreshes": refreshes, "projection_basis":
+                                                  latest["label"], "projection": proj, "projection_no_reuse": noreuse},
                                                  indent=2, default=str))
     print(f"Measured cold pilot: {money(m['cold']['api_cost_usd'], 6)} in {m['cold']['wall_clock_seconds']:.1f}s · "
           f"warm: {money(m['warm']['api_cost_usd'], 6)}, {m['warm']['enrich_calls']} enrichment calls")

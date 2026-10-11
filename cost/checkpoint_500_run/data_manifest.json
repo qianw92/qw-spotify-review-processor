@@ -1,0 +1,18 @@
+{
+  "run_id": "ingest-20261010-184711",
+  "created_at": "2026-10-11T01:47:11+00:00",
+  "code_commit": "2cf7d3e9d5b617876bfda5c033b870c96c5b1c7f",
+  "input": {
+    "path": "data/checkpoint_500.csv",
+    "bytes": 76170,
+    "sha256": "a94e31663ee7b7eaa77e23b7a8425b530cc0c866ed5e714953172a0afef6a12f",
+    "is_course_full_file": false
+  },
+  "row_hash": "check_submission.row_sha (SHA-256 of canonical JSON of 6 source fields)",
+  "outputs": {
+    "ingestion_report": "outputs/ingestion_report.json",
+    "quarantine": "outputs/quarantine.jsonl",
+    "grading_ingestion": "grading/ingestion.json",
+    "state_db": "state/cp500.sqlite"
+  }
+}

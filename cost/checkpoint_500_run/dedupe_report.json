@@ -1,0 +1,88 @@
+{
+  "stage": "dedupe",
+  "model_calls": 0,
+  "created_at": "2026-10-11T01:47:11+00:00",
+  "rule": "exact byte-identical review_text (SHA-256); canonical = earliest source row; aliases reuse its label via cache_source_id",
+  "counts": {
+    "nonempty_rows": 500,
+    "canonical_texts_to_classify": 479,
+    "alias_rows_reusing_a_label": 21,
+    "work_reduction_pct": 4.2
+  },
+  "integrity_checks_all_zero": true,
+  "integrity_checks": {
+    "nonempty_rows_not_mapped": 0,
+    "alias_text_differs_from_canonical": 0,
+    "alias_points_to_non_canonical (chain)": 0,
+    "canonical_not_pointing_to_itself": 0,
+    "empty_text_rows_mapped": 0
+  },
+  "group_size_distribution": {
+    "1 (unique)": 468,
+    "2-5": 10,
+    "6-50": 1
+  },
+  "most_repeated_texts": [
+    {
+      "text": "Good",
+      "rows": 7
+    },
+    {
+      "text": "Great",
+      "rows": 4
+    },
+    {
+      "text": "Worst app",
+      "rows": 3
+    },
+    {
+      "text": "Excellent",
+      "rows": 3
+    },
+    {
+      "text": "Nice",
+      "rows": 3
+    },
+    {
+      "text": "Love it",
+      "rows": 2
+    },
+    {
+      "text": "Op",
+      "rows": 2
+    },
+    {
+      "text": "Superb",
+      "rows": 2
+    },
+    {
+      "text": "Hate this application",
+      "rows": 2
+    },
+    {
+      "text": "Very good",
+      "rows": 2
+    },
+    {
+      "text": "Awesome",
+      "rows": 2
+    },
+    {
+      "text": "Thik thak hi hai",
+      "rows": 1
+    },
+    {
+      "text": "Good at all",
+      "rows": 1
+    },
+    {
+      "text": "You can't even listen to music you want it just shuffles it, like what the hell? This app is killing it self and forcing you to pay premium for basic things like just listening to music.",
+      "rows": 1
+    },
+    {
+      "text": "This was fine till the last update, now you can't even pick a certain song without Spotify premium, and now you can only skip 6 songs, like please just let the songs fit my mood!",
+      "rows": 1
+    }
+  ],
+  "seconds": 0.0
+}

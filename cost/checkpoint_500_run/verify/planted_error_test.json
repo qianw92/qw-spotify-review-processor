@@ -1,0 +1,19 @@
+{
+  "synthetic_test": true,
+  "planted_wrong_topics": 10,
+  "flagged_by_comparison": 10,
+  "caught_all": true,
+  "model_calls": 0,
+  "comparison": {
+    "compared": 48,
+    "agreement": {
+      "topic": 0.75,
+      "intent": 1.0,
+      "severity": 0.9375
+    },
+    "all_three_agree": 0.6875,
+    "severity_mae": 0.0625,
+    "sentiment_mae": 0.0594,
+    "disagreements": 15
+  }
+}

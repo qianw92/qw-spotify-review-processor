@@ -6,10 +6,10 @@
 
 | | |
 |---|---|
-| **Current step** | **4.3 — 500-review run** (awaiting price approval) |
-| **Next paid step** | 4.3 — 500-review run (~$0.019) |
-| **Progress** | 14 of 27 steps done |
-| **Spent so far** | Jev $0.0049 · OpenAI $0.0013 · **Total $0.0065 of $10** |
+| **Current step** | **5.1 + 5.3 — golden-50 evaluation and system tests** (awaiting price approval) |
+| **Next paid step** | 5.1 + 5.3 (~$0.002) |
+| **Progress** | 15 of 27 steps done |
+| **Spent so far** | Jev $0.0122 · OpenAI $0.0028 · **Total $0.0150 of $10** |
 | **Last updated** | Oct 10 |
 
 **Status key:** ✅ done · 🔨 code built, still needs its full-data run · ⏳ to do
@@ -96,15 +96,15 @@ Rules for every step: explain outputs in plain words · price preview + approval
 **What you're doing:** A tool that recomputes cost from saved usage and editable prices (no API key), and projects the full run with budget warnings.
 **Outputs:** `cost/rates.csv` · `cost/usage.csv` · `cost/pilot_records.jsonl` · `cost/pilot_calls.jsonl` · `cost/report.md` · offline replay command
 
-### ⏳ Step 4.3: Run 500 reviews (paid, ~$0.02) ← **current**
+### ✅ Step 4.3: Run 500 reviews (paid, $0.0086)
 **What you're doing:** Run `checkpoint_500.csv`, refresh the estimate; test shorter question wording to cut full-run cost.
-**Outputs:** `cost/checkpoint_500_run/` · updated `cost/report.md`
+**Outputs:** `cost/checkpoint_500_run/` (500/500 completed, 321 tokens/review, verifier 43/48 all-agree, planted-error test caught 10/10) · `cost/report.md` refreshed: full run base $6.63 / conservative $7.40 · run cap raised to $8
 
 ---
 
 ## Phase 5: Evaluate quality
 
-### ⏳ Step 5.1: Compare AI labels with the golden 50 (paid, <$0.01)
+### ⏳ Step 5.1: Compare AI labels with the golden 50 (paid, <$0.01) ← **current**
 **What you're doing:** Run Jev on the golden 50 and compare with your labels, field by field.
 **Outputs:** `evals/golden/results.csv` · `evals/golden/report.md` (agreement, confusion table, error analysis)
 

@@ -1,0 +1,52 @@
+{
+  "recommended_area": "playback",
+  "headline": "Prioritize playback reliability next quarter",
+  "memo_markdown": "## Recommendation\nInvest next quarter in **playback**, focusing on reliable connection and uninterrupted listening. Playback has 43 complaints, a mean severity of 3.77, and 34 severity-4-or-5 complaints in the area totals. The leading playback issue, ISS-playback-general, has a priority score of \"114\" [C1]. Reviews describe connection and playback failures, including interruptions mid-song.\n\n## Evidence\nISS-playback-general is the strongest playback signal: its complaint count is \"30\" and severity sum is \"114\" [C1]. Supporting reports include review IDs 4ab2089a-ffa8-49e7-a8a3-aeb583a96796 (connection problem), 46ff0c74-5e86-4e5b-b4cd-36201aab0f9e (assistant playback failure), and 6c257eba-3dca-49f6-b7f0-4c4484d81e26 (playback stopping). This area-level pattern and concentrated issue evidence make playback a clear target for product effort.\n\n## Alternatives considered\nBilling/support is a substantial alternative: it has 54 complaints, but a lower area mean severity of 2.94. Its leading issue, ISS-billing-paywall, has a priority score of \"123\" [C2], so it is the strongest individual issue in the supplied top-issues list and merits attention. However, the broader playback area has higher mean severity and many more high-severity complaints, supporting a playback-focused area choice rather than treating the decision as a ranking of single issues.\n\nUsability has 57 complaints, but its area mean severity is 2.58. Its top listed issue, ISS-usability-ads, has a priority score of \"41\" [C3], below the leading playback issue. Access has high severity but only 10 complaints; its area mean severity is 4.10. Taken together, playback offers the stronger balance of scale and severity among the four requested choices.\n\n## Limitations\nReviews are self-selected and historical (Google Play reviews from 17 May 2022 to 15 Nov 2023). Cancellation language is intent, not observed churn. There is no revenue data, so this recommendation does not estimate revenue at risk or causal retention effects. Coverage reports 0 pending and 0 quarantined reviews (500 completed of 500 source rows).",
+  "claims": [
+    {
+      "claim_id": "C1",
+      "issue_id": "ISS-playback-general",
+      "metric": "priority_score",
+      "value": "114"
+    },
+    {
+      "claim_id": "C2",
+      "issue_id": "ISS-billing-paywall",
+      "metric": "priority_score",
+      "value": "123"
+    },
+    {
+      "claim_id": "C3",
+      "issue_id": "ISS-usability-ads",
+      "metric": "priority_score",
+      "value": "41"
+    }
+  ],
+  "cited_review_ids": [
+    "4ab2089a-ffa8-49e7-a8a3-aeb583a96796",
+    "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e",
+    "6c257eba-3dca-49f6-b7f0-4c4484d81e26"
+  ],
+  "check": {
+    "status": "passed",
+    "checks": [
+      "claim values match ranking",
+      "claim IDs cited",
+      "issue IDs exist",
+      "review IDs from evidence pack",
+      "numbers appear in evidence pack"
+    ],
+    "recommended_area": "playback",
+    "area_with_highest_severity_sum": "playback",
+    "agrees_with_highest_severity_sum": true,
+    "model_call": {
+      "cached": false,
+      "request_id": "resp_042089c9212d9395006acaeab9fad887d0b33c5420c2f6c1cb",
+      "cache_key": "e1ce82c9bb2a748d99dd5468bea7bce2e4c3dedfbfd72b3dc5d25ce6d586c1c6",
+      "input_tokens": 3367,
+      "output_tokens": 690,
+      "attempts": 1
+    },
+    "human_review": "pending"
+  }
+}

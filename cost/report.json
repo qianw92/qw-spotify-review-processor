@@ -148,6 +148,401 @@
       "note": "laptop CPU only; electricity/hardware not measured, not counted as $0"
     }
   },
+  "refreshes": [
+    {
+      "label": "100 (pilot)",
+      "stats": {
+        "rows": 100,
+        "completed": 100,
+        "stages": {
+          "enrich": {
+            "provider": "typesafe",
+            "tokens": {
+              "input_tokens": 32203,
+              "output_tokens": 21743
+            },
+            "cost_usd": 0.0013525260000000002,
+            "reviews_sent": 100,
+            "requests": 2,
+            "attempts": 2,
+            "failed_attempts": 0,
+            "stage_seconds": 3.249,
+            "seconds_per_request_mean": 1.599,
+            "seconds_per_request_max": 2.726
+          },
+          "verify": {
+            "provider": "typesafe",
+            "tokens": {
+              "input_tokens": 7268,
+              "output_tokens": 4231
+            },
+            "cost_usd": 0.00030525600000000006,
+            "reviews_sent": 20,
+            "requests": 1,
+            "attempts": 1,
+            "failed_attempts": 0,
+            "stage_seconds": 0.361,
+            "seconds_per_request_mean": 0.358,
+            "seconds_per_request_max": 0.358
+          },
+          "group": {
+            "provider": "openai",
+            "tokens": {
+              "input_tokens_uncached": 2804,
+              "cached_input_tokens": 0,
+              "output_tokens": 520
+            },
+            "cost_usd": 0.0005404,
+            "reviews_sent": 40,
+            "requests": 1,
+            "attempts": 1,
+            "failed_attempts": 0,
+            "stage_seconds": 7.273,
+            "seconds_per_request_mean": 7.064,
+            "seconds_per_request_max": 7.064
+          },
+          "memo": {
+            "provider": "openai",
+            "tokens": {
+              "input_tokens_uncached": 3288,
+              "cached_input_tokens": 0,
+              "output_tokens": 850
+            },
+            "cost_usd": 0.0007538,
+            "reviews_sent": 27,
+            "requests": 1,
+            "attempts": 1,
+            "failed_attempts": 0,
+            "stage_seconds": 8.044,
+            "seconds_per_request_mean": 8.04,
+            "seconds_per_request_max": 8.04
+          }
+        },
+        "api_cost_usd": 0.002951982,
+        "wall_clock_seconds": 18.947,
+        "issues": 17
+      },
+      "projection": {
+        "base": {
+          "texts_classified": 484189,
+          "stages": {
+            "enrich": {
+              "reviews": 484189,
+              "requests": 9830,
+              "tokens": {
+                "input_tokens": 156703001,
+                "output_tokens": 105803600
+              },
+              "cost_usd": 6.5815260247106995,
+              "sequential_seconds": 15716.986739999997,
+              "modeled_wall_seconds": 4365.829649999999
+            },
+            "verify": {
+              "reviews": 4842,
+              "requests": 99,
+              "tokens": {
+                "input_tokens": 1768381,
+                "output_tokens": 1029447
+              },
+              "cost_usd": 0.074271989988,
+              "sequential_seconds": 35.24688999999999,
+              "modeled_wall_seconds": 9.790802777777776
+            },
+            "group": {
+              "reviews": "fixed overhead (once)",
+              "requests": 1,
+              "tokens": {
+                "input_tokens_uncached": 4948,
+                "cached_input_tokens": 0,
+                "output_tokens": 918
+              },
+              "cost_usd": 0.0009536470588235293,
+              "sequential_seconds": 7.273,
+              "modeled_wall_seconds": 7.273
+            },
+            "memo": {
+              "reviews": "fixed overhead (once)",
+              "requests": 1,
+              "tokens": {
+                "input_tokens_uncached": 3288,
+                "cached_input_tokens": 0,
+                "output_tokens": 850
+              },
+              "cost_usd": 0.0007538,
+              "sequential_seconds": 8.044,
+              "modeled_wall_seconds": 8.044
+            }
+          },
+          "api_cost_usd": 6.657505461757523,
+          "by_provider": {
+            "typesafe": 6.6557980146987,
+            "openai": 0.0017074470588235293
+          },
+          "modeled_wall_hours": 1.2197048479938268,
+          "budget_remaining_usd": 9.9849,
+          "within_budget": true,
+          "within_run_cap": true
+        },
+        "conservative": {
+          "texts_classified": 484189,
+          "stages": {
+            "enrich": {
+              "reviews": 484189,
+              "requests": 10362,
+              "tokens": {
+                "input_tokens": 174946036,
+                "output_tokens": 118121034
+              },
+              "cost_usd": 7.347733532065081,
+              "sequential_seconds": 28246.484880000004,
+              "modeled_wall_seconds": 11769.368700000003
+            },
+            "verify": {
+              "reviews": 4842,
+              "requests": 104,
+              "tokens": {
+                "input_tokens": 1974252,
+                "output_tokens": 1149293
+              },
+              "cost_usd": 0.08291857986720001,
+              "sequential_seconds": 37.15682,
+              "modeled_wall_seconds": 15.482008333333335
+            },
+            "group": {
+              "reviews": "fixed overhead (once)",
+              "requests": 2,
+              "tokens": {
+                "input_tokens_uncached": 9896,
+                "cached_input_tokens": 0,
+                "output_tokens": 1835
+              },
+              "cost_usd": 0.0019072941176470587,
+              "sequential_seconds": 14.546,
+              "modeled_wall_seconds": 14.546
+            },
+            "memo": {
+              "reviews": "fixed overhead (once)",
+              "requests": 2,
+              "tokens": {
+                "input_tokens_uncached": 6576,
+                "cached_input_tokens": 0,
+                "output_tokens": 1700
+              },
+              "cost_usd": 0.0015076,
+              "sequential_seconds": 16.088,
+              "modeled_wall_seconds": 16.088
+            }
+          },
+          "api_cost_usd": 7.434067006049927,
+          "by_provider": {
+            "typesafe": 7.430652111932281,
+            "openai": 0.0034148941176470587
+          },
+          "modeled_wall_hours": 3.2820790856481485,
+          "budget_remaining_usd": 9.9849,
+          "within_budget": true,
+          "within_run_cap": true
+        }
+      }
+    },
+    {
+      "label": "500",
+      "stats": {
+        "rows": 500,
+        "completed": 500,
+        "stages": {
+          "enrich": {
+            "provider": "typesafe",
+            "tokens": {
+              "input_tokens": 153727,
+              "output_tokens": 103749
+            },
+            "cost_usd": 0.006456534000000001,
+            "reviews_sent": 479,
+            "requests": 10,
+            "attempts": 10,
+            "failed_attempts": 0,
+            "stage_seconds": 10.489,
+            "seconds_per_request_mean": 1.0356999999999998,
+            "seconds_per_request_max": 2.498
+          },
+          "verify": {
+            "provider": "typesafe",
+            "tokens": {
+              "input_tokens": 15711,
+              "output_tokens": 10149
+            },
+            "cost_usd": 0.0006598620000000001,
+            "reviews_sent": 48,
+            "requests": 1,
+            "attempts": 1,
+            "failed_attempts": 0,
+            "stage_seconds": 5.735,
+            "seconds_per_request_mean": 5.728,
+            "seconds_per_request_max": 5.728
+          },
+          "group": {
+            "provider": "openai",
+            "tokens": {
+              "input_tokens_uncached": 4658,
+              "cached_input_tokens": 0,
+              "output_tokens": 712
+            },
+            "cost_usd": 0.0008218,
+            "reviews_sent": 71,
+            "requests": 1,
+            "attempts": 1,
+            "failed_attempts": 0,
+            "stage_seconds": 10.248,
+            "seconds_per_request_mean": 10.047,
+            "seconds_per_request_max": 10.047
+          },
+          "memo": {
+            "provider": "openai",
+            "tokens": {
+              "input_tokens_uncached": 3367,
+              "cached_input_tokens": 0,
+              "output_tokens": 690
+            },
+            "cost_usd": 0.0006817,
+            "reviews_sent": 30,
+            "requests": 1,
+            "attempts": 1,
+            "failed_attempts": 0,
+            "stage_seconds": 6.71,
+            "seconds_per_request_mean": 6.706,
+            "seconds_per_request_max": 6.706
+          }
+        },
+        "api_cost_usd": 0.008619896,
+        "wall_clock_seconds": 33.213,
+        "issues": 22
+      },
+      "projection": {
+        "base": {
+          "texts_classified": 484189,
+          "stages": {
+            "enrich": {
+              "reviews": 484189,
+              "requests": 9830,
+              "tokens": {
+                "input_tokens": 156169284,
+                "output_tokens": 105397276
+              },
+              "cost_usd": 6.559109926159979,
+              "sequential_seconds": 10180.164581999998,
+              "modeled_wall_seconds": 2827.823494999999
+            },
+            "verify": {
+              "reviews": 4842,
+              "requests": 99,
+              "tokens": {
+                "input_tokens": 1592771,
+                "output_tokens": 1028899
+              },
+              "cost_usd": 0.06689639714625,
+              "sequential_seconds": 563.9502399999999,
+              "modeled_wall_seconds": 156.6528444444444
+            },
+            "group": {
+              "reviews": "fixed overhead (once)",
+              "requests": 1,
+              "tokens": {
+                "input_tokens_uncached": 6352,
+                "cached_input_tokens": 0,
+                "output_tokens": 971
+              },
+              "cost_usd": 0.0011206363636363636,
+              "sequential_seconds": 10.248,
+              "modeled_wall_seconds": 10.248
+            },
+            "memo": {
+              "reviews": "fixed overhead (once)",
+              "requests": 1,
+              "tokens": {
+                "input_tokens_uncached": 3367,
+                "cached_input_tokens": 0,
+                "output_tokens": 690
+              },
+              "cost_usd": 0.0006817,
+              "sequential_seconds": 6.71,
+              "modeled_wall_seconds": 6.71
+            }
+          },
+          "api_cost_usd": 6.627808659669865,
+          "by_provider": {
+            "typesafe": 6.626006323306229,
+            "openai": 0.0018023363636363635
+          },
+          "modeled_wall_hours": 0.8337317609567899,
+          "budget_remaining_usd": 9.9849,
+          "within_budget": true,
+          "within_run_cap": true
+        },
+        "conservative": {
+          "texts_classified": 484189,
+          "stages": {
+            "enrich": {
+              "reviews": 484189,
+              "requests": 10362,
+              "tokens": {
+                "input_tokens": 174350186,
+                "output_tokens": 117667407
+              },
+              "cost_usd": 7.322707798160695,
+              "sequential_seconds": 25883.976240000004,
+              "modeled_wall_seconds": 10784.990100000003
+            },
+            "verify": {
+              "reviews": 4842,
+              "requests": 104,
+              "tokens": {
+                "input_tokens": 1778198,
+                "output_tokens": 1148682
+              },
+              "cost_usd": 0.07468433591850002,
+              "sequential_seconds": 594.50912,
+              "modeled_wall_seconds": 247.71213333333336
+            },
+            "group": {
+              "reviews": "fixed overhead (once)",
+              "requests": 2,
+              "tokens": {
+                "input_tokens_uncached": 12704,
+                "cached_input_tokens": 0,
+                "output_tokens": 1942
+              },
+              "cost_usd": 0.002241272727272727,
+              "sequential_seconds": 20.496,
+              "modeled_wall_seconds": 20.496
+            },
+            "memo": {
+              "reviews": "fixed overhead (once)",
+              "requests": 2,
+              "tokens": {
+                "input_tokens_uncached": 6734,
+                "cached_input_tokens": 0,
+                "output_tokens": 1380
+              },
+              "cost_usd": 0.0013634,
+              "sequential_seconds": 13.42,
+              "modeled_wall_seconds": 13.42
+            }
+          },
+          "api_cost_usd": 7.400996806806468,
+          "by_provider": {
+            "typesafe": 7.397392134079195,
+            "openai": 0.003604672727272727
+          },
+          "modeled_wall_hours": 3.0740606203703713,
+          "budget_remaining_usd": 9.9849,
+          "within_budget": true,
+          "within_run_cap": true
+        }
+      }
+    }
+  ],
+  "projection_basis": "500",
   "projection": {
     "base": {
       "texts_classified": 484189,
@@ -156,56 +551,56 @@
           "reviews": 484189,
           "requests": 9830,
           "tokens": {
-            "input_tokens": 156703001,
-            "output_tokens": 105803600
+            "input_tokens": 156169284,
+            "output_tokens": 105397276
           },
-          "cost_usd": 6.5815260247106995,
-          "sequential_seconds": 15716.986739999997,
-          "modeled_wall_seconds": 4365.829649999999
+          "cost_usd": 6.559109926159979,
+          "sequential_seconds": 10180.164581999998,
+          "modeled_wall_seconds": 2827.823494999999
         },
         "verify": {
           "reviews": 4842,
           "requests": 99,
           "tokens": {
-            "input_tokens": 1768381,
-            "output_tokens": 1029447
+            "input_tokens": 1592771,
+            "output_tokens": 1028899
           },
-          "cost_usd": 0.074271989988,
-          "sequential_seconds": 35.24688999999999,
-          "modeled_wall_seconds": 9.790802777777776
+          "cost_usd": 0.06689639714625,
+          "sequential_seconds": 563.9502399999999,
+          "modeled_wall_seconds": 156.6528444444444
         },
         "group": {
           "reviews": "fixed overhead (once)",
           "requests": 1,
           "tokens": {
-            "input_tokens_uncached": 4948,
+            "input_tokens_uncached": 6352,
             "cached_input_tokens": 0,
-            "output_tokens": 918
+            "output_tokens": 971
           },
-          "cost_usd": 0.0009536470588235293,
-          "sequential_seconds": 7.273,
-          "modeled_wall_seconds": 7.273
+          "cost_usd": 0.0011206363636363636,
+          "sequential_seconds": 10.248,
+          "modeled_wall_seconds": 10.248
         },
         "memo": {
           "reviews": "fixed overhead (once)",
           "requests": 1,
           "tokens": {
-            "input_tokens_uncached": 3288,
+            "input_tokens_uncached": 3367,
             "cached_input_tokens": 0,
-            "output_tokens": 850
+            "output_tokens": 690
           },
-          "cost_usd": 0.0007538,
-          "sequential_seconds": 8.044,
-          "modeled_wall_seconds": 8.044
+          "cost_usd": 0.0006817,
+          "sequential_seconds": 6.71,
+          "modeled_wall_seconds": 6.71
         }
       },
-      "api_cost_usd": 6.657505461757523,
+      "api_cost_usd": 6.627808659669865,
       "by_provider": {
-        "typesafe": 6.6557980146987,
-        "openai": 0.0017074470588235293
+        "typesafe": 6.626006323306229,
+        "openai": 0.0018023363636363635
       },
-      "modeled_wall_hours": 1.2197048479938268,
-      "budget_remaining_usd": 9.9935,
+      "modeled_wall_hours": 0.8337317609567899,
+      "budget_remaining_usd": 9.9849,
       "within_budget": true,
       "within_run_cap": true
     },
@@ -216,58 +611,58 @@
           "reviews": 484189,
           "requests": 10362,
           "tokens": {
-            "input_tokens": 174946036,
-            "output_tokens": 118121034
+            "input_tokens": 174350186,
+            "output_tokens": 117667407
           },
-          "cost_usd": 7.347733532065081,
-          "sequential_seconds": 28246.484880000004,
-          "modeled_wall_seconds": 11769.368700000003
+          "cost_usd": 7.322707798160695,
+          "sequential_seconds": 25883.976240000004,
+          "modeled_wall_seconds": 10784.990100000003
         },
         "verify": {
           "reviews": 4842,
           "requests": 104,
           "tokens": {
-            "input_tokens": 1974252,
-            "output_tokens": 1149293
+            "input_tokens": 1778198,
+            "output_tokens": 1148682
           },
-          "cost_usd": 0.08291857986720001,
-          "sequential_seconds": 37.15682,
-          "modeled_wall_seconds": 15.482008333333335
+          "cost_usd": 0.07468433591850002,
+          "sequential_seconds": 594.50912,
+          "modeled_wall_seconds": 247.71213333333336
         },
         "group": {
           "reviews": "fixed overhead (once)",
           "requests": 2,
           "tokens": {
-            "input_tokens_uncached": 9896,
+            "input_tokens_uncached": 12704,
             "cached_input_tokens": 0,
-            "output_tokens": 1835
+            "output_tokens": 1942
           },
-          "cost_usd": 0.0019072941176470587,
-          "sequential_seconds": 14.546,
-          "modeled_wall_seconds": 14.546
+          "cost_usd": 0.002241272727272727,
+          "sequential_seconds": 20.496,
+          "modeled_wall_seconds": 20.496
         },
         "memo": {
           "reviews": "fixed overhead (once)",
           "requests": 2,
           "tokens": {
-            "input_tokens_uncached": 6576,
+            "input_tokens_uncached": 6734,
             "cached_input_tokens": 0,
-            "output_tokens": 1700
+            "output_tokens": 1380
           },
-          "cost_usd": 0.0015076,
-          "sequential_seconds": 16.088,
-          "modeled_wall_seconds": 16.088
+          "cost_usd": 0.0013634,
+          "sequential_seconds": 13.42,
+          "modeled_wall_seconds": 13.42
         }
       },
-      "api_cost_usd": 7.434067006049927,
+      "api_cost_usd": 7.400996806806468,
       "by_provider": {
-        "typesafe": 7.430652111932281,
-        "openai": 0.0034148941176470587
+        "typesafe": 7.397392134079195,
+        "openai": 0.003604672727272727
       },
-      "modeled_wall_hours": 3.2820790856481485,
-      "budget_remaining_usd": 9.9935,
+      "modeled_wall_hours": 3.0740606203703713,
+      "budget_remaining_usd": 9.9849,
       "within_budget": true,
-      "within_run_cap": false
+      "within_run_cap": true
     }
   },
   "projection_no_reuse": {
@@ -278,56 +673,56 @@
           "reviews": 660609,
           "requests": 13412,
           "tokens": {
-            "input_tokens": 213799596,
-            "output_tokens": 144354396
+            "input_tokens": 213071413,
+            "output_tokens": 143800022
           },
-          "cost_usd": 8.9795830257567,
-          "sequential_seconds": 21444.500804999996,
-          "modeled_wall_seconds": 5956.805779166665
+          "cost_usd": 8.948999356058517,
+          "sequential_seconds": 13889.974661499995,
+          "modeled_wall_seconds": 3858.3262948611095
         },
         "verify": {
           "reviews": 6607,
           "requests": 135,
           "tokens": {
-            "input_tokens": 2412989,
-            "output_tokens": 1404699
+            "input_tokens": 2173366,
+            "output_tokens": 1403952
           },
-          "cost_usd": 0.101345526198,
-          "sequential_seconds": 48.32820999999999,
-          "modeled_wall_seconds": 13.424502777777775
+          "cost_usd": 0.091281391149375,
+          "sequential_seconds": 773.2513599999999,
+          "modeled_wall_seconds": 214.7920444444444
         },
         "group": {
           "reviews": "fixed overhead (once)",
           "requests": 1,
           "tokens": {
-            "input_tokens_uncached": 4948,
+            "input_tokens_uncached": 6352,
             "cached_input_tokens": 0,
-            "output_tokens": 918
+            "output_tokens": 971
           },
-          "cost_usd": 0.0009536470588235293,
-          "sequential_seconds": 7.273,
-          "modeled_wall_seconds": 7.273
+          "cost_usd": 0.0011206363636363636,
+          "sequential_seconds": 10.248,
+          "modeled_wall_seconds": 10.248
         },
         "memo": {
           "reviews": "fixed overhead (once)",
           "requests": 1,
           "tokens": {
-            "input_tokens_uncached": 3288,
+            "input_tokens_uncached": 3367,
             "cached_input_tokens": 0,
-            "output_tokens": 850
+            "output_tokens": 690
           },
-          "cost_usd": 0.0007538,
-          "sequential_seconds": 8.044,
-          "modeled_wall_seconds": 8.044
+          "cost_usd": 0.0006817,
+          "sequential_seconds": 6.71,
+          "modeled_wall_seconds": 6.71
         }
       },
-      "api_cost_usd": 9.082635999013524,
+      "api_cost_usd": 9.042083083571528,
       "by_provider": {
-        "typesafe": 9.080928551954699,
-        "openai": 0.0017074470588235293
+        "typesafe": 9.040280747207891,
+        "openai": 0.0018023363636363635
       },
-      "modeled_wall_hours": 1.6626520227623454,
-      "budget_remaining_usd": 9.9935,
+      "modeled_wall_hours": 1.1361323164737651,
+      "budget_remaining_usd": 9.9849,
       "within_budget": true,
       "within_run_cap": false
     },
@@ -338,56 +733,56 @@
           "reviews": 660609,
           "requests": 14138,
           "tokens": {
-            "input_tokens": 238689698,
-            "output_tokens": 161159833
+            "input_tokens": 237876742,
+            "output_tokens": 160540921
           },
-          "cost_usd": 10.024967318307482,
-          "sequential_seconds": 38539.94266000001,
-          "modeled_wall_seconds": 16058.30944166667
+          "cost_usd": 9.990823161689212,
+          "sequential_seconds": 35316.499180000006,
+          "modeled_wall_seconds": 14715.20799166667
         },
         "verify": {
           "reviews": 6607,
           "requests": 143,
           "tokens": {
-            "input_tokens": 2693904,
-            "output_tokens": 1568232
+            "input_tokens": 2426385,
+            "output_tokens": 1567398
           },
-          "cost_usd": 0.11314396059120002,
-          "sequential_seconds": 50.946979999999996,
-          "modeled_wall_seconds": 21.227908333333332
+          "cost_usd": 0.10190817996975002,
+          "sequential_seconds": 815.1516799999999,
+          "modeled_wall_seconds": 339.6465333333333
         },
         "group": {
           "reviews": "fixed overhead (once)",
           "requests": 2,
           "tokens": {
-            "input_tokens_uncached": 9896,
+            "input_tokens_uncached": 12704,
             "cached_input_tokens": 0,
-            "output_tokens": 1835
+            "output_tokens": 1942
           },
-          "cost_usd": 0.0019072941176470587,
-          "sequential_seconds": 14.546,
-          "modeled_wall_seconds": 14.546
+          "cost_usd": 0.002241272727272727,
+          "sequential_seconds": 20.496,
+          "modeled_wall_seconds": 20.496
         },
         "memo": {
           "reviews": "fixed overhead (once)",
           "requests": 2,
           "tokens": {
-            "input_tokens_uncached": 6576,
+            "input_tokens_uncached": 6734,
             "cached_input_tokens": 0,
-            "output_tokens": 1700
+            "output_tokens": 1380
           },
-          "cost_usd": 0.0015076,
-          "sequential_seconds": 16.088,
-          "modeled_wall_seconds": 16.088
+          "cost_usd": 0.0013634,
+          "sequential_seconds": 13.42,
+          "modeled_wall_seconds": 13.42
         }
       },
-      "api_cost_usd": 10.141526173016329,
+      "api_cost_usd": 10.096336014386235,
       "by_provider": {
-        "typesafe": 10.138111278898682,
-        "openai": 0.0034148941176470587
+        "typesafe": 10.092731341658961,
+        "openai": 0.003604672727272727
       },
-      "modeled_wall_hours": 4.475047597222224,
-      "budget_remaining_usd": 9.9935,
+      "modeled_wall_hours": 4.191325145833335,
+      "budget_remaining_usd": 9.9849,
       "within_budget": false,
       "within_run_cap": false
     }

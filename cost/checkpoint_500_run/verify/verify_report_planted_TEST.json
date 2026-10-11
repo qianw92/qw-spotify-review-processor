@@ -1,0 +1,12 @@
+{
+  "compared": 48,
+  "agreement": {
+    "topic": 0.75,
+    "intent": 1.0,
+    "severity": 0.9375
+  },
+  "all_three_agree": 0.6875,
+  "severity_mae": 0.0625,
+  "sentiment_mae": 0.0594,
+  "disagreements": 15
+}
