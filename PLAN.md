@@ -127,7 +127,7 @@ Rules for every step: explain outputs in plain words · price preview + approval
 
 ### ✅ Step 6.2: Full run + interruption demo (paid, $6.50)
 **What you're doing:** Label all 484,189 unique texts. Stop it partway on purpose (screen recording), then resume.
-**Outputs:** `outputs/full_run/` — 660,609 completed + 13 quarantined, 0 pending; 71 connection drops all retried · `grading/checkpoint_before.json` (143,321) → `checkpoint_after.json` (660,609), 0 re-sent · screen recording (user's file) · verifier 4,842 reviews, 78% all-three agree
+**Outputs:** `outputs/full_run/` — 660,609 completed + 13 quarantined, 0 pending; 71 connection drops all retried · `grading/checkpoint_before.json` (143,321) → `checkpoint_after.json` (660,609), 0 re-sent · screen recording `evals/system_tests/interruption_resume_demo.mov` (4m56s) · verifier 4,842 reviews, 78% all-three agree
 
 ---
 
