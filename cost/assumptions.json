@@ -1,7 +1,7 @@
 {
   "_note": "Editable projection assumptions. Measured pilot results never depend on this file.",
   "budget_usd": 10.0,
-  "already_spent_usd": 0.0151,
+  "already_spent_usd": 0.1348,
   "full_run": {
     "source_rows": 660622,
     "nonempty_to_classify": 660609,
@@ -40,5 +40,15 @@
       "seconds_per_request": "max",
       "parallel_efficiency": 0.6
     }
+  },
+  "measured_worker_speedup": {
+    "workers": 2,
+    "run": "analysis_10000_run",
+    "requests": 169,
+    "enrich_wall_seconds": 102.693,
+    "mean_call_seconds": 1.17,
+    "effective_seconds_per_request": 0.608,
+    "speedup_vs_sequential": 1.93,
+    "note": "1-worker baseline is the mean call time; same-review 1-vs-2 comparison was not run (would cost another $0.12)"
   }
 }

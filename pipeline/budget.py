@@ -8,6 +8,7 @@
 import csv
 import datetime
 import json
+import threading
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -15,6 +16,9 @@ LEDGER = ROOT / "budget" / "spend_ledger.csv"
 CONFIG = ROOT / "budget" / "budget.json"
 FIELDS = ["ts", "provider", "model", "purpose", "request_id", "input_tokens", "output_tokens",
           "price_in_per_m", "price_out_per_m", "cost_usd"]
+
+
+_LEDGER_LOCK = threading.Lock()
 
 
 class BudgetExceeded(RuntimeError):
@@ -45,8 +49,8 @@ def spent(provider=None):
 def record(provider, model, purpose, request_id, input_tokens, output_tokens):
     pin, pout = price(provider)
     usd = cost(provider, input_tokens, output_tokens)
-    new = not LEDGER.exists()
-    with open(LEDGER, "a", newline="", encoding="utf-8") as f:
+    with _LEDGER_LOCK, open(LEDGER, "a", newline="", encoding="utf-8") as f:
+        new = f.tell() == 0
         w = csv.DictWriter(f, fieldnames=FIELDS)
         if new:
             w.writeheader()
@@ -58,20 +62,45 @@ def record(provider, model, purpose, request_id, input_tokens, output_tokens):
 
 
 class Guard:
-    """Tracks one run's spend against its own cap and the project cap."""
+    """One spend ledger per run, shared by every worker.
+
+    Workers reserve a worst-case cost BEFORE dispatch. New work is refused when
+    spent + already reserved (in flight) + this reservation would exceed the run cap or the project cap.
+    """
 
     def __init__(self, run_cap_usd):
         self.project_cap = config()["project_cap_usd"]
         self.run_cap = run_cap_usd
         self.start_total = spent()
         self.run_spent = 0.0
+        self.reserved = 0.0
+        self._lock = threading.Lock()
+
+    def _would_exceed(self, amount):
+        if self.run_spent + self.reserved + amount > self.run_cap:
+            return (f"run cap ${self.run_cap:.4f} would be exceeded (spent ${self.run_spent:.6f} + in flight "
+                    f"${self.reserved:.6f} + next ${amount:.6f})")
+        if self.start_total + self.run_spent + self.reserved + amount > self.project_cap:
+            return f"project cap ${self.project_cap:.2f} would be exceeded"
+        return None
 
     def check(self, reservation_usd):
-        if self.run_spent + reservation_usd > self.run_cap:
-            raise BudgetExceeded(f"run cap ${self.run_cap:.4f} would be exceeded "
-                                 f"(spent ${self.run_spent:.6f} + next ${reservation_usd:.6f})")
-        if self.start_total + self.run_spent + reservation_usd > self.project_cap:
-            raise BudgetExceeded(f"project cap ${self.project_cap:.2f} would be exceeded")
+        with self._lock:
+            reason = self._would_exceed(reservation_usd)
+        if reason:
+            raise BudgetExceeded(reason)
+
+    def reserve(self, amount):
+        with self._lock:
+            reason = self._would_exceed(amount)
+            if reason:
+                raise BudgetExceeded(reason)
+            self.reserved += amount
+
+    def release(self, amount):
+        with self._lock:
+            self.reserved -= amount
 
     def add(self, usd):
-        self.run_spent += usd
+        with self._lock:
+            self.run_spent += usd

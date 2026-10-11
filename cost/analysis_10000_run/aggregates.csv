@@ -1,0 +1,29 @@
+rank,issue_id,complaint_count,severity_sum,mean_severity,priority_score,topic,name,name_source,cancellation_count,share_of_complaints_pct
+1,ISS-other-general,1182,2375,2.009306,2375,other,Other General Concerns,model,65,26.6
+2,ISS-billing-paywall,691,2071,2.997106,2071,billing,Subscription and Premium Access Issues,model,126,15.6
+3,ISS-playback-general,442,1611,3.644796,1611,playback,General Playback Problems,model,24,10.0
+4,ISS-usability-general,365,958,2.624658,958,usability,General Usability and Permissions,model,26,8.2
+5,ISS-usability-ads,391,855,2.186701,855,usability,Ads Disrupting App Use,model,23,8.8
+6,ISS-billing-general,236,648,2.745763,648,billing,General Billing Problems,model,23,5.3
+7,ISS-usability-controls,141,439,3.113475,439,usability,Playback Controls and Song Selection,model,12,3.2
+8,ISS-access-login,90,360,4.000000,360,access,Unable to Log In,model,4,2.0
+9,ISS-catalog-general,116,357,3.077586,357,catalog,Missing or Unavailable Music,model,6,2.6
+10,ISS-usability-library,112,335,2.991071,335,usability,Playlist and Library Navigation,model,10,2.5
+11,ISS-other-update,159,319,2.006289,319,other,Problems After App Updates,model,22,3.6
+12,ISS-playback-update,77,297,3.857143,297,playback,Playback Problems After Updates,model,9,1.7
+13,ISS-usability-update,95,274,2.884211,274,usability,Usability Problems After Updates,model,20,2.1
+14,ISS-downloads-offline,61,231,3.786885,231,downloads,Offline Listening and Downloads,model,3,1.4
+15,ISS-access-general,57,229,4.017544,229,access,General Account Access Concerns,model,2,1.3
+16,ISS-playback-crashes,46,181,3.934783,181,playback,App Crashes During Playback,model,2,1.0
+17,ISS-catalog-lyrics,52,158,3.038462,158,catalog,Missing Song Lyrics,model,2,1.2
+18,ISS-playback-devices,21,80,3.809524,80,playback,Playback and Bluetooth Device Issues,model,1,0.5
+19,ISS-catalog-search,18,64,3.555556,64,catalog,Music Search Problems,model,2,0.4
+20,ISS-access-account,13,49,3.769231,49,access,Account Access Problems,model,1,0.3
+21,ISS-downloads-general,13,49,3.769231,49,downloads,Download and Library Problems,model,1,0.3
+22,ISS-billing-price,20,46,2.300000,46,billing,Pricing and Paid Features,model,1,0.5
+23,ISS-billing-charges,11,39,3.545455,39,billing,Unexpected or Continued Charges,model,1,0.2
+24,ISS-catalog-podcasts,8,25,3.125000,25,catalog,Podcast Access and Suggestions,model,1,0.2
+25,ISS-support-general,8,25,3.125000,25,support,Support and Account Help Concerns,model,2,0.2
+26,ISS-playback-audio,7,22,3.142857,22,playback,Audio Quality and Sound Problems,model,2,0.2
+27,ISS-catalog-recommendations,5,14,2.800000,14,catalog,Poor Music Recommendations,model,0,0.1
+28,ISS-other-ads,4,8,2.000000,8,other,Objectionable or Excessive Ads,model,1,0.1

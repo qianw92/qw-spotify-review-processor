@@ -6,10 +6,10 @@
 
 | | |
 |---|---|
-| **Current step** | **6.1 — 10,000-review run** (+ parallel workers, awaiting price approval) |
-| **Next paid step** | 6.1 (~$0.17) |
-| **Progress** | 18 of 27 steps done |
-| **Spent so far** | Jev $0.0130 · OpenAI $0.0036 · **Total $0.0166 of $10** |
+| **Current step** | **6.2 — full run + interruption recording** (awaiting approval) |
+| **Next paid step** | 6.2 full run (~$6.69 base / $7.47 conservative, cap $8) |
+| **Progress** | 19 of 27 steps done |
+| **Spent so far** | Jev $0.1280 · OpenAI $0.0068 · **Total $0.1348 of $10** |
 | **Last updated** | Oct 11 |
 
 **Status key:** ✅ done · 🔨 code built, still needs its full-data run · ⏳ to do
@@ -120,11 +120,11 @@ Rules for every step: explain outputs in plain words · price preview + approval
 
 ## Phase 6: Scale up and do the full run
 
-### ⏳ Step 6.1: Run 10,000 reviews (paid, ~$0.17) ← **current**
+### ✅ Step 6.1: Run 10,000 reviews (paid, $0.118)
 **What you're doing:** Run `analysis_10000.csv`, refresh the estimate, confirm the full run fits the budget.
-**Outputs:** `cost/analysis_10000_run/` · updated `cost/report.md`
+**Outputs:** `cost/analysis_10000_run/` — 10,000/10,000 completed, 0 quarantined, 2 workers (1.9× faster than 1), 1 real connection error retried OK, verifier 74% all-three agree · `cost/report.md`: full run base $6.69 / conservative $7.47
 
-### ⏳ Step 6.2: Full run + interruption demo (paid, ~$6–7)
+### ⏳ Step 6.2: Full run + interruption demo (paid, ~$6.7) ← **current**
 **What you're doing:** Label all 484,189 unique texts. Stop it partway on purpose (screen recording), then resume.
 **Outputs:** full run folder · `grading/checkpoint_before.json`, `checkpoint_after.json` · screen recording
 

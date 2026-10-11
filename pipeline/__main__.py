@@ -35,6 +35,7 @@ def main():
     p.add_argument("--verify-min", type=int, default=20)
     p.add_argument("--allow-partial", action="store_true")
     p.add_argument("--prompt", default="enrich-v1", choices=["enrich-v1", "enrich-v2"])
+    p.add_argument("--workers", type=int, default=1, help="parallel enrichment requests (start at 1, then 2)")
     p.add_argument("--confirm-spend", action="store_true")
     p = stages.add_parser("rank", help="Rebuild ranking.csv from saved files only (no database, no model, $0)")
     p.add_argument("--records", required=True, help="records.jsonl or enriched.jsonl (.gz ok)")
@@ -62,7 +63,7 @@ def main():
             print("\nNo API calls made. Re-run with --confirm-spend and --max-spend to execute.")
             return
         s = orchestrator.run(args.input, args.db, args.run_dir, args.max_spend, args.verify_rate, args.verify_min,
-                             args.label, args.allow_partial, args.prompt)
+                             args.label, args.allow_partial, args.prompt, args.workers)
         print(json.dumps({k: s[k] for k in ("record_status", "wall_clock_seconds", "run_spent_usd")}, indent=2))
         return
     if args.stage == "rank":

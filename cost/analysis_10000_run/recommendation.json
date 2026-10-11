@@ -1,0 +1,70 @@
+{
+  "recommended_area": "playback",
+  "headline": "Prioritize playback reliability next quarter",
+  "memo_markdown": "## Recommendation\nAllocate next quarter’s product effort to **playback**. The evidence points to a concentrated, high-severity problem set: playback has 667 complaints and a mean severity of 3.70, with 484 reviews rated severity 4 or 5. Within that area, General Playback Problems (ISS-playback-general) ranks third among listed issues, with a priority score of 1611 [C1]. Representative reviews describe unexpected volume jumps (e5579b0b-f662-479b-9103-e13d263b9459), Wi-Fi connectivity trouble (4ab2089a-ffa8-49e7-a8a3-aeb583a96796), and songs failing to play through Google Assistant (46ff0c74-5e86-4e5b-b4cd-36201aab0f9e). These reports suggest a focused opportunity to improve the consistency and predictability of listening.\n\n## Evidence\nPlayback’s combination of complaint volume and severity makes it a strong candidate for action. Its area-level figures are pack-reported; the issue-level figures for ISS-playback-general are a complaint count of 442 [C2], severity sum of 1611 [C3], and mean severity of 3.644796 [C4]. The review examples span sound behavior, connectivity, and playback initiation, rather than one isolated failure mode.\n\n## Alternatives considered\nUsability has more complaints overall (1104) and the largest share among the four requested areas (24.9%), but its mean severity is lower at 2.59. Its Ads Disrupting App Use issue (ISS-usability-ads) has a priority score of 855 [C5], below the playback issue. Billing/support also has more complaints (966) and substantially more cancellation-intent records (153) than playback (42), but its mean severity is 2.93; Subscription and Premium Access Issues (ISS-billing-paywall) has a priority score of 2071 [C6]. Billing merits attention, but playback’s reported severity and many high-severity reviews support choosing it for this quarter. Access has the highest area mean severity (3.99), but only 160 complaints and a 3.6% share, so its overall reach appears more limited in this evidence.\n\n## Limitations\nThese are Google Play reviews from 17 May 2022 to 15 Nov 2023; reviews are self-selected and historical. Cancellation language is intent, not observed churn. There is no revenue data, so this recommendation does not estimate financial impact or causal retention effects. Coverage reports 10000 completed, 0 pending, and 0 quarantined records. The evidence is review text and aggregated counts, not a controlled test of product changes.",
+  "claims": [
+    {
+      "claim_id": "C1",
+      "issue_id": "ISS-playback-general",
+      "metric": "priority_score",
+      "value": "1611"
+    },
+    {
+      "claim_id": "C2",
+      "issue_id": "ISS-playback-general",
+      "metric": "complaint_count",
+      "value": "442"
+    },
+    {
+      "claim_id": "C3",
+      "issue_id": "ISS-playback-general",
+      "metric": "severity_sum",
+      "value": "1611"
+    },
+    {
+      "claim_id": "C4",
+      "issue_id": "ISS-playback-general",
+      "metric": "mean_severity",
+      "value": "3.644796"
+    },
+    {
+      "claim_id": "C5",
+      "issue_id": "ISS-usability-ads",
+      "metric": "priority_score",
+      "value": "855"
+    },
+    {
+      "claim_id": "C6",
+      "issue_id": "ISS-billing-paywall",
+      "metric": "priority_score",
+      "value": "2071"
+    }
+  ],
+  "cited_review_ids": [
+    "e5579b0b-f662-479b-9103-e13d263b9459",
+    "4ab2089a-ffa8-49e7-a8a3-aeb583a96796",
+    "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e"
+  ],
+  "check": {
+    "status": "passed",
+    "checks": [
+      "claim values match ranking",
+      "claim IDs cited",
+      "issue IDs exist",
+      "review IDs from evidence pack",
+      "numbers appear in evidence pack"
+    ],
+    "recommended_area": "playback",
+    "area_with_highest_severity_sum": "usability",
+    "agrees_with_highest_severity_sum": false,
+    "model_call": {
+      "cached": false,
+      "request_id": "resp_0f33146b20885abd006acaef88b11887d095addc775d62b535",
+      "cache_key": "09a7a52b2076e3285f65059dbdbb949a8016680836d6cfa758db4ee0bd8c7339",
+      "input_tokens": 3606,
+      "output_tokens": 952,
+      "attempts": 1
+    },
+    "human_review": "pending"
+  }
+}

@@ -12,6 +12,8 @@ import datetime
 import json
 import os
 import random
+import threading
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 import re
 import time
 from pathlib import Path
@@ -207,7 +209,10 @@ def parse(answers, keymap, quote_options, texts, config, request_id):
 
 class Enricher:
     def __init__(self, db_path, run_dir, layout="batched", batch_size=50, max_spend=0.0, limit=None, guard=None,
-                 prompt=DEFAULT_PROMPT):
+                 prompt=DEFAULT_PROMPT, workers=1):
+        assert 1 <= workers <= 8, "workers must be between 1 and 8"
+        self.workers = workers
+        self._log_lock = threading.Lock()
         assert prompt in PROMPTS, prompt
         self.prompt = prompt
         assert 1 <= batch_size <= 50, "enrichment requests must contain at most 50 reviews"
@@ -259,7 +264,7 @@ class Enricher:
     def log_call(self, **event):
         event = {"ts": now(), "role": "enrich", "model": MODEL, "phase": self.phase,
                  "label_config": self.config, **event}
-        with open(self.calls_path, "a", encoding="utf-8") as f:
+        with self._log_lock, open(self.calls_path, "a", encoding="utf-8") as f:
             f.write(json.dumps(event, ensure_ascii=False) + "\n")
 
     def call(self, batch):
@@ -267,7 +272,15 @@ class Enricher:
         from typesafe_sdk import RetryPolicy, TypeSafeClient, TypeSafeError
         state, questions, keymap, quote_options = build_request(batch, self.layout, self.prompt)
         est = estimate_tokens(state, questions)
-        self.guard.check(budget.cost(PROVIDER, est, 0) * RESERVE_FACTOR)   # raises BudgetExceeded
+        reservation = budget.cost(PROVIDER, est, 0) * RESERVE_FACTOR
+        self.guard.reserve(reservation)   # raises BudgetExceeded; shared across workers
+        try:
+            return self._dispatch(batch, state, questions, keymap, quote_options, est)
+        finally:
+            self.guard.release(reservation)
+
+    def _dispatch(self, batch, state, questions, keymap, quote_options, est):
+        from typesafe_sdk import RetryPolicy, TypeSafeClient, TypeSafeError
         ids = [rid for rid, _ in batch]
         for attempt in range(1, API_ATTEMPTS + 1):
             started = time.time()
@@ -315,33 +328,62 @@ class Enricher:
     def run(self):
         rows = self.pending()
         texts = dict(rows)
-        stats = {"requests": 0, "completed": 0, "quarantined": 0, "stopped_reason": None}
+        stats = {"requests": 0, "completed": 0, "quarantined": 0, "stopped_reason": None, "workers": self.workers}
         started = time.time()
+        queue = list(self.batches(rows))
+        pool = ThreadPoolExecutor(max_workers=self.workers)
+        in_flight = set()
         try:
-            for b in self.batches(rows):
-                resp, keymap, qopts = self.call(b)
-                stats["requests"] += 1
-                good, bad = parse(resp.answers, keymap, qopts, texts, self.config, resp.request_id)
-                self.save(good, bad, final=False)
-                stats["completed"] += len(good)
-                if bad:  # retry invalid output once, then quarantine
-                    retry = [(rid, texts[rid]) for rid in bad]
-                    resp2, keymap2, qopts2 = self.call(retry)
-                    stats["requests"] += 1
-                    good2, bad2 = parse(resp2.answers, keymap2, qopts2, texts, self.config, resp2.request_id)
-                    self.save(good2, bad2, final=True)
-                    stats["completed"] += len(good2)
-                    stats["quarantined"] += len(bad2)
-                stats["batches_saved"] = stats.get("batches_saved", 0) + 1
-                if INJECT["PIPELINE_KILL_AFTER_BATCHES"] and stats["batches_saved"] >= INJECT["PIPELINE_KILL_AFTER_BATCHES"]:
-                    print(f"SYNTHETIC CRASH: hard-killing process after {stats['batches_saved']} saved batch(es)", flush=True)
-                    os._exit(137)  # no cleanup, no final summary: like a power cut
-        except budget.BudgetExceeded as e:
-            stats["stopped_reason"] = f"budget: {e}"
+            # Workers only call the API. Results are parsed and saved here, on the main thread, one batch at a time.
+            while queue or in_flight:
+                while queue and len(in_flight) < self.workers and not stats["stopped_reason"]:
+                    in_flight.add(pool.submit(self.call, queue.pop(0)))
+                if not in_flight:
+                    break
+                try:
+                    done, in_flight = wait(in_flight, return_when=FIRST_COMPLETED)
+                except KeyboardInterrupt:
+                    # Ctrl+C: stop admitting work; finish and SAVE requests already sent (they are paid for).
+                    print(f"\nINTERRUPTED: no new requests; saving {len(in_flight)} in-flight batch(es)...", flush=True)
+                    stats["stopped_reason"] = "interrupted by user (Ctrl+C); rerun the same command to resume"
+                    queue.clear()
+                    done, in_flight = wait(in_flight), set()
+                for fut in done:
+                    try:
+                        resp, keymap, qopts = fut.result()
+                    except budget.BudgetExceeded as e:
+                        stats["stopped_reason"] = f"budget: {e}"
+                        queue.clear()
+                        continue
+                    self._handle(resp, keymap, qopts, texts, stats)
+        finally:
+            pool.shutdown(wait=True)
         stats["aliases_completed_from_cache"] = self.propagate()
         stats["run_spent_usd"] = round(self.guard.run_spent, 6)
         stats["seconds"] = round(time.time() - started, 2)
         return stats
+
+    def _handle(self, resp, keymap, qopts, texts, stats):
+        """Parse, validate and save one batch (main thread only); retry invalid output once."""
+        try:
+            stats["requests"] += 1
+            good, bad = parse(resp.answers, keymap, qopts, texts, self.config, resp.request_id)
+            self.save(good, bad, final=False)
+            stats["completed"] += len(good)
+            if bad:  # retry invalid output once, then quarantine
+                retry = [(rid, texts[rid]) for rid in bad]
+                resp2, keymap2, qopts2 = self.call(retry)
+                stats["requests"] += 1
+                good2, bad2 = parse(resp2.answers, keymap2, qopts2, texts, self.config, resp2.request_id)
+                self.save(good2, bad2, final=True)
+                stats["completed"] += len(good2)
+                stats["quarantined"] += len(bad2)
+            stats["batches_saved"] = stats.get("batches_saved", 0) + 1
+            if INJECT["PIPELINE_KILL_AFTER_BATCHES"] and stats["batches_saved"] >= INJECT["PIPELINE_KILL_AFTER_BATCHES"]:
+                print(f"SYNTHETIC CRASH: hard-killing process after {stats['batches_saved']} saved batch(es)", flush=True)
+                os._exit(137)  # no cleanup, no final summary: like a power cut
+        except budget.BudgetExceeded as e:
+            stats["stopped_reason"] = f"budget: {e}"
 
     def propagate(self):
         """Copy a completed canonical's label to its exact-duplicate aliases (cache_source_id = canonical)."""

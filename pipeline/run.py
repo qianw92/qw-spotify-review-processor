@@ -47,7 +47,7 @@ def preview(input_csv, db_path, run_dir, verify_rate, verify_min, prompt=enrich.
 
 
 def run(input_csv, db_path, run_dir, max_spend, verify_rate=0.01, verify_min=20, run_label="run",
-        allow_partial=False, prompt=enrich.DEFAULT_PROMPT):
+        allow_partial=False, prompt=enrich.DEFAULT_PROMPT, workers=1):
     run_dir = Path(run_dir)
     run_dir.mkdir(parents=True, exist_ok=True)
     guard = budget.Guard(max_spend)
@@ -57,7 +57,7 @@ def run(input_csv, db_path, run_dir, max_spend, verify_rate=0.01, verify_min=20,
                "config": {"enrich": enrich.label_config("batched", prompt), "verify": verify.verify_config(),
                           "group_prompt": group.PROMPT_VERSION, "memo_prompt": memo.PROMPT_VERSION,
                           "openai_model": llm.MODEL, "openai_reasoning_effort": llm.REASONING_EFFORT,
-                          "jev_model": enrich.MODEL, "batch_size": 50, "workers": 1,
+                          "jev_model": enrich.MODEL, "batch_size": 50, "workers": workers,
                           "verify_rate": verify_rate, "verify_min": verify_min, "verify_seed": verify.SEED},
                "stages": []}
     t_run = time.time()
@@ -88,7 +88,7 @@ def run(input_csv, db_path, run_dir, max_spend, verify_rate=0.01, verify_min=20,
                                                            grading_dir=run_dir / "grading").items()
                              if k in ("counts", "record_status", "reused_saved_state_for_same_input")})
     stage("dedupe", lambda: dedupe.run(db_path=db_path, out_dir=run_dir)["counts"])
-    enricher = enrich.Enricher(db_path, run_dir, guard=guard, prompt=prompt)
+    enricher = enrich.Enricher(db_path, run_dir, guard=guard, prompt=prompt, workers=workers)
     status, res = stage("enrich", enricher.run)
     con = db.connect(db_path)
     counts = dict(con.execute("SELECT status, COUNT(*) FROM records GROUP BY status").fetchall())

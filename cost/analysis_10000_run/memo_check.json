@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "checks": [
+    "claim values match ranking",
+    "claim IDs cited",
+    "issue IDs exist",
+    "review IDs from evidence pack",
+    "numbers appear in evidence pack"
+  ],
+  "recommended_area": "playback",
+  "area_with_highest_severity_sum": "usability",
+  "agrees_with_highest_severity_sum": false,
+  "model_call": {
+    "cached": false,
+    "request_id": "resp_0f33146b20885abd006acaef88b11887d095addc775d62b535",
+    "cache_key": "09a7a52b2076e3285f65059dbdbb949a8016680836d6cfa758db4ee0bd8c7339",
+    "input_tokens": 3606,
+    "output_tokens": 952,
+    "attempts": 1
+  },
+  "human_review": "pending"
+}

@@ -42,21 +42,22 @@ Cost per 1,000 input rows: **$0.0295** · per completed record: $0.0000295 · co
 |---|---|---|---|---|---|---|---|---|---|
 | 100 (pilot) | 100 | 100 | 2 | 322 | 1.60 / 2.73 | $0.0030 | 18.9s | $6.66 | $7.43 |
 | 500 | 500 | 500 | 10 | 321 | 1.04 / 2.50 | $0.0086 | 33.2s | $6.63 | $7.40 |
+| 10,000 | 10,000 | 10,000 | 170 | 324 | 1.17 / 5.46 | $0.1182 | 123.0s | $6.69 | $7.47 |
 
-The projection below uses the largest checkpoint so far (**500**).
+The projection below uses the largest checkpoint so far (**10,000**).
 
 ## Estimated: full run (projection, not a measurement)
 
 - 660,622 rows accounted for: 660,609 nonempty classified, 13 empty-text quarantines
 - With exact-text reuse: **484,189** distinct texts sent to the model (no-reuse comparison: 660,609)
 - Verification: 1% declared sample · fallback model: none (max fallback fraction 0%) · group + memo counted once as fixed overhead
-- Controls: budget $10.00 (already spent $0.0151) · run cap $8.00 · max workers 4 · OpenAI output caps {'group': 2600, 'memo': 2500}
+- Controls: budget $10.00 (already spent $0.1348) · run cap $8.00 · max workers 4 · OpenAI output caps {'group': 2600, 'memo': 2500}
 
 | Scenario | Texts | Enrich | Verify | Group | Memo | **API total** | Jev | OpenAI | Modeled wall time | Budget check |
 |---|---|---|---|---|---|---|---|---|---|---|
-| base | 484,189 | $6.56 | $0.067 | $0.0011 | $0.0007 | **$6.63** | $6.63 | $0.0018 | 0.8 h | ✅ within budget |
-| conservative | 484,189 | $7.32 | $0.075 | $0.0022 | $0.0014 | **$7.40** | $7.40 | $0.0036 | 3.1 h | ✅ within budget |
-| base (no reuse) | 660,609 | $8.95 | $0.091 | $0.0011 | $0.0007 | **$9.04** | $9.04 | $0.0018 | 1.1 h | ⚠️ exceeds run cap |
-| conservative (no reuse) | 660,609 | $9.99 | $0.102 | $0.0022 | $0.0014 | **$10.10** | $10.09 | $0.0036 | 4.2 h | ⚠️ **EXCEEDS BUDGET** |
+| base | 484,189 | $6.62 | $0.067 | $0.0013 | $0.0008 | **$6.69** | $6.69 | $0.0021 | 0.9 h | ✅ within budget |
+| conservative | 484,189 | $7.40 | $0.074 | $0.0025 | $0.0017 | **$7.47** | $7.47 | $0.0042 | 6.6 h | ✅ within budget |
+| base (no reuse) | 660,609 | $9.04 | $0.091 | $0.0013 | $0.0008 | **$9.13** | $9.13 | $0.0021 | 1.2 h | ⚠️ exceeds run cap |
+| conservative (no reuse) | 660,609 | $10.09 | $0.102 | $0.0025 | $0.0017 | **$10.20** | $10.19 | $0.0042 | 8.9 h | ⚠️ **EXCEEDS BUDGET** |
 
 Assumptions (`assumptions.json`): base = measured tokens/review, 1% API retries, 0.5% invalid-output re-sends, mean request time, 90% parallel efficiency; conservative = +10% tokens, 5% retries, 2% re-sends, slowest observed request, 60% efficiency, memo and group each regenerated once. Failed API attempts are logged but bill no tokens. Wall time with >1 worker is **modeled**, not measured. Local compute cost is unknown and excluded from API totals. The first 100 reviews are an initial estimate; it is refreshed at 500 and 10,000 reviews before the full run.

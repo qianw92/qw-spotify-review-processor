@@ -1,0 +1,359 @@
+{
+  "question": "Where should next quarter's product effort go: access, usability, playback, or billing/support?",
+  "period": "Google Play reviews, 17 May 2022 to 15 Nov 2023",
+  "coverage": {
+    "source_rows": 10000,
+    "completed": 10000,
+    "quarantined": 0,
+    "pending": 0
+  },
+  "total_complaint_and_cancellation_records": 4441,
+  "areas": {
+    "outside_options": {
+      "complaint_count": 1544,
+      "severity_sum": 3320,
+      "issues": 8,
+      "share_of_complaints_pct": "34.8",
+      "mean_severity": "2.15",
+      "severity_4_or_5_count": 68,
+      "cancellation_intent_count": 99,
+      "topics": [
+        "catalog",
+        "other"
+      ]
+    },
+    "billing_support": {
+      "complaint_count": 966,
+      "severity_sum": 2829,
+      "issues": 5,
+      "share_of_complaints_pct": "21.8",
+      "mean_severity": "2.93",
+      "severity_4_or_5_count": 91,
+      "cancellation_intent_count": 153,
+      "topics": [
+        "billing",
+        "support"
+      ]
+    },
+    "playback": {
+      "complaint_count": 667,
+      "severity_sum": 2471,
+      "issues": 7,
+      "share_of_complaints_pct": "15.0",
+      "mean_severity": "3.70",
+      "severity_4_or_5_count": 484,
+      "cancellation_intent_count": 42,
+      "topics": [
+        "playback",
+        "downloads"
+      ]
+    },
+    "usability": {
+      "complaint_count": 1104,
+      "severity_sum": 2861,
+      "issues": 5,
+      "share_of_complaints_pct": "24.9",
+      "mean_severity": "2.59",
+      "severity_4_or_5_count": 108,
+      "cancellation_intent_count": 91,
+      "topics": [
+        "usability"
+      ]
+    },
+    "access": {
+      "complaint_count": 160,
+      "severity_sum": 638,
+      "issues": 3,
+      "share_of_complaints_pct": "3.6",
+      "mean_severity": "3.99",
+      "severity_4_or_5_count": 152,
+      "cancellation_intent_count": 7,
+      "topics": [
+        "access"
+      ]
+    }
+  },
+  "top_issues": [
+    {
+      "rank": "1",
+      "issue_id": "ISS-other-general",
+      "complaint_count": "1182",
+      "severity_sum": "2375",
+      "mean_severity": "2.009306",
+      "priority_score": "2375",
+      "name": "Other General Concerns",
+      "topic": "other",
+      "area": "outside_options",
+      "examples": [
+        {
+          "review_id": "08c07310-e802-4a88-bd97-2a5f240c0b44",
+          "severity": 5,
+          "quote": "Kitna paisa chahiye bhai..."
+        },
+        {
+          "review_id": "21ddfe12-8433-4bad-b0f8-e7f605c056ae",
+          "severity": 5,
+          "quote": "Collects too much personal information"
+        },
+        {
+          "review_id": "a841fa5f-b7e7-442a-8776-b6e042b051d1",
+          "severity": 5,
+          "quote": "Harmful"
+        }
+      ]
+    },
+    {
+      "rank": "2",
+      "issue_id": "ISS-billing-paywall",
+      "complaint_count": "691",
+      "severity_sum": "2071",
+      "mean_severity": "2.997106",
+      "priority_score": "2071",
+      "name": "Subscription and Premium Access Issues",
+      "topic": "billing",
+      "area": "billing_support",
+      "examples": [
+        {
+          "review_id": "fe488940-abfd-4737-bf03-1c75fbd5903b",
+          "severity": 5,
+          "quote": "I paid for the 3 month premium subscription promo and now after 1 month you tell me my subscription is over?? So I have to pay again to subscribe to premium services??"
+        },
+        {
+          "review_id": "01bae9e0-2ad4-4ce4-98ee-aaac1fa9235a",
+          "severity": 5,
+          "quote": "Yo estoy pagando el Spotify premium, para que me cuenten el stream que hago y ahorita le quitan eso, APRENDAN A MÁS QUE SEA DISIMULAR PORQUE LO QUE HICIERON ES UN ROBO AL OJO"
+        },
+        {
+          "review_id": "c46f202e-0e8b-402d-9f7f-cbd05b982c54",
+          "severity": 5,
+          "quote": "Very nice and good for searching songs. Easy access to new music but once i got my premium, i did not even get the free 1 month of premium as stated."
+        }
+      ]
+    },
+    {
+      "rank": "3",
+      "issue_id": "ISS-playback-general",
+      "complaint_count": "442",
+      "severity_sum": "1611",
+      "mean_severity": "3.644796",
+      "priority_score": "1611",
+      "name": "General Playback Problems",
+      "topic": "playback",
+      "area": "playback",
+      "examples": [
+        {
+          "review_id": "e5579b0b-f662-479b-9103-e13d263b9459",
+          "severity": 5,
+          "quote": "Bad application Volume will jump in / increasing after next song Risk of loss of hearing"
+        },
+        {
+          "review_id": "4ab2089a-ffa8-49e7-a8a3-aeb583a96796",
+          "severity": 4,
+          "quote": "Iam a premium user. But this app if i using wifi not able to connect Internet. But if using mobile data it will work. Some songs quality also very poor comparing to the YouTube music."
+        },
+        {
+          "review_id": "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e",
+          "severity": 4,
+          "quote": "I am unable to use my Google assistant on the app.it says playing your Spotify playlist but do not play the songs"
+        }
+      ]
+    },
+    {
+      "rank": "4",
+      "issue_id": "ISS-usability-general",
+      "complaint_count": "365",
+      "severity_sum": "958",
+      "mean_severity": "2.624658",
+      "priority_score": "958",
+      "name": "General Usability and Permissions",
+      "topic": "usability",
+      "area": "usability",
+      "examples": [
+        {
+          "review_id": "91132204-877d-4ac1-9d08-20d03f1414f6",
+          "severity": 5,
+          "quote": "It's absolutely trash and I would suggest that no one use it because it takes takes over too many permissions on your phone and it really really does spy on your privacy"
+        },
+        {
+          "review_id": "9dd4e856-cae6-4234-bc53-41a0097c41f0",
+          "severity": 5,
+          "quote": "Starts by itself in my car without consent (app not even open) and routinely explodes my eardrums.."
+        },
+        {
+          "review_id": "b03d6dc9-449a-4647-b112-559186656759",
+          "severity": 4,
+          "quote": "Generally nice - but integrations buggy, offline mode USELESS, and moving storage failed and deleted everything."
+        }
+      ]
+    },
+    {
+      "rank": "5",
+      "issue_id": "ISS-usability-ads",
+      "complaint_count": "391",
+      "severity_sum": "855",
+      "mean_severity": "2.186701",
+      "priority_score": "855",
+      "name": "Ads Disrupting App Use",
+      "topic": "usability",
+      "area": "usability",
+      "examples": [
+        {
+          "review_id": "ee11e1df-cb73-4c3a-b5e8-7268c7872b01",
+          "severity": 5,
+          "quote": "Update: my playlist, that had hundreds of songs that took years to put together, just vanished."
+        },
+        {
+          "review_id": "031cc9c5-33ba-46b2-af70-e6d6c2a2bc48",
+          "severity": 4,
+          "quote": "IT IS FLOODED WITH ADS MAN and now it doesn't even play songs specifically on demand."
+        },
+        {
+          "review_id": "933b1cf2-8fa9-46aa-9a06-85fd89533a99",
+          "severity": 4,
+          "quote": "Volume of ads is way louder than the volume of the music. Makes the app unusable."
+        }
+      ]
+    },
+    {
+      "rank": "6",
+      "issue_id": "ISS-billing-general",
+      "complaint_count": "236",
+      "severity_sum": "648",
+      "mean_severity": "2.745763",
+      "priority_score": "648",
+      "name": "General Billing Problems",
+      "topic": "billing",
+      "area": "billing_support",
+      "examples": [
+        {
+          "review_id": "e51bcefb-8071-4e36-9c57-87281443bd29",
+          "severity": 5,
+          "quote": "Worst music platform I ever seen in my life. I tried to buy student plan but they are not approving it and took my money also"
+        },
+        {
+          "review_id": "dc412619-bdf2-4feb-ada7-adff62293e3b",
+          "severity": 5,
+          "quote": "They still put advertisements on podcasts."
+        },
+        {
+          "review_id": "6985febf-75fa-47e9-9a86-c62f47a18554",
+          "severity": 5,
+          "quote": "ME ENCANTA SPOTIFY, EL ÚNICO PROBLEMA ES QUE NUEVAMENTE LE COBRARON A JAIME ROSALES, QUE ES GRATIS SUPUESTAMENTE Y ÉL NO LO USA. SOY YO LA QUE LO QUIERO."
+        }
+      ]
+    },
+    {
+      "rank": "7",
+      "issue_id": "ISS-usability-controls",
+      "complaint_count": "141",
+      "severity_sum": "439",
+      "mean_severity": "3.113475",
+      "priority_score": "439",
+      "name": "Playback Controls and Song Selection",
+      "topic": "usability",
+      "area": "usability",
+      "examples": [
+        {
+          "review_id": "e16a4550-43e7-4ae1-b538-a65cc652c31b",
+          "severity": 4,
+          "quote": "Am very sad about the new spotfy update. i can't play song happly . Can't repeat and play specific part.please solve this matter. I'm leaving spotfy"
+        },
+        {
+          "review_id": "7f27bbab-ef19-4fb1-80d8-cd014da3e002",
+          "severity": 4,
+          "quote": "I HATE the new update , the app is also not showing lyrics and I also can't add songs to queue. Listening to music on Spotify is now a painful experience."
+        },
+        {
+          "review_id": "f9cf3b4a-c40e-4578-9f6f-358807450b0f",
+          "severity": 4,
+          "quote": "Trash I hate this app I can't pick ANY song I want it's only a stupid Playlist that pops up I WANT TO LISTEN TO A SPECIFIC GODDAMN SONG NOT WASTE ALL MY SKIPS TO NOT EVEN GET TO PLAY THE SONG"
+        }
+      ]
+    },
+    {
+      "rank": "8",
+      "issue_id": "ISS-access-login",
+      "complaint_count": "90",
+      "severity_sum": "360",
+      "mean_severity": "4.000000",
+      "priority_score": "360",
+      "name": "Unable to Log In",
+      "topic": "access",
+      "area": "access",
+      "examples": [
+        {
+          "review_id": "91b3f409-7fcf-472b-a308-29361707085e",
+          "severity": 5,
+          "quote": "This is my premium (real) account And I'm unable to log in to my own account and beside that , I got a massage from my bank of ₹119 debuted."
+        },
+        {
+          "review_id": "305c3fe1-109c-4f52-b7c4-5b95bb526035",
+          "severity": 5,
+          "quote": "Why am I paying for this? Unable to login, can not reach tech support. Looks like the account was hacked."
+        },
+        {
+          "review_id": "de0a9cdf-8974-48bc-802f-331228df4619",
+          "severity": 4,
+          "quote": "Will not except my password"
+        }
+      ]
+    },
+    {
+      "rank": "9",
+      "issue_id": "ISS-catalog-general",
+      "complaint_count": "116",
+      "severity_sum": "357",
+      "mean_severity": "3.077586",
+      "priority_score": "357",
+      "name": "Missing or Unavailable Music",
+      "topic": "catalog",
+      "area": "outside_options",
+      "examples": [
+        {
+          "review_id": "727555ed-3c7c-4d7c-9138-5b54a1e073d8",
+          "severity": 5,
+          "quote": "Can you please bring back zee company Musics Or else we will force government to Ban spotify And Refund all our Money."
+        },
+        {
+          "review_id": "8d1bfaf3-2632-42a1-90d0-eb7fd381358a",
+          "severity": 5,
+          "quote": "Good music app. Missing some songs I love. Charged me wrong once."
+        },
+        {
+          "review_id": "3df77a78-ad9a-4456-8be8-8178ffd43d67",
+          "severity": 4,
+          "quote": "Always say no internet connection Most of my favourite Bollywood songs are not present"
+        }
+      ]
+    },
+    {
+      "rank": "10",
+      "issue_id": "ISS-usability-library",
+      "complaint_count": "112",
+      "severity_sum": "335",
+      "mean_severity": "2.991071",
+      "priority_score": "335",
+      "name": "Playlist and Library Navigation",
+      "topic": "usability",
+      "area": "usability",
+      "examples": [
+        {
+          "review_id": "45f50a2d-4f73-49b3-8c92-02e6950ff041",
+          "severity": 4,
+          "quote": "I have a problem if i enter my playlist it will not show me my music"
+        },
+        {
+          "review_id": "df3b0a01-8b8a-4fb6-b82d-3b3cafe26f43",
+          "severity": 4,
+          "quote": "I just want one specific song to play!"
+        },
+        {
+          "review_id": "ab83e890-9076-4fc9-a069-c32943e9dc53",
+          "severity": 4,
+          "quote": "Great app but I can't open the playlist of my favorite songs anymore I hope it gets better"
+        }
+      ]
+    }
+  ],
+  "ranking_rule": "priority_score = complaint_count x mean_severity = severity_sum"
+}
