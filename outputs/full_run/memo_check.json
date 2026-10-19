@@ -20,5 +20,11 @@
     "output_tokens": 1147,
     "attempts": 1
   },
-  "human_review": "area chosen by the project author (playback); model drafted the argument; code checked every claim, quote and number"
+  "human_review": "area chosen by the project author (playback); model drafted the argument; code checked every claim, quote and number; one sentence added by the project author (severity 4-5 comparison), re-checked by code",
+  "human_edits": [
+    {
+      "section": "Evidence",
+      "added": "Playback also has 31050 complaints at severity 4 or 5, roughly three times access (10267) and four times billing/support (7448), so it holds the largest volume of reports where a core task is blocked."
+    }
+  ]
 }
