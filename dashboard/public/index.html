@@ -106,8 +106,9 @@ dt { color: var(--text-secondary); }
 
   <section class="card">
     <h2>Decision areas compared</h2>
-    <p class="note">Each panel is one measure (no shared axis). Highlighted bar = recommended area. Catalog and generic
-      "bad app" complaints are shown as <em>outside options</em> because they are not one of the four choices.</p>
+    <p class="note">Area-level totals: each area adds up all of its issues (playback = playback + downloads issues;
+      billing / support = billing + support). Each panel is one measure (no shared axis); highlighted bar = recommended area.
+      Catalog and generic "bad app" complaints are shown as <em>outside options</em> because they are not one of the four choices.</p>
     <div class="grid4" id="areaCharts" style="margin-top:12px"></div>
   </section>
 
@@ -274,7 +275,8 @@ function render(d) {
     kpi("Full-run API cost", "$" + (cost.full_run_jev + cost.full_run_openai).toFixed(2), `project total $${cost.project_total.toFixed(2)} of $${cost.budget}`) +
     kpi("Verifier agreement", pct(m.verifier.all_three), `topic+intent+severity, ${fmt(m.verifier.sample)} re-labeled`);
 
-  const claimsTxt = d.claims.map((c) => `<tr><td>${esc(c.claim_id)}</td><td><code>${esc(c.issue_id)}</code></td><td>${esc(c.metric)}</td>
+  const issueName = Object.fromEntries(d.issues.map((i) => [i.issue_id, i.name]));
+  const claimsTxt = d.claims.map((c) => `<tr><td>${esc(c.claim_id)}</td><td title="${esc(c.issue_id)}">${esc(issueName[c.issue_id] || c.issue_id)}</td><td>${esc(c.metric)}</td>
      <td class="num">${c.metric === "mean_severity" ? Number(c.value).toFixed(2) : fmt(c.value)}</td></tr>`).join("");
   $("rec").innerHTML = `<span class="area">AI recommendation · human-reviewed</span>
     <h2>${esc(rec.headline)}</h2>
@@ -282,7 +284,9 @@ function render(d) {
       area chosen by the project author; every claim, quote and number checked by code (${esc(rec.check_result.status)}).</p>
     <div class="grid2" style="margin-top:12px">
       <div class="memo">${DOMPurify.sanitize(marked.parse(rec.memo_markdown))}</div>
-      <div><h3>Claims (recomputed from the ranking)</h3>
+      <div><h3>Claims — issue-level, recomputed from the ranking</h3>
+        <p class="note" style="margin:0 0 6px">Issue numbers cover one issue; the area figures below cover every issue in an area
+          (so the playback area mean is 3.68 while its largest issue's mean is 3.65).</p>
         <div class="scroll"><table><thead><tr><th>Claim</th><th>Issue</th><th>Metric</th><th class="num">Value</th></tr></thead><tbody>${claimsTxt}</tbody></table></div>
         <h3 style="margin-top:14px">Cited reviews</h3>
         ${rec.cited_reviews.map((c) => `<p style="margin:0 0 8px"><button class="rid" data-rid="${esc(c.review_id)}">${esc(c.review_id.slice(0, 8))}…</button>

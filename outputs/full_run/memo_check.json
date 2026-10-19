@@ -20,11 +20,21 @@
     "output_tokens": 1147,
     "attempts": 1
   },
-  "human_review": "area chosen by the project author (playback); model drafted the argument; code checked every claim, quote and number; one sentence added by the project author (severity 4-5 comparison), re-checked by code",
+  "human_review": "area chosen by the project author (playback); model drafted the argument; author added one sentence, removed Claim 4 and clarified area vs issue means; code re-checked every claim, quote and number",
   "human_edits": [
     {
       "section": "Evidence",
       "added": "Playback also has 31050 complaints at severity 4 or 5, roughly three times access (10267) and four times billing/support (7448), so it holds the largest volume of reports where a core task is blocked."
+    },
+    {
+      "section": "Alternatives considered",
+      "removed": "The issue-level login mean is 3.99 (Claim 4), but access\u2019s smaller total burden",
+      "replaced_with": "Access\u2019s smaller total burden",
+      "why": "Claim 4 (access login issue mean) did not support the recommendation; access is compared with area-level numbers"
+    },
+    {
+      "section": "Evidence",
+      "change": "labeled 3.68 as the playback AREA mean and 3.65 as the Music Playback Problems ISSUE mean"
     }
   ]
 }
