@@ -1,0 +1,8 @@
+{
+  "name": "qw-spotify-review-dashboard",
+  "private": true,
+  "type": "module",
+  "description": "Read-only backend + dashboard for the Spotify review pipeline. Data lives in Neon Postgres.",
+  "scripts": { "dev": "node dev-server.mjs" },
+  "dependencies": { "@vercel/functions": "^2.0.0", "pg": "^8.13.0" }
+}
