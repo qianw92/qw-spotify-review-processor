@@ -12,11 +12,11 @@
   "agrees_with_highest_severity_sum": false,
   "model_call": {
     "cached": false,
-    "request_id": "resp_0d816826b71433ce006acb1793414087d095c8b3a497fefe9a",
-    "cache_key": "54d26601cce93cf7587278034f0b3186140c14e0e13a1495dc99ea7de1f0952f",
-    "input_tokens": 3677,
-    "output_tokens": 988,
-    "attempts": 1
+    "request_id": "resp_0c7574113a096c93006ad685e7d10487d29b293c6de6c4a309",
+    "cache_key": "01b9b47b9cd10a999e52e1d3548b0f2f287de84306873e96394d34579467af5d",
+    "input_tokens": 4236,
+    "output_tokens": 777,
+    "attempts": 2
   },
   "human_review": "pending"
 }

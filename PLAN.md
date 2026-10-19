@@ -1,17 +1,17 @@
 # Project Plan
 
-**Due:** Oct 13, 2026, 11:59 pm PT · **Budget:** $10 total (Jev + OpenAI, tracked separately in `budget/spend_ledger.csv`)
+**Due:** Tue Oct 20, 2026, 11:59 pm PT (bCourses; the assignment doc said Oct 13) · **Budget:** $10 total (Jev + OpenAI, tracked separately in `budget/spend_ledger.csv`)
 
 ## 📍 Where we are
 
 | | |
 |---|---|
-| **Current step** | **7.1/7.3 fix — issue names + memo examples** (awaiting approval of ≤$0.005 OpenAI re-run) |
-| **Open decision** | Approve fix: names/memo examples were picked from the most severe (rare) reviews → misleading names (e.g. ISS-other-general named "Privacy…" but is 91% generic "bad app"). Fix = typical examples (`group-names-v2`, `memo-v3`); labels, membership and ranking unchanged |
+| **Current step** | **7.3 — human review of the memo** |
+| **Open decision** | Accept / edit / regenerate the memo (`outputs/full_run/memo.md`) |
 | **Then** | Review memo (playback recommended vs billing/support highest severity sum) → 8.x database/backend/dashboard → 9.x grading export, README, submit |
 | **Progress** | 20 of 27 steps done |
-| **Spent so far** | Jev $6.889 · OpenAI $0.008 · **Total $6.897 of $10** ($3.10 left) |
-| **Last updated** | Oct 11 (paused; resume Oct 12) |
+| **Spent so far** | Jev $6.889 · OpenAI $0.011 · **Total $6.900 of $10** ($3.10 left) |
+| **Last updated** | Oct 19 |
 
 **Status key:** ✅ done · 🔨 code built, still needs its full-data run · ⏳ to do
 
@@ -133,11 +133,11 @@ Rules for every step: explain outputs in plain words · price preview + approval
 
 ## Phase 7: Group, rank and write the memo (full data)
 
-### 🔨 Step 7.1: Group complaints into issues (Stage 4)
-**Outputs:** `pipeline/group.py` (built, ran in pilot) · full-data `issues.csv`, `grading/membership.csv`
+### ✅ Step 7.1: Group complaints into issues (Stage 4)
+**Outputs:** `outputs/full_run/issues.csv`, `membership.csv` — 293,175 complaints → 28 issues · names re-generated with typical examples (`group-names-v2`, $0.0015); v1 names came from extreme examples and were misleading
 
-### 🔨 Step 7.2: Rank issues (Stage 5)
-**Outputs:** `pipeline/rank.py` (built; rebuild-from-saved-files verified) · full-data `aggregates.csv`, `grading/ranking.csv`
+### ✅ Step 7.2: Rank issues (Stage 5)
+**Outputs:** `outputs/full_run/ranking.csv`, `aggregates.csv` (unchanged by the renaming)
 
 ### 🔨 Step 7.3: Write the memo (Stage 6)
 **What you're doing:** OpenAI writes from the ranking + evidence pack only; code fact-checks; **you read and approve it**.
