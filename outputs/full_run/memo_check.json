@@ -9,16 +9,16 @@
     "numbers appear in evidence pack",
     "means shown with 2 decimals"
   ],
-  "recommended_area": "access",
+  "recommended_area": "playback",
   "area_with_highest_severity_sum": "billing_support",
   "agrees_with_highest_severity_sum": false,
   "model_call": {
     "cached": false,
-    "request_id": "resp_049a5ac65f6e0e6f006ad6895c6de487d2862e0b3eb667d4f8",
-    "cache_key": "137badca998f2b5ecf45aa8a9485aeb80f9d19258d06db1d569532741fa3d4ea",
-    "input_tokens": 4701,
-    "output_tokens": 1036,
+    "request_id": "resp_067b80e397fb03d7006ad68c84230087d2b4cb38a3947772e7",
+    "cache_key": "470bb4765cbc5f14cbbdfee462f6a333c135b28ef4647aa204f73f40694afa86",
+    "input_tokens": 4761,
+    "output_tokens": 1147,
     "attempts": 1
   },
-  "human_review": "pending"
+  "human_review": "area chosen by the project author (playback); model drafted the argument; code checked every claim, quote and number"
 }

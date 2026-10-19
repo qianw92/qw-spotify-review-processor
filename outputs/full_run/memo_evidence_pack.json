@@ -482,5 +482,10 @@
       ]
     }
   ],
-  "ranking_rule": "priority_score = complaint_count x mean_severity = severity_sum"
+  "ranking_rule": "priority_score = complaint_count x mean_severity = severity_sum",
+  "human_decision": {
+    "recommended_area": "playback",
+    "decided_by": "the project author after reviewing the evidence pack and earlier drafts",
+    "instruction": "Recommend this area. Make the strongest evidence-based case for it, compare every other candidate area fairly, and keep all limitations."
+  }
 }

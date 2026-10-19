@@ -6,11 +6,11 @@
 
 | | |
 |---|---|
-| **Current step** | **7.3 — human review of the memo** |
-| **Open decision** | Accept / edit / regenerate the memo (`outputs/full_run/memo.md`) |
+| **Current step** | **8.x — database, backend and dashboard** |
+| **Open decision** | Hosting: Vercel account, or everything on Neon? |
 | **Then** | Review memo (playback recommended vs billing/support highest severity sum) → 8.x database/backend/dashboard → 9.x grading export, README, submit |
-| **Progress** | 20 of 27 steps done |
-| **Spent so far** | Jev $6.889 · OpenAI $0.011 · **Total $6.900 of $10** ($3.10 left) |
+| **Progress** | 23 of 27 steps done |
+| **Spent so far** | Jev $6.889 · OpenAI $0.013 · **Total $6.902 of $10** ($3.10 left) |
 | **Last updated** | Oct 19 |
 
 **Status key:** ✅ done · 🔨 code built, still needs its full-data run · ⏳ to do
@@ -139,9 +139,9 @@ Rules for every step: explain outputs in plain words · price preview + approval
 ### ✅ Step 7.2: Rank issues (Stage 5)
 **Outputs:** `outputs/full_run/ranking.csv`, `aggregates.csv` (unchanged by the renaming)
 
-### 🔨 Step 7.3: Write the memo (Stage 6)
+### ✅ Step 7.3: Write the memo (Stage 6)
 **What you're doing:** OpenAI writes from the ranking + evidence pack only; code fact-checks; **you read and approve it**.
-**Outputs:** `pipeline/memo.py` (built, passed checks in pilot) · full-data `memo.md`, `grading/claims.csv`
+**Outputs:** `outputs/full_run/memo.md` (`memo-v4`: Claim N citations, verbatim review quotes, 2-dp means) · `claims.csv` · `memo_check.json` — **human decision: playback** (author chose it over access/billing-support after reviewing drafts; model-only drafts said playback, then access)
 
 ---
 
