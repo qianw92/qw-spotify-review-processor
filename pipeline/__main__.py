@@ -50,6 +50,7 @@ def main():
     p = stages.add_parser("eval-injection", help="Synthetic prompt-injection tests for enrich and memo (paid, <$0.004)")
     p.add_argument("--max-spend", type=float, default=0.008)
     p.add_argument("--source-db", default="state/cp500.sqlite")
+    p = stages.add_parser("publish", help="Load saved full-run outputs into the dashboard database (no model calls, $0)")
     p = stages.add_parser("checkpoint", help="Snapshot completed review IDs (no model calls, $0)")
     p.add_argument("--db", default="state/pipeline.sqlite")
     p.add_argument("--out", required=True)
@@ -87,6 +88,10 @@ def main():
         r2 = evaluate.injection_memo(args.source_db, None, args.max_spend * 3 / 4)
         print(json.dumps({"enrich": [{k: x[k] for k in ("review_id", "got", "resisted_injection")} for x in r1],
                           "memo": {k: v for k, v in r2.items() if k != "memo_markdown"}}, indent=2))
+        return
+    if args.stage == "publish":
+        from . import publish
+        print(json.dumps(publish.run(), indent=2))
         return
     if args.stage == "checkpoint":
         import datetime
