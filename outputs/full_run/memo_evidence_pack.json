@@ -73,6 +73,23 @@
       ]
     }
   },
+  "area_rank_by_severity_sum": [
+    "billing_support",
+    "usability",
+    "playback",
+    "access"
+  ],
+  "area_rank_by_complaint_count": [
+    "usability",
+    "billing_support",
+    "playback",
+    "access"
+  ],
+  "quality_notes": {
+    "severity_bias": "On the 50 hand-labeled golden reviews, model severity matched the human label 76% of the time and errors were almost always one level too high, so absolute severity values are inflated; issue order is more reliable.",
+    "verifier_agreement": "An independent re-labeling of 4842 sampled reviews agreed with the original on topic, intent and severity together 78% of the time.",
+    "generic_bucket": "The largest issue, ISS-other-general, is generic dissatisfaction (for example 'bad app') with no specific feature, so it is not an actionable product area."
+  },
   "top_issues": [
     {
       "rank": "1",
@@ -83,6 +100,7 @@
       "priority_score": "158290",
       "name": "General App Dissatisfaction",
       "topic": "other",
+      "mean_severity_2dp": "1.97",
       "area": "outside_options",
       "severity_mix_pct": {
         "1": 7,
@@ -121,6 +139,7 @@
       "priority_score": "127309",
       "name": "Premium Required for Features",
       "topic": "billing",
+      "mean_severity_2dp": "3.01",
       "area": "billing_support",
       "severity_mix_pct": {
         "1": 1,
@@ -159,6 +178,7 @@
       "priority_score": "103197",
       "name": "Music Playback Problems",
       "topic": "playback",
+      "mean_severity_2dp": "3.65",
       "area": "playback",
       "severity_mix_pct": {
         "1": 0,
@@ -197,6 +217,7 @@
       "priority_score": "57343",
       "name": "General Usability Frustrations",
       "topic": "usability",
+      "mean_severity_2dp": "2.62",
       "area": "usability",
       "severity_mix_pct": {
         "1": 1,
@@ -235,6 +256,7 @@
       "priority_score": "55683",
       "name": "Too Many Interrupting Ads",
       "topic": "usability",
+      "mean_severity_2dp": "2.21",
       "area": "usability",
       "severity_mix_pct": {
         "1": 0,
@@ -273,6 +295,7 @@
       "priority_score": "48407",
       "name": "Billing and Free-Tier Frustrations",
       "topic": "billing",
+      "mean_severity_2dp": "2.79",
       "area": "billing_support",
       "severity_mix_pct": {
         "1": 1,
@@ -311,6 +334,7 @@
       "priority_score": "29243",
       "name": "Playback Controls Missing or Restricted",
       "topic": "usability",
+      "mean_severity_2dp": "3.11",
       "area": "usability",
       "severity_mix_pct": {
         "1": 0,
@@ -349,6 +373,7 @@
       "priority_score": "26008",
       "name": "Login and Sign-In Problems",
       "topic": "access",
+      "mean_severity_2dp": "3.99",
       "area": "access",
       "severity_mix_pct": {
         "1": 0,
@@ -387,6 +412,7 @@
       "priority_score": "25596",
       "name": "Negative Update Reactions",
       "topic": "other",
+      "mean_severity_2dp": "2.04",
       "area": "outside_options",
       "severity_mix_pct": {
         "1": 1,
@@ -425,6 +451,7 @@
       "priority_score": "24363",
       "name": "Music and Catalog Issues",
       "topic": "catalog",
+      "mean_severity_2dp": "2.90",
       "area": "outside_options",
       "severity_mix_pct": {
         "1": 2,

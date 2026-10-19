@@ -2,21 +2,23 @@
   "status": "passed",
   "checks": [
     "claim values match ranking",
-    "claim IDs cited",
+    "every claim cited as (Claim N)",
     "issue IDs exist",
-    "review IDs from evidence pack",
-    "numbers appear in evidence pack"
+    "cited reviews are from the evidence pack",
+    "each cited review has a verbatim 3-15 word quote",
+    "numbers appear in evidence pack",
+    "means shown with 2 decimals"
   ],
-  "recommended_area": "playback",
+  "recommended_area": "access",
   "area_with_highest_severity_sum": "billing_support",
   "agrees_with_highest_severity_sum": false,
   "model_call": {
     "cached": false,
-    "request_id": "resp_0c7574113a096c93006ad685e7d10487d29b293c6de6c4a309",
-    "cache_key": "01b9b47b9cd10a999e52e1d3548b0f2f287de84306873e96394d34579467af5d",
-    "input_tokens": 4236,
-    "output_tokens": 777,
-    "attempts": 2
+    "request_id": "resp_049a5ac65f6e0e6f006ad6895c6de487d2862e0b3eb667d4f8",
+    "cache_key": "137badca998f2b5ecf45aa8a9485aeb80f9d19258d06db1d569532741fa3d4ea",
+    "input_tokens": 4701,
+    "output_tokens": 1036,
+    "attempts": 1
   },
   "human_review": "pending"
 }
