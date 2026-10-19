@@ -144,6 +144,7 @@ const $ = (id) => document.getElementById(id);
 const fmt = (n) => Number(n).toLocaleString("en-US");
 const pct = (x) => (100 * x).toFixed(0) + "%";
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+const METRIC_DEF = {"complaint_count": "Number of complaint or cancellation reviews in the issue", "severity_sum": "All of those reviews' severities (1–5) added together", "mean_severity": "Average severity per complaint = severity sum ÷ complaints", "priority_score": "Baseline ranking score = complaints × mean severity (equals severity sum)"};
 const AREA = { access: "Access", usability: "Usability", playback: "Playback", billing_support: "Billing / support",
                outside_options: "Outside options" };
 
@@ -276,18 +277,19 @@ function render(d) {
     kpi("Verifier agreement", pct(m.verifier.all_three), `topic+intent+severity, ${fmt(m.verifier.sample)} re-labeled`);
 
   const issueName = Object.fromEntries(d.issues.map((i) => [i.issue_id, i.name]));
-  const claimsTxt = d.claims.map((c) => `<tr><td>${esc(c.claim_id)}</td><td title="${esc(c.issue_id)}">${esc(issueName[c.issue_id] || c.issue_id)}</td><td>${esc(c.metric)}</td>
-     <td class="num">${c.metric === "mean_severity" ? Number(c.value).toFixed(2) : fmt(c.value)}</td></tr>`).join("");
+  const claimsTxt = d.claims.map((c) => `<tr><td style="white-space:nowrap">${esc(c.claim_id)}</td><td title="${esc(c.issue_id)}">${esc(issueName[c.issue_id] || c.issue_id)}</td><td>${esc(c.metric)}</td>
+     <td class="num">${c.metric === "mean_severity" ? Number(c.value).toFixed(2) : fmt(c.value)}</td>
+     <td style="color:var(--text-secondary);font-size:13px">${esc(METRIC_DEF[c.metric] || "")}</td></tr>`).join("");
   $("rec").innerHTML = `<span class="area">AI recommendation · human-reviewed</span>
     <h2>${esc(rec.headline)}</h2>
     <p class="note">Drafted by <code>${esc(rec.model)}</code> (prompt <code>${esc(rec.prompt_version)}</code>) from saved aggregates only;
       area chosen by the project author; every claim, quote and number checked by code (${esc(rec.check_result.status)}).</p>
-    <div class="grid2" style="margin-top:12px">
+    <div style="display:grid;gap:18px;margin-top:12px">
       <div class="memo">${DOMPurify.sanitize(marked.parse(rec.memo_markdown))}</div>
       <div><h3>Claims — issue-level, recomputed from the ranking</h3>
         <p class="note" style="margin:0 0 6px">Issue numbers cover one issue; the area figures below cover every issue in an area
           (so the playback area mean is 3.68 while its largest issue's mean is 3.65).</p>
-        <div class="scroll"><table><thead><tr><th>Claim</th><th>Issue</th><th>Metric</th><th class="num">Value</th></tr></thead><tbody>${claimsTxt}</tbody></table></div>
+        <div class="scroll"><table><thead><tr><th>Claim</th><th>Issue</th><th>Metric</th><th class="num">Value</th><th>What it means</th></tr></thead><tbody>${claimsTxt}</tbody></table></div>
         <h3 style="margin-top:14px">Cited reviews</h3>
         ${rec.cited_reviews.map((c) => `<p style="margin:0 0 8px"><button class="rid" data-rid="${esc(c.review_id)}">${esc(c.review_id.slice(0, 8))}…</button>
           <blockquote>“${esc(c.quote)}”</blockquote></p>`).join("")}

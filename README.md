@@ -25,9 +25,9 @@ Results are stored in a database, served by a deployed backend, and shown on a l
 
 | | |
 |---|---|
-| **Live dashboard** | TODO: `https://...` |
-| **Access instructions** | TODO: public / test login / other |
-| **Backend API** | TODO: `https://...` |
+| **Live dashboard** | https://qw-spotify-review-dashboard.vercel.app |
+| **Access instructions** | Public, no login. All data is read live from the database through a read-only API. |
+| **Backend API** | https://qw-spotify-review-dashboard.vercel.app/api/summary · `/api/issue?id=ISS-playback-general` · `/api/review?id=<review_id>` |
 | **Final run ID** | TODO: `run_...` |
 | **Grading export** | [`grading/`](grading/) (TODO: release asset link if large files are hosted externally) |
 | **Decision memo** | [`memo.md`](memo.md) |

@@ -126,7 +126,9 @@ def run():
             cur.execute("CREATE INDEX ON reviews_processed (issue_id, severity DESC)")
             cur.execute("CREATE INDEX ON reviews_processed (topic)")
             # 7) read-only role for the deployed backend
-            password = secrets.token_urlsafe(24)
+            # Keep the existing read-only password (the deployed site uses it); only create one the first time.
+            existing = os.environ.get("DATABASE_URL_READONLY", "")
+            password = existing.split("@", 1)[0].rsplit(":", 1)[1] if "@" in existing else secrets.token_urlsafe(24)
             cur.execute(f"""DO $$ BEGIN
                               IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = '{READER_ROLE}') THEN
                                 CREATE ROLE {READER_ROLE} LOGIN;

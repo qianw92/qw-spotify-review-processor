@@ -6,10 +6,10 @@
 
 | | |
 |---|---|
-| **Current step** | **8.x — database, backend and dashboard** |
-| **Open decision** | Waiting on user: `vercel login`, then deploy |
+| **Current step** | **9.1 — grading export + checker** |
+| **Open decision** | none |
 | **Then** | Review memo (playback recommended vs billing/support highest severity sum) → 8.x database/backend/dashboard → 9.x grading export, README, submit |
-| **Progress** | 24 of 27 steps done |
+| **Progress** | 26 of 29 steps done |
 | **Spent so far** | Jev $6.889 · OpenAI $0.013 · **Total $6.902 of $10** ($3.10 left) |
 | **Last updated** | Oct 19 |
 
@@ -150,11 +150,11 @@ Rules for every step: explain outputs in plain words · price preview + approval
 ### ✅ Step 8.1: Load the results into a database
 **Outputs:** Neon project `qw-spotify-review-dashboard` (282 MB) · `db/schema.sql` · `python -m pipeline publish` (loads 660,622 rows in ~30 s) · read-only role `dashboard_reader` for the website
 
-### 🔨 Step 8.2: Deploy the backend
-**Outputs:** `dashboard/api/` (summary, issue, review; read-only) — tested locally against Neon; deploy pending `vercel login`
+### ✅ Step 8.2: Deploy the backend
+**Outputs:** https://qw-spotify-review-dashboard.vercel.app/api/summary (+ `/api/issue`, `/api/review`) — Vercel serverless, read-only role, secret stored as Vercel env
 
-### 🔨 Step 8.3: Deploy the dashboard
-**Outputs:** `dashboard/public/index.html` — tested locally (desktop, phone width, dark mode, drill-down, review trace); deploy pending
+### ✅ Step 8.3: Deploy the dashboard
+**Outputs:** **https://qw-spotify-review-dashboard.vercel.app** — public, tested logged-out; metrics, areas, ranking drill-down, review trace, memo with Claims 1–3 + definitions
 
 ---
 
