@@ -144,7 +144,7 @@ const $ = (id) => document.getElementById(id);
 const fmt = (n) => Number(n).toLocaleString("en-US");
 const pct = (x) => (100 * x).toFixed(0) + "%";
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-const METRIC_DEF = {"complaint_count": "Number of complaint or cancellation reviews in the issue", "severity_sum": "All of those reviews' severities (1–5) added together", "mean_severity": "Average severity per complaint = severity sum ÷ complaints", "priority_score": "Baseline ranking score = complaints × mean severity (equals severity sum)"};
+const METRIC_DEF = {"complaint_count": "Number of complaint or cancellation reviews in the issue", "severity_sum": "All of those reviews' severities (1–5) added together", "mean_severity": "Average severity per complaint = severity sum ÷ complaints", "priority_score": "Ranking score: each complaint adds its severity (1–5) as points, so score = complaints × average severity; higher = more and worse complaints"};
 const AREA = { access: "Access", usability: "Usability", playback: "Playback", billing_support: "Billing / support",
                outside_options: "Outside options" };
 
