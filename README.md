@@ -6,11 +6,9 @@ Turning 660,622 real Spotify reviews into a product-priority recommendation back
 
 ## 1. Overview
 
-> The question, the answer, and where to look first.
-
 **Question.** Advising Spotify at the end of the review window (May 2022 – Nov 2023): where should next quarter's product effort go — access, usability, playback, or billing/support?
 
-**Answer.** **Prioritize playback reliability.** The playback area holds 31,050 complaints at severity 4–5 (a core task blocked) — three times access and four times billing/support — and its largest issue, *Music Playback Problems* (`ISS-playback-general`), has 28,307 complaints (Claim 2), mean severity 3.65 (Claim 1) and priority score 103,197 (Claim 3). Billing/support and usability have more *total* severity; the memo weighs that trade-off explicitly. Full argument: [decision memo](outputs/full_run/memo.md).
+**Answer.** **Prioritize playback reliability.** The playback area holds 31,050 complaints at severity 4–5 (a core task blocked) — three times access and four times billing/support — and its largest issue, *Music Playback Problems* (`ISS-playback-general`), has 28,307 complaints (Claim 2), mean severity 3.65 (Claim 1) and priority score 103,197 (Claim 3). Billing/support and usability have more *total* severity; the memo weighs that trade-off explicitly. Full argument: [decision memo](outputs/full_run/memo.md) · same memo with charts, the issue ranking and clickable review evidence on the [live dashboard](https://qw-spotify-review-dashboard.vercel.app).
 
 **What this repo does.** A staged, multi-agent pipeline coordinated by code:
 
