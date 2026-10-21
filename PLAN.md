@@ -6,7 +6,7 @@
 
 | | |
 |---|---|
-| **Current step** | **9.3 — final checks + submit** |
+| **Current step** | **9.3 — submit on the course portal (user)** |
 | **Open decision** | none |
 | **Then** | Review memo (playback recommended vs billing/support highest severity sum) → 8.x database/backend/dashboard → 9.x grading export, README, submit |
 | **Progress** | 28 of 29 steps done |
@@ -167,4 +167,4 @@ Rules for every step: explain outputs in plain words · price preview + approval
 **Outputs:** `README.md` complete (53 links verified; one TODO left = checker result from 9.1) · `requirements.txt` · `prompts/`
 
 ### ⏳ Step 9.3: Final checks and submit
-**Outputs:** public repo verified signed-out · no keys in history · repo URL submitted on the course portal
+**Outputs:** ✅ repo + key files download signed out · ✅ full-history secret scan: 0 hits (39 commits; actual .env values and generic key patterns) · ✅ `.env` never committed, `.env.example` blank · ⏳ user submits https://github.com/qianw92/qw-spotify-review-processor
