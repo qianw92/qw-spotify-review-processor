@@ -1,0 +1,4 @@
+claim_id,issue_id,metric,value
+Claim 1,ISS-playback-general,mean_severity,3.645635
+Claim 2,ISS-playback-general,complaint_count,28307
+Claim 3,ISS-playback-general,priority_score,103197

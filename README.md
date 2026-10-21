@@ -27,7 +27,7 @@ Results live in a Postgres database, served by a deployed read-only backend to a
 | **Access instructions** | Public, no login. All data is read live from the database through a read-only API. |
 | **Backend API** | https://qw-spotify-review-dashboard.vercel.app/api/summary · `/api/issue?id=ISS-playback-general` · `/api/review?id=<review_id>` |
 | **Final run** | Run folder [`outputs/full_run/`](outputs/full_run/) · label config `jev-1.13.0+enrich-v1+labels-v1+batched` |
-| **Grading export** | [`grading/`](grading/) |
+| **Grading export** | [`grading/`](grading/) — course checker: **pass, 0 issues, coverage 1.0** ([report](outputs/self_check.json)) |
 | **Decision memo** | [`outputs/full_run/memo.md`](outputs/full_run/memo.md) |
 | **Interruption / resume recording** | [`evals/system_tests/interruption_resume_demo.mov`](evals/system_tests/interruption_resume_demo.mov) |
 
@@ -431,4 +431,13 @@ Not committed: the raw dataset (`data/`), local state databases (`state/`), `.en
 
 BwandoWando (Kaggle username of the publisher), [*3.4 Million Spotify Google Store Reviews*](https://www.kaggle.com/datasets/bwandowando/3-4-million-spotify-google-store-reviews), Kaggle, v2, CC0 Public Domain. This repo uses the course's 18-month extract (660,622 rows); see the course `manifest.json` for boundaries and checksums.
 
-**Grader self-check:** TODO (step 9.1) — result of `check_submission.py check` on `grading/`.
+**Grader self-check:** `check_submission.py check` on [`grading/`](grading/) → **status `pass`, 0 issues, working coverage point candidate 1.0** (660,622/660,622 rows; 660,609 valid completed; 13 quarantined; 176,420 valid cache reuses; 9,863 logged calls). Report: [`outputs/self_check.json`](outputs/self_check.json). Reproduce:
+
+```bash
+.venv/bin/python -m pipeline export-grading      # rebuilds grading/ from saved outputs ($0)
+python3 tools/check_submission.py reference --full data/spotify_reviews_18months.csv \
+    --analysis data/spotify_reviews_18months.csv --out state/local-reference.json
+python3 tools/check_submission.py check --reference state/local-reference.json --submission grading \
+    --out outputs/self_check.json
+```
+

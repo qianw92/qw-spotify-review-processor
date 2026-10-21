@@ -51,6 +51,7 @@ def main():
     p.add_argument("--max-spend", type=float, default=0.008)
     p.add_argument("--source-db", default="state/cp500.sqlite")
     p = stages.add_parser("publish", help="Load saved full-run outputs into the dashboard database (no model calls, $0)")
+    p = stages.add_parser("export-grading", help="Build the standardized grading/ folder (no model calls, $0)")
     p = stages.add_parser("checkpoint", help="Snapshot completed review IDs (no model calls, $0)")
     p.add_argument("--db", default="state/pipeline.sqlite")
     p.add_argument("--out", required=True)
@@ -92,6 +93,10 @@ def main():
     if args.stage == "publish":
         from . import publish
         print(json.dumps(publish.run(), indent=2))
+        return
+    if args.stage == "export-grading":
+        from . import grading_export
+        print(json.dumps(grading_export.run(), indent=2))
         return
     if args.stage == "checkpoint":
         import datetime

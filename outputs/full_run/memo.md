@@ -22,13 +22,13 @@ These are self-selected historical Google Play reviews from 17 May 2022 to 15 No
 
 ## Claims
 
-Each claim is recomputed by code from `ranking.csv`; `claims.csv` keeps the exact value the grader checks, and the prose shows means rounded to 2 decimals.
+Each claim is recomputed by code from `ranking.csv`; `claims.csv` keeps the exact value the grader checks (the prose rounds means to 2 decimals and adds thousands separators).
 
-| Claim | Issue | Metric | Exact value | As written | What it means |
-|---|---|---|---|---|---|
-| Claim 1 | ISS-playback-general | mean_severity | 3.645635 | 3.65 | Average severity per complaint = severity sum ÷ complaints |
-| Claim 2 | ISS-playback-general | complaint_count | 28307 | 28,307 | Number of complaint or cancellation reviews in the issue |
-| Claim 3 | ISS-playback-general | priority_score | 103197 | 103,197 | Ranking score: each complaint adds its severity (1–5) as points, so score = complaints × average severity; higher = more and worse complaints |
+| Claim | Issue | Metric | Exact value | What it means |
+|---|---|---|---|---|
+| Claim 1 | ISS-playback-general | mean_severity | 3.645635 | Average severity per complaint = severity sum ÷ complaints |
+| Claim 2 | ISS-playback-general | complaint_count | 28307 | Number of complaint or cancellation reviews in the issue |
+| Claim 3 | ISS-playback-general | priority_score | 103197 | Ranking score: each complaint adds its severity (1–5) as points, so score = complaints × average severity; higher = more and worse complaints |
 
 ## Cited reviews
 
