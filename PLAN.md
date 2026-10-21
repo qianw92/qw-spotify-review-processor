@@ -9,9 +9,9 @@
 | **Current step** | **9.1 — grading export + checker** |
 | **Open decision** | none |
 | **Then** | Review memo (playback recommended vs billing/support highest severity sum) → 8.x database/backend/dashboard → 9.x grading export, README, submit |
-| **Progress** | 26 of 29 steps done |
+| **Progress** | 27 of 29 steps done |
 | **Spent so far** | Jev $6.889 · OpenAI $0.013 · **Total $6.902 of $10** ($3.10 left) |
-| **Last updated** | Oct 19 |
+| **Last updated** | Oct 20 (due tonight 11:59 pm PT) |
 
 **Status key:** ✅ done · 🔨 code built, still needs its full-data run · ⏳ to do
 
@@ -163,8 +163,8 @@ Rules for every step: explain outputs in plain words · price preview + approval
 ### ⏳ Step 9.1: Build the grading export and run the checker
 **Outputs:** `grading/` (run.json, ingestion.json, records.jsonl, membership.csv, ranking.csv, claims.csv, calls.jsonl, checkpoints) · self-check report
 
-### ⏳ Step 9.2: Finish the README
-**Outputs:** completed `README.md` (no TODOs; disclose the 150-review recovery test and AI-assisted golden-label consistency review)
+### ✅ Step 9.2: Finish the README
+**Outputs:** `README.md` complete (53 links verified; one TODO left = checker result from 9.1) · `requirements.txt` · `prompts/`
 
 ### ⏳ Step 9.3: Final checks and submit
 **Outputs:** public repo verified signed-out · no keys in history · repo URL submitted on the course portal
